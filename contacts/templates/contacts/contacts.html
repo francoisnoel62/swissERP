@@ -1,13 +1,18 @@
 {% extends 'index/index.html' %}
 
 {% block content %}
-    {% if contacts_list %}
-        <ul>
-            {% for contact in contacts_list %}
-                <a class="btn btn-outline-primary" href="#" role="button">{{ contact.name }}</a>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No contacts are available.</p>
-    {% endif %}
+    <div class="col-md-4 offset-md-4">
+        <div class="list-group list-group-flush text-center">
+            {% if contacts_list %}
+                <ul>
+                    {% for contact in contacts_list %}
+                        <a href="#" class="list-group-item list-group-item-action">{{ contact.name }}</a>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No contacts are available.</p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
+
