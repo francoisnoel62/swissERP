@@ -1,12 +1,10 @@
 {% extends 'index/index.html' %}
 
 {% block content %}
-    <div class="col-md-12">
-        <h1 class="text-center">Welcome to swissERP</h1>
+    <div class="row col-md-4 offset-md-4 mt-4 mb-5">
+        <h1>Welcome to swissERP</h1>
     </div>
-
-
-{#    <div>#}
-{#        <a class="btn btn-outline-secondary" href="{% url 'contacts' %}" role="button">Contacts</a>#}
-{#    </div>#}
+    <div class="row">
+        <a class="btn btn-outline-secondary ml-5" href="{% url 'contacts' %}" role="button">Contacts</a>
+    </div>
 {% endblock %}
