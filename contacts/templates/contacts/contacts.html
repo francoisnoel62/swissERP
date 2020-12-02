@@ -2,6 +2,11 @@
 
 {% block viewlist %}
     <div class="row mx-auto mt-5 justify-content-center">
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        </form>
+    </div>
+    <div class="row mx-auto mt-5 justify-content-center">
         {% if contacts_list %}
             <ul class="list-group list-group-flush w-50">
                 {% for contact in contacts_list %}
