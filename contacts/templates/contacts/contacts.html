@@ -1,14 +1,14 @@
 {% extends 'index/index.html' %}
 
 {% block content %}
-    <div class="row justify-content-center mt-5">
+    <div class="row mx-auto mt-5">
         {% if contacts_list %}
-            <ul class="list-group w-50">
+            <ul class="list-group w-100">
                 {% for contact in contacts_list %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">{{ contact.name }}
-                        <span class="badge badge-primary badge-pill">{{ contact.age }}</span>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-secondary btn-sm">{{ contact.name }}</button>
                         <span class="badge badge-info badge-pill">active</span>
-                        <span>{{ contact.name }}</span>
+
                     </li>
                 {% endfor %}
             </ul>
