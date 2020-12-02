@@ -31,7 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'viewlist.apps.ViewlistConfig',
     'contacts.apps.ContactsConfig',
+    'phonenumber_field',
     'index.apps.IndexConfig',
     'home.apps.HomeConfig',
     'django.contrib.admin',
