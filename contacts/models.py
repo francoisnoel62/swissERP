@@ -3,6 +3,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Contact(models.Model):
+    # picture_id = models.ImageField(verbose_name="Profile picture", width_field=15, height_field=15)
     title = models.CharField(verbose_name="titre", max_length=50, null=True)
     lang = models.CharField(verbose_name="Langue maternelle", max_length=80, null=True, blank=True)
     name = models.CharField(verbose_name='Nom et prénom du contact', max_length=200, null=True)
@@ -11,7 +12,7 @@ class Contact(models.Model):
     region_zip = models.IntegerField(verbose_name="Code postale", null=True)
     city = models.CharField(verbose_name="Ville", max_length=200, null=True)
     country = models.CharField(verbose_name="Pays", max_length=100, null=True)
-    phone = PhoneNumberField()
-    mobile = PhoneNumberField()
+    phone = PhoneNumberField(null=True)
+    mobile = PhoneNumberField(null=True)
     email = models.EmailField(verbose_name="E-mail", max_length=254, null=True)
     state = models.CharField(verbose_name="Etat", max_length=20, null=True)
