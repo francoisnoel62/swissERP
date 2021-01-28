@@ -1,14 +1,22 @@
-from django.shortcuts import render, get_object_or_404
-
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
+from django.views import generic
 from .models import Contact
 
 
-def index(request):
-    contacts_list = Contact.objects.all()
-    context = {'contacts_list': contacts_list}
-    return render(request, 'contacts/contacts_listview.html', context)
+class IndexView(generic.ListView):
+    template_name = 'contacts/contacts_listview.html'
+    context_object_name = 'contacts_list'
+
+    def get_queryset(self):
+        return Contact.objects.all()
 
 
-def contact_detail(request, contact_id):
+class DetailView(generic.ListView):
+    model = Contact
+    template_name = 'contacts/contacts_formview.html'
+
+def detail(request, contact_id):
     contact = get_object_or_404(Contact, pk=contact_id)
-    return render(request, 'contacts/contacts_other_infos.html', {'contact': contact})
+    return render(request, 'contacts/contacts_formview.html', {'contact': contact})
