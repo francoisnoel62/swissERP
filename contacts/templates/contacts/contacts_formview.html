@@ -25,6 +25,7 @@
                         <span class="glyphicon glyphicon-earphone">{{ contact.email }}</span>
                     </a>
                 </div>
+                {% if contact.phone %}
                 <div class="row ml-1 mb-1">
                     <a class="btn btn-light btn-xlg" href="tel:{{ contact.phone }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -35,6 +36,8 @@
                         <span class="glyphicon glyphicon-earphone">{{ contact.phone }}</span>
                     </a>
                 </div>
+                {% endif %}
+                {% if contact.mobile %}
                 <div class="row ml-1 mt-1">
                     <a class="btn btn-light btn-xlg" href="tel:{{ contact.mobile }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -46,10 +49,9 @@
                         <span class="glyphicon glyphicon-earphone">{{ contact.mobile }}</span>
                     </a>
                 </div>
+                {% endif %}
             </div>
         </div>
-    </div>
-    </div>
     </div>
 
     {% block other_infos %}

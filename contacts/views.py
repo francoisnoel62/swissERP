@@ -15,4 +15,4 @@ class IndexView(generic.ListView):
 
 class DetailView(generic.DetailView):
     model = Contact
-    template_name = 'contacts/contacts_formview.html'
+    template_name = 'contacts/contacts_other_infos.html'
