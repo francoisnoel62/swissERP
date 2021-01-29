@@ -13,10 +13,6 @@ class IndexView(generic.ListView):
         return Contact.objects.all()
 
 
-class DetailView(generic.ListView):
+class DetailView(generic.DetailView):
     model = Contact
     template_name = 'contacts/contacts_formview.html'
-
-def detail(request, contact_id):
-    contact = get_object_or_404(Contact, pk=contact_id)
-    return render(request, 'contacts/contacts_formview.html', {'contact': contact})
