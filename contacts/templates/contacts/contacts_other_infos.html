@@ -1,40 +1,31 @@
 {% extends 'contacts/contacts_formview.html' %}
 
 {% block other_infos %}
-    <div class="row mx-auto mt-5 justify-content-center" style="width: 58rem;">
-        <div class="col-md-2 mb-2">
-            <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#sales"
-                    aria-expanded="false" aria-controls="collapseExample">
-                Sales
-            </button>
-        </div>
-        <div class="col-md-2 mb-2">
-            <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#account"
-                    aria-expanded="false" aria-controls="collapseExample">
-                Account
-            </button>
-        </div>
-        <div class="col-md-2 mb-2">
-            <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#other"
-                    aria-expanded="false" aria-controls="collapseExample">
-                Other infos
-            </button>
-        </div>
+    <div class="row mx-auto mt-5 justify-content-around" style="width: 58rem;">
+        <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#sales" aria-expanded="false" aria-controls="collapseExample">
+        Sales
+        </button>
+        <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#invoices" aria-expanded="false" aria-controls="collapseExample">
+        Invoices
+        </button>
+        <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#delivers" aria-expanded="false" aria-controls="collapseExample">
+        Delivers
+        </button>
     </div>
-    <div class="row mx-auto mt-5 justify-content-center">
+    <div class="row mx-auto mt-5 justify-content-center" style="width: 55%">
         <div class="collapse" id="sales">
             <div class="card card-body">
-                Sales
+                Some sales
             </div>
         </div>
-        <div class="collapse" id="account">
+        <div class="collapse" id="invoices">
             <div class="card card-body">
-                Account
+                Some invoices
             </div>
         </div>
-        <div class="collapse" id="other">
+        <div class="collapse" id="delivers">
             <div class="card card-body">
-                Other
+                Some delivers
             </div>
         </div>
     </div>
