@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'viewlist.apps.ViewlistConfig',
     'contacts.apps.ContactsConfig',
-    'product.apps.ProductConfig',
+    'products.apps.ProductConfig',
     'phonenumber_field',
     'index.apps.IndexConfig',
     'home.apps.HomeConfig',
