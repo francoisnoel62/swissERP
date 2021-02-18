@@ -1,0 +1,30 @@
+{% extends 'viewlist/viewlist.html' %}
+
+{% block viewlist %}
+    <div class="row mx-auto mt-5 justify-content-center">
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        </form>
+    </div>
+    <div class="row mx-auto mt-5 justify-content-center">
+        {% if products_list %}
+            <div class="card-deck w-50">
+                {% for product in products_list %}
+                  <div class="card">
+                    <img src="{% static 'product/bananes.jpeg' %}" class="card-img-top">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ product.name }}</h5>
+                      <p class="card-text">{{ product.description }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No products are available.</p>
+        {% endif %}
+    </div>
+{% endblock %}
+
