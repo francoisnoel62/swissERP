@@ -12,13 +12,15 @@
         {% if products_list %}
             <div class="card-deck w-50">
                 {% for product in products_list %}
-                    <div class="card">
+                    <div class="card text-center mt-3" style="min-width: 30%; max-width: 30%">
                         <a href="#">
-                            <img src="{% static product.picture %}" class="card-img-top" alt="...">
+                            <img src="{% static product.picture %}" class="card-img-top" alt="..."
+                                 style="width: 100%; height: 10vw;
+                                 object-fit: cover;">
                         </a>
                         <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}<span
-                                    class="badge badge-success ml-3">{{ product.price }}</span></h5>
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="badge badge-success">CHF {{ product.price }}</p>
                             <p class="card-text">{{ product.description }}</p>
                         </div>
                         <div class="card-footer">
