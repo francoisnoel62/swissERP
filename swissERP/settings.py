@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'viewlist.apps.ViewlistConfig',
     'contacts.apps.ContactsConfig',
     'products.apps.ProductConfig',
+    'tax.apps.TaxConfig',
     'phonenumber_field',
     'index.apps.IndexConfig',
     'home.apps.HomeConfig',

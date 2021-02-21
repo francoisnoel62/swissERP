@@ -1,0 +1,9 @@
+{% extends 'viewlist/viewlist.html' %}
+
+{% block viewlist %}
+    <form action="." method="post">
+    {% csrf_token %}
+    <input type="submit" value="Save">
+    </form>
+{% endblock %}
+

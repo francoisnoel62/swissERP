@@ -1,5 +1,7 @@
 from django.views import generic
+
 from .models import Contact
+from .forms import ContactsModelForm
 
 
 class IndexView(generic.ListView):
@@ -11,5 +13,11 @@ class IndexView(generic.ListView):
 
 
 class DetailView(generic.DetailView):
-    model = Contact
     template_name = 'contacts/contacts_other_infos.html'
+    model = Contact
+
+
+class CreateView(generic.CreateView):
+    template_name = 'contacts/contacts_createview.html'
+    form_class = ContactsModelForm
+    queryset = Contact.objects.all()
