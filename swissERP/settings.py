@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'products.apps.ProductConfig',
     'tax.apps.TaxConfig',
     'phonenumber_field',
+    'crispy_forms',
     'index.apps.IndexConfig',
     'home.apps.HomeConfig',
     'django.contrib.admin',
@@ -45,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,10 +1,64 @@
 {% extends 'viewlist/viewlist.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block viewlist %}
-    <form action="." method="post">
+    <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save">
+        <div class="w-50 mx-auto mt-5">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    {{ form.title|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.lang|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.age|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    {{ form.lastname|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6">
+                    {{ form.name|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    {{ form.street|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.city|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    {{ form.region_zip|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.state|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-5">
+                    {{ form.country|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    {{ form.email|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    {{ form.phone|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6">
+                    {{ form.mobile|as_crispy_field }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-light">Create</button>
+        </div>
     </form>
 {% endblock %}
 

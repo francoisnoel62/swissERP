@@ -4,8 +4,9 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class Contact(models.Model):
     title = models.CharField(verbose_name="titre", max_length=50, null=True)
-    lang = models.CharField(verbose_name="Langue maternelle", max_length=80, null=True, blank=True)
-    name = models.CharField(verbose_name='Nom et prénom du contact', max_length=200, null=True)
+    lang = models.CharField(verbose_name="Langue", max_length=80, null=True, blank=True)
+    name = models.CharField(verbose_name='Prénom', max_length=200, null=True)
+    lastname = models.CharField(verbose_name='Nom de famille', max_length=200, null=True)
     age = models.IntegerField(verbose_name='Age', default=0, null=True)
     street = models.CharField(verbose_name="Addresse", max_length=100, null=True)
     region_zip = models.IntegerField(verbose_name="Code postale", null=True)
