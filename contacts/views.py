@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.views import generic
 
 from .models import Contact
@@ -20,4 +21,3 @@ class DetailView(generic.DetailView):
 class CreateView(generic.CreateView):
     template_name = 'contacts/contacts_createview.html'
     form_class = ContactsModelForm
-    queryset = Contact.objects.all()
