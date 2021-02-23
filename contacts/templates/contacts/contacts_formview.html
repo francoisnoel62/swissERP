@@ -13,7 +13,7 @@
                         <a class="btn btn-light mr-2" href="{% url 'edit_contact' contact.id %}" role="button">Edit</a>
                         <form action="{% url 'delete_contact' contact.id %}" method="post">
                             {% csrf_token %}
-                            <button class="btn btn-light">Delete</button>
+                            <button class="btn btn-light mr-2">Delete</button>
                         </form>
                     </div>
                 </div>

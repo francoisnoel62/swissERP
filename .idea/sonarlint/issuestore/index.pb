@@ -13,3 +13,7 @@ b
 contacts/urls.py,3/1/31adf62619d940451b8eb41aec7b72d0b6ce7935
 b
 2contacts/templates/contacts/contacts_formview.html,f/7/f72e442dc38478013124e0788cb19ee1a5b5cd4b
+S
+#.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
+]
+-contacts/migrations/0009_contact_is_active.py,0/6/060e837380a21e52f833f6d940c9f20ace068611

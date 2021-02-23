@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -31,3 +32,10 @@ class EditView(generic.UpdateView):
 class DeleteView(generic.DeleteView):
     model = Contact
     success_url = reverse_lazy("contacts")
+
+
+def toggle_active(request, contact_id):
+    contact = Contact.objects.get(pk=contact_id)
+    contact.is_active = not contact.is_active
+    contact.save()
+    return redirect('contacts')
