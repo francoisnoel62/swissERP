@@ -21,3 +21,10 @@ class DetailView(generic.DetailView):
 class CreateView(generic.CreateView):
     template_name = 'contacts/contacts_createview.html'
     form_class = ContactsModelForm
+
+
+class EditView(generic.UpdateView):
+    template_name = 'contacts/contacts_createview.html'
+    model = Contact
+    form_class = ContactsModelForm
+    success_url = reverse_lazy("contacts")
