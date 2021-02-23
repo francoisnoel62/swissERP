@@ -8,9 +8,7 @@ from .forms import ContactsModelForm
 class IndexView(generic.ListView):
     template_name = 'contacts/contacts_listview.html'
     context_object_name = 'contacts_list'
-
-    def get_queryset(self):
-        return Contact.objects.all()
+    queryset = Contact.objects.all()
 
 
 class DetailView(generic.DetailView):
