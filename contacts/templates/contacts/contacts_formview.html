@@ -9,11 +9,12 @@
                         <h5 class="card-title">{{ contact.name }} {{ contact.lastname }} <span
                                 class="badge bg-light text-primary">{{ contact.lang }}</span></h5>
                     </div>
-                    <div class="col-md-2">
-                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                            <a class="btn btn-light" href="{% url 'edit_contact' contact.id %}" role="button">Edit</a>
-                            <a class="btn btn-light" href="#" role="button">Delete</a>
-                        </div>
+                    <div class="col-md-2" style="display: inherit">
+                        <a class="btn btn-light mr-2" href="{% url 'edit_contact' contact.id %}" role="button">Edit</a>
+                        <form action="{% url 'delete_contact' contact.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-light">Delete</button>
+                        </form>
                     </div>
                 </div>
                 <h6 class="card-subtitle mb-2 text-muted ">{{ contact.street }}</h6>

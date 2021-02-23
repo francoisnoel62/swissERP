@@ -26,3 +26,8 @@ class EditView(generic.UpdateView):
     model = Contact
     form_class = ContactsModelForm
     success_url = reverse_lazy("contacts")
+
+
+class DeleteView(generic.DeleteView):
+    model = Contact
+    success_url = reverse_lazy("contacts")

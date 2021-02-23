@@ -4,6 +4,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Contact(models.Model):
+    is_active = models.BooleanField(verbose_name="active", default=True)
     title = models.CharField(verbose_name="titre", max_length=50, null=True)
     lang = models.CharField(verbose_name="Langue", max_length=80, null=True, blank=True)
     name = models.CharField(verbose_name='Prénom', max_length=200, null=True)

@@ -18,11 +18,10 @@
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <a class="btn btn-light" href="{% url 'contact_detail' contact.id %}"
                            role="button">{{ contact.name }} {{ contact.lastname }}</a>
-                        {% if contact.state == 'active' %}
-                            <span class="badge badge-info badge-pill">{{ contact.state }}</span>
-                        {% endif %}
-                        {% if contact.state == 'archived' %}
-                            <span class="badge badge-danger badge-pill">{{ contact.state }}</span>
+                        {% if contact.is_active %}
+                            <span class="badge badge-info badge-pill">active</span>
+                        {% else %}
+                            <span class="badge badge-danger badge-pill">archived</span>
                         {% endif %}
                     </li>
                 {% endfor %}

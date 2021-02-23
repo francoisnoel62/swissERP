@@ -4,9 +4,14 @@
 
 {% block viewlist %}
     <div class="row mx-auto mt-5 justify-content-center">
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        </form>
+        {#        <form class="form-inline">#}
+        {#            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+        {#        </form>#}
+        <div class="row mx-auto mt-5 justify-content-center">
+            <form class="form-inline">
+                <a class="btn btn-info" href="#" role="button">Create products</a>
+            </form>
+        </div>
     </div>
     <div class="row mx-auto mt-5 justify-content-center">
         {% if products_list %}
@@ -22,11 +27,10 @@
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="badge badge-success">CHF {{ product.price }}</p>
                             <p class="card-text">{{ product.description }}</p>
-                            <p class="card-text">{{ product.categ_id.name }}</p>
-                            {% for tax in product.tax_ids.all %}
-                                <p class="card-text">{{ tax.name }}</p>
-                            {% endfor %}
-
+{#                            <p class="card-text">{{ product.categ_id.name }}</p>#}
+{#                            {% for tax in product.tax_ids.all %}#}
+{#                                <p class="card-text">{{ tax.name }}</p>#}
+{#                            {% endfor %}#}
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">Last updated 3 mins ago</small>
