@@ -12,6 +12,18 @@
         </form>
     </div>
     <div class="row mx-auto mt-5 justify-content-center">
+        {% if messages %}
+            {% for message in messages %}
+                <p class="alert alert-dismissable {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        &times;
+                    </button>
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="row mx-auto mt-5 justify-content-center">
         {% if contacts_list %}
             <ul class="list-group list-group-flush w-50">
                 {% for contact in contacts_list %}

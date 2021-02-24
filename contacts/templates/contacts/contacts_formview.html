@@ -19,7 +19,7 @@
                 </div>
                 <h6 class="card-subtitle mb-2 text-muted ">{{ contact.street }}</h6>
                 <h6 class="card-subtitle mb-2 text-muted">{{ contact.region_zip }} - {{ contact.city }}</h6>
-                <h6 class="card-subtitle mb-2 text-muted">{{ contact.country }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ contact.get_country_display }}</h6>
                 <div class="row ml-1 mb-1">
                     <a class="btn btn-light btn-xlg" href="mailto:{{ contact.email }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

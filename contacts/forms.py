@@ -6,3 +6,4 @@ class ContactsModelForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = '__all__'
+        exclude = ['is_active']

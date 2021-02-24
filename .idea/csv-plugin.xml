@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/contacts/templates/contacts/contacts_listview.html">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/contacts/views.py">
           <value>
             <Attribute>

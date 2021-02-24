@@ -1,9 +1,10 @@
-from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib import messages
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .models import Contact
 from .forms import ContactsModelForm
+from .models import Contact
 
 
 class IndexView(generic.ListView):
@@ -32,6 +33,11 @@ class EditView(generic.UpdateView):
 class DeleteView(generic.DeleteView):
     model = Contact
     success_url = reverse_lazy("contacts")
+
+    def delete(self, request, *args, **kwargs):
+        deleted_person = super(DeleteView, self).get_object()
+        messages.success(self.request, f"{deleted_person.name} was removed from DB  ")
+        return super(DeleteView, self).delete(request, *args, **kwargs)
 
 
 def toggle_active(request, contact_id):
