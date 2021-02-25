@@ -17,3 +17,13 @@ S
 #.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
 ]
 -contacts/migrations/0009_contact_is_active.py,0/6/060e837380a21e52f833f6d940c9f20ace068611
+d
+4contacts/templates/contacts/contacts_createview.html,8/c/8cff317019f79a1f0c9d2c9f9a798a7e009e8a3a
+^
+.contacts/migrations/0010_auto_20210224_0737.py,1/0/10921915491bf94b8f21acbb9ed649b7fccaf49f
+^
+.contacts/migrations/0011_auto_20210224_0750.py,6/0/606900b21fbf0eb8e06ece67d7a6b0b291ae5a39
+^
+.contacts/migrations/0012_auto_20210224_0754.py,8/d/8dc35d315be12060fda3e03aee791d70a6f1bb23
+A
+contacts/forms.py,f/d/fd4bfda018c7687432cb0d45c099ed2be65c7f6f
