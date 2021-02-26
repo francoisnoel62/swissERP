@@ -1,7 +1,9 @@
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
+from next_prev import next_in_order, prev_in_order
+
 
 from .forms import ContactsModelForm
 from .models import Contact
@@ -16,6 +18,12 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     template_name = 'contacts/contacts_other_infos.html'
     model = Contact
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['next'] = next_in_order(self.object)
+        context['previous'] = prev_in_order(self.object)
+        return context
 
 
 class CreateView(generic.CreateView):
@@ -44,3 +52,4 @@ def toggle_active(request, contact_id):
     contact.is_active = not contact.is_active
     contact.save()
     return redirect('contacts')
+

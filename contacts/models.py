@@ -33,7 +33,7 @@ class Contact(models.Model):
     name = models.CharField(verbose_name='Prénom', max_length=200, null=True)
     lastname = models.CharField(verbose_name='Nom de famille', max_length=200, null=True)
     age = models.IntegerField(verbose_name='Age', null=True)
-    street = models.CharField(verbose_name="Addresse", max_length=100, null=True)
+    street = models.CharField(verbose_name="Adresse", max_length=100, null=True)
     region_zip = models.IntegerField(verbose_name="Code postale", null=True)
     city = models.CharField(verbose_name="Ville", max_length=200, null=True)
     country = models.CharField(verbose_name="Pays", max_length=100, null=False, choices=COUNTRY_CHOICES, default='CH')
