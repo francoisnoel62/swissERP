@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'contacts.apps.ContactsConfig',
     'products.apps.ProductConfig',
     'tax.apps.TaxConfig',
+    'sale.apps.SaleConfig',
     'phonenumber_field',
     'crispy_forms',
     'index.apps.IndexConfig',
