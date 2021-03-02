@@ -41,3 +41,19 @@ D
 sale/views.py,7/d/7d1f80182b926eb94ce63eb3fc2a1dc414c325e4
 >
 sale/models.py,5/9/590ecfd2a1a7ff41d77be2cf4c4ddd9e70d57b2d
+^
+.contacts/migrations/0013_auto_20210226_1005.py,c/a/ca94afadc22167eb7a1fa3a9d9117d180fc1fcad
+O
+sale/migrations/0001_initial.py,4/4/441574222b8f1acbf988b4cd2c5857b18acefa13
+K
+sale/migrations/__init__.py,4/7/47e19f8e29e8653b1daad1989e15a1905b6417eb
+@
+sale/__init__.py,6/9/693b01f05288e725d8ba648046c1eb0174705538
+=
+sale/admin.py,7/9/798c251646328d9ead9bea4af7d926a87513822b
+<
+sale/apps.py,9/5/951636fa6f2893a046d25ff6a67916037455385f
+=
+sale/tests.py,f/8/f87cddf2411ece61f0a561a0c8142133e4a824e7
+Q
+!sale/templates/sale_listview.html,1/a/1a34c51207e938872420c827044f1ceb94c46ab0

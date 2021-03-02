@@ -1,0 +1,24 @@
+{% extends 'viewlist/viewlist.html' %}
+
+{% block viewlist %}
+    <div class="row mx-auto mt-5 justify-content-center">
+        <form class="form-inline">
+            <a class="btn btn-info" href="{% url 'create_sale' %}" role="button">Create order</a>
+        </form>
+    </div>
+    <div class="row mx-auto mt-5 justify-content-center">
+        {% if sales_list %}
+            <ul class="list-group list-group-flush w-50">
+                {% for sale in sales_list %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ sale.partner_id.name }}</span>
+                        <span>{{ sale.so_total }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No contacts are available</p>
+        {% endif %}
+    </div>
+{% endblock %}
+
