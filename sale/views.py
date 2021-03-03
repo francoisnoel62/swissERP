@@ -13,18 +13,18 @@ class SaleOrderCreateView(generic.CreateView):
     form_class = SaleModelForm
 
 
+
 class SaleOrderIndexView(generic.ListView):
     template_name = 'sale/sale_listview.html'
     context_object_name = 'sales_list'
     queryset = SaleOrder.objects.all()
 
 
-#
-# class SaleOrderDetailView(generic.DetailView):
-#     template_name = ''
-#     model = SaleOrder
-#
-#
+class SaleOrderDetailView(generic.DetailView):
+    template_name = 'sale/sale_formview.html'
+    model = SaleOrder
+
+
 # # SALE ORDER LINE
 class SaleOrderLineCreateView(generic.CreateView):
     template_name = 'sale/create_sale_order_line.html'

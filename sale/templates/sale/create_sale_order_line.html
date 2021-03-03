@@ -10,19 +10,20 @@
                 <div class="form-group col-md-6">
                     {{ form.product_id|as_crispy_field }}
                 </div>
+            </div>
+            <div class="form-row">
                 <div class="form-group col-md-6">
                     {{ form.quantity|as_crispy_field }}
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-4">
-                    {{ form.ht_price|as_crispy_field }}
-                </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     {{ form.tax_id|as_crispy_field }}
                 </div>
-                <div class="form-group col-md-4">
-                    {{ form.sol_total|as_crispy_field }}
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    {{ form.ht_price|as_crispy_field }}
                 </div>
             </div>
             <div class="text-center">

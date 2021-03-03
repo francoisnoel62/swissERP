@@ -11,13 +11,13 @@
             <ul class="list-group list-group-flush w-50">
                 {% for sale in sales_list %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>{{ sale.partner_id.name }}</span>
-                        <span>{{ sale.so_total }}</span>
+                        <a class="btn btn-light" href="{% url 'sale_detail' sale.id %}"
+                           role="button">{{ sale.partner_id }} - {{ sale.validity_date }} - {{ sale.so_total }}</a>
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No contacts are available</p>
+            <p>There are no order yet</p>
         {% endif %}
     </div>
 {% endblock %}

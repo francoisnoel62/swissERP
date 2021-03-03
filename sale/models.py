@@ -6,14 +6,15 @@ from products.models import Product
 
 
 class SaleOrder(models.Model):
-    # create_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    # updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     partner_id = models.ForeignKey(Contact, on_delete=models.CASCADE, null=False, verbose_name='Customer')
     validity_date = models.DateField(verbose_name="Validity date", blank=True, null=True)
-    so_total = models.CharField(verbose_name="Total", max_length=100)
+    so_total = models.CharField(verbose_name="Total", max_length=100, blank=True)
 
     def get_absolute_url(self):
-        return reverse('sales')
+        return reverse('sale_detail', kwargs={'pk': self.pk})
+
 
     # def save(self, force_insert=False, force_update=False, using=None,
     #          update_fields=None):

@@ -79,3 +79,5 @@ Y
 )viewlist/templates/viewlist/viewlist.html,a/6/a6c71dd7fdb4d17db66a16639f24e681978cf167
 T
 $sale/templates/sale/create_sale.html,3/e/3e4df6ff3641816083d8ffcd8dcdab52c1f6a4b7
+_
+/sale/templates/sale/create_sale_order_line.html,6/3/630ca2b7f216c32ac96052feb7da54fb8cce50ba
