@@ -1,0 +1,33 @@
+{% extends 'viewlist/viewlist.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block viewlist %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="w-50 mx-auto mt-5">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    {{ form.product_id|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6">
+                    {{ form.quantity|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    {{ form.ht_price|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.tax_id|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.sol_total|as_crispy_field }}
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-info">Submit</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

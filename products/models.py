@@ -13,3 +13,6 @@ class Product(models.Model):
     picture = models.ImageField(verbose_name="Illustrations", upload_to='products', null=True)
     categ_id = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, null=True)
     tax_ids = models.ManyToManyField("tax.AccountTax")
+
+    def __str__(self):
+        return self.name

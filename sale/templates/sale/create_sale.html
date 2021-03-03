@@ -18,7 +18,7 @@
                 <div class="form-group col-md-12">
                     {% if not form.saleorderline_set.all %}
                         <form class="form-inline">
-                            <a class="btn btn-light" href="#" role="button">Add products</a>
+                            <a class="btn btn-light" href="{% url 'create_sale_order' %}" role="button">Add products</a>
                         </form>
                     {% else %}
                         {% for sol in form.saleorderline_set.all %}
@@ -31,16 +31,18 @@
                                     <th scope="col">HT Price</th>
                                     <th scope="col">Tax</th>
                                     <th scope="col">Total</th>
+                                    <th scope="col">Edit</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <th scope="row">1</th>
-                                    <td>Qumquat</td>
-                                    <td>2</td>
-                                    <td>12.5</td>
-                                    <td>7.7</td>
-                                    <td>13.35</td>
+                                    <td>{{ sol.product_id }}</td>
+                                    <td>{{ sol.quantity }}</td>
+                                    <td>{{ sol.ht_price }}</td>
+                                    <td>{{ sol.tax_id }}</td>
+                                    <td>{{ sol.sol_total }}</td>
+                                    <td><a class="btn btn-info" href="{% url 'edit_sol' sol.id %}" role="button">Edit</a></td>
                                 </tr>
                                 </tbody>
                             </table>
