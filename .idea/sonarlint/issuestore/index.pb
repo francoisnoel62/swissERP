@@ -57,18 +57,6 @@ K
 sale/tests.py,f/8/f87cddf2411ece61f0a561a0c8142133e4a824e7
 M
 home/templates/home/home.html,c/8/c853ea1b87ec000fffa9a18f7c438a2bd1fae45e
-Z
-*sale/migrations/0002_auto_20210302_1327.py,3/2/32a7c488403fa477d97c987a05eeb3943ed7f9a6
-Z
-*sale/migrations/0003_auto_20210302_1343.py,6/d/6db1e6413fdb376dd1dbb125a39dc2d7c4164de7
-Z
-*sale/migrations/0004_auto_20210302_1345.py,2/5/25b6c3f6b5bd84bc3b31fbf2d761034e1cf09a12
-_
-/sale/migrations/0005_saleorder_validity_date.py,3/d/3d9e4c6c1e93282d7974f92dbd17498d68628dad
-f
-6sale/migrations/0006_remove_saleorder_validity_date.py,6/8/689dc817e50f40bd1e3a59698ac783da7e65ddca
-_
-/sale/migrations/0007_saleorder_validity_date.py,f/6/f6f678b6885a70a1a62367a24f3c7dd2a3a48db7
 V
 &sale/templates/sale/sale_listview.html,d/0/d02b113efb4ea2ecd107273e9785b7f93ddb814b
 =
@@ -81,3 +69,5 @@ T
 $sale/templates/sale/create_sale.html,3/e/3e4df6ff3641816083d8ffcd8dcdab52c1f6a4b7
 _
 /sale/templates/sale/create_sale_order_line.html,6/3/630ca2b7f216c32ac96052feb7da54fb8cce50ba
+V
+&sale/templates/sale/sale_formview.html,f/5/f5ed1e66e15cc4087cb1a378a597f819894acfe7

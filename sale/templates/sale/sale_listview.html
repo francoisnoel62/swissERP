@@ -12,7 +12,7 @@
                 {% for sale in sales_list %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <a class="btn btn-light" href="{% url 'sale_detail' sale.id %}"
-                           role="button">{{ sale.partner_id }} - {{ sale.validity_date }} - {{ sale.so_total }}</a>
+                           role="button">{{ sale.name }}</a>
                     </li>
                 {% endfor %}
             </ul>

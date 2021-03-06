@@ -8,6 +8,7 @@ from products.models import Product
 class SaleOrder(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    name = models.CharField(max_length=25)
     partner_id = models.ForeignKey(Contact, on_delete=models.CASCADE, null=False, verbose_name='Customer')
     validity_date = models.DateField(verbose_name="Validity date", blank=True, null=True)
     so_total = models.CharField(verbose_name="Total", max_length=100, blank=True)
@@ -16,22 +17,11 @@ class SaleOrder(models.Model):
         return reverse('sale_detail', kwargs={'pk': self.pk})
 
 
-    # def save(self, force_insert=False, force_update=False, using=None,
-    #          update_fields=None):
-    #
-    #     for sol in self.saleorderline_set.all():
-    #         self.so_total += sol.sol_total
-    #
-    #     return super(SaleOrder, self).save(self, force_insert=False, force_update=False, using=None, update_fields=None)
-
-
 class SaleOrderLine(models.Model):
     create_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE, null=False, verbose_name="Products")
     quantity = models.FloatField(default=1, verbose_name="Quantity")
-    ht_price = models.FloatField(verbose_name="HT price")
-    tax_id = models.ManyToManyField("tax.AccountTax", verbose_name="Tax")
     sol_total = models.FloatField(verbose_name="Total", max_length=100)
     sale_order_id = models.ForeignKey(SaleOrder, on_delete=models.CASCADE, null=False)
 
@@ -46,4 +36,5 @@ class SaleOrderLine(models.Model):
         else:
             self.sol_total = self.ht_price
 
-        return super(SaleOrderLine, self).save(self, force_insert=False, force_update=False, using=None, update_fields=None)
+        return super(SaleOrderLine, self).save(self, force_insert=False, force_update=False, using=None,
+                                               update_fields=None)
