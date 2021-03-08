@@ -28,17 +28,28 @@
                     <div class="col-md-10">
                         <h5 class="card-title">{{ saleorder.partner_id.name }} </h5>
                     </div>
-                    {#                    <div class="col-md-2" style="display: inherit">#}
-                    {#                        <a class="btn btn-light mr-2" href="{% url 'edit_contact' saleorder.id %}" role="button">Edit</a>#}
-                    {#                        <form action="{% url 'delete_contact' saleorder.id %}" method="post">#}
-                    {#                            {% csrf_token %}#}
-                    {#                            <button class="btn btn-light mr-2">Delete</button>#}
-                    {#                        </form>#}
-                    {#                    </div>#}
+                    <div class="col-md-2" style="display: inherit">
+                        <a class="btn btn-light mr-2" href="{% url 'edit_sale' saleorder.pk %}"
+                           role="button">Edit</a>
+                        <form action="#" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-light mr-2">Delete</button>
+                        </form>
+                    </div>
                 </div>
                 <h6 class="card-subtitle mb-2 text-muted ">{{ saleorder.validity_date }}</h6>
                 <h6 class="card-subtitle mb-2 text-muted">{{ saleorder.so_total }}</h6>
             </div>
+        </div>
+    </div>
+    <div class="row mx-auto mt-5 justify-content-center">
+        <div>
+            {% if not saleorder.saleorderline_set.all %}
+                <a class="btn btn-light" href="#" role="button">Add products</a>
+            {% endif %}
+            {% for sol in saleorder.saleorderline_set.all %}
+               {{ sol.product_id.name }}
+            {% endfor %}
         </div>
     </div>
 
