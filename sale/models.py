@@ -16,6 +16,9 @@ class SaleOrder(models.Model):
     def get_absolute_url(self):
         return reverse('sale_detail', kwargs={'pk': self.pk})
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class SaleOrderLine(models.Model):
     create_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
@@ -24,3 +27,6 @@ class SaleOrderLine(models.Model):
     quantity = models.FloatField(default=1, verbose_name="Quantity")
     sol_total = models.FloatField(verbose_name="Total", max_length=100)
     sale_order_id = models.ForeignKey(SaleOrder, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f" {self.product_id.name} - {self.quantity} - {self.sol_total}"

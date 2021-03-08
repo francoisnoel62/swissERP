@@ -71,3 +71,5 @@ _
 /sale/templates/sale/create_sale_order_line.html,6/3/630ca2b7f216c32ac96052feb7da54fb8cce50ba
 V
 &sale/templates/sale/sale_formview.html,f/5/f5ed1e66e15cc4087cb1a378a597f819894acfe7
+Z
+*sale/migrations/0002_auto_20210308_1433.py,d/f/df369cef1efbb0a99fe84ef57dce70d952464b56

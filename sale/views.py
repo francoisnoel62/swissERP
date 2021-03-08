@@ -1,16 +1,39 @@
-from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
+from django.db import transaction
 from django.views import generic
-from next_prev import next_in_order, prev_in_order
 
-from .models import SaleOrder, SaleOrderLine
-from .forms import SaleModelForm
+from .forms import SaleModelForm, SaleOrderLineFormSet
+from .models import SaleOrder
 
 
 # SALE ORDER
+
 class SaleOrderCreateView(generic.CreateView):
     template_name = 'sale/create_sale.html'
     form_class = SaleModelForm
+
+
+class SaleOrderCreateViewWithSOL(generic.CreateView):
+    template_name = 'sale/create_sale.html'
+    form_class = SaleModelForm
+    
+    def get_context_data(self, **kwargs):
+        data = super(SaleOrderCreateViewWithSOL, self).get_context_data(**kwargs)
+        if self.request.POST:
+            data['sale_order_lines'] = SaleOrderLineFormSet(self.request.POST)
+        else:
+            data['sale_order_lines'] = SaleOrderLineFormSet()
+        return data
+    
+    def form_valid(self, form):
+        context = self.get_context_data()
+        sale_order_lines = context['sale_order_lines']
+        with transaction.atomic():
+            self.object = form.save()
+            
+            if sale_order_lines.is_valid():
+                sale_order_lines.instance = self.object
+                sale_order_lines.save()
+        return super(SaleOrderCreateViewWithSOL, self).form_valid(form)
 
 
 class SaleOrderUpdateView(generic.UpdateView):
