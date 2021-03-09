@@ -45,10 +45,12 @@
     <div class="row mx-auto mt-5 justify-content-center">
         <div>
             {% if not saleorder.saleorderline_set.all %}
-                <a class="btn btn-light" href="#" role="button">Add products</a>
+                <a class="btn btn-light" href="{% url 'edit_sale' saleorder.pk %}" role="button">Add products</a>
             {% endif %}
             {% for sol in saleorder.saleorderline_set.all %}
                {{ sol.product_id.name }}
+               {{ sol.quantity }}
+               {{ sol.sol_total }}
             {% endfor %}
         </div>
     </div>

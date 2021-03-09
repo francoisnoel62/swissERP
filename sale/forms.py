@@ -9,8 +9,7 @@ class SaleModelForm(forms.ModelForm):
 
     class Meta:
         model = SaleOrder
-        fields = '__all__'
-        exclude = ['name']
+        exclude = ['name', 'so_total']
 
     def save(self, commit=True):
         temp = super(SaleModelForm, self).save(commit=True)
@@ -24,7 +23,14 @@ class SaleModelForm(forms.ModelForm):
 class SaleOrderLineModelForm(forms.ModelForm):
     class Meta:
         model = SaleOrderLine
-        fields = '__all__'
+        exclude = ['sol_total']
+
+    def save(self, commit=True):
+        temp = super(SaleOrderLineModelForm, self).save(commit=False)
+        temp.sol_total = temp.product_id.price * temp.quantity
+        if commit:
+            temp.save()
+        return temp
 
 
 SaleOrderLineFormSet = inlineformset_factory(SaleOrder, SaleOrderLine, form=SaleOrderLineModelForm, extra=1)

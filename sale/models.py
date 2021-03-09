@@ -30,3 +30,4 @@ class SaleOrderLine(models.Model):
 
     def __str__(self):
         return f" {self.product_id.name} - {self.quantity} - {self.sol_total}"
+
