@@ -73,3 +73,21 @@ V
 &sale/templates/sale/sale_formview.html,f/5/f5ed1e66e15cc4087cb1a378a597f819894acfe7
 Z
 *sale/migrations/0002_auto_20210308_1433.py,d/f/df369cef1efbb0a99fe84ef57dce70d952464b56
+Z
+*sale/migrations/0003_auto_20210309_1212.py,4/a/4a1bfdb586cd0f04950e09110c68de957d31ffc7
+Z
+*sale/migrations/0004_auto_20210309_1214.py,e/5/e5f4bc3a8517095dafbe3a0f15693a006186f926
+Z
+*sale/migrations/0005_auto_20210309_1216.py,3/e/3eae566eab5019056facedd62d6133800c875eb8
+a
+1sale/migrations/0006_remove_saleorder_so_total.py,e/6/e6657fe91fb1f536aa1342681f3d88efe568cbc3
+P
+ static/formset/jquery.formset.js,6/0/60ee8543c98e042c3a3827598ba1445b119862bd
+P
+ index/templates/index/index.html,d/d/dd567b7809c6448468b8ac968ca7755979cb6307
+A
+index/__init__.py,6/0/605a97a192200e47b1904aa33c5baa8901c625a9
+M
+sale/templatetags/__init__.py,9/d/9d60e3cb06b1a31929deaeedccbd2b6bbc80db89
+R
+"sale/templatetags/verbose_names.py,7/0/7048a82bc0612d87271361ebe929afa46a25bfab

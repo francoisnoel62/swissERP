@@ -7,6 +7,8 @@ class ProductCategory(models.Model):
 
 
 class Product(models.Model):
+    create_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(verbose_name="Nom du produit", max_length=50)
     price = models.FloatField(verbose_name="Prix du produit")
     description = models.TextField(verbose_name="Description du produit", null=True)

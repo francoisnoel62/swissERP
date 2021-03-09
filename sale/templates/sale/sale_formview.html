@@ -1,5 +1,7 @@
 {% extends 'viewlist/viewlist.html' %}
 
+{% load verbose_names %}
+
 {% block viewlist %}
     {#    <div class="row mx-auto mt-5 justify-content-around" style="width: 80%">#}
     {#        {% if previous %}#}
@@ -26,7 +28,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-10">
-                        <h5 class="card-title">{{ saleorder.partner_id.name }} </h5>
+                        <h5 class="card-title">{{ saleorder.partner_id.name }} {{ saleorder.partner_id.lastname }} </h5>
                     </div>
                     <div class="col-md-2" style="display: inherit">
                         <a class="btn btn-light mr-2" href="{% url 'edit_sale' saleorder.pk %}"
@@ -37,8 +39,9 @@
                         </form>
                     </div>
                 </div>
-                <h6 class="card-subtitle mb-2 text-muted ">{{ saleorder.validity_date }}</h6>
-                <h6 class="card-subtitle mb-2 text-muted">{{ saleorder.total }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted " data-toggle="tooltip" data-placement="left"
+                    title="{% get_verbose_field_name saleorder "validity_date" %}">{{ saleorder.validity_date }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Total: {{ saleorder.total }} CHF</h6>
             </div>
         </div>
     </div>
@@ -65,6 +68,5 @@
         </table>
     </div>
     <a class="btn btn-light" href="{% url 'edit_sale' saleorder.pk %}" role="button">Add products</a>
-
 
 {% endblock %}
