@@ -14,7 +14,7 @@ class SaleModelForm(forms.ModelForm):
     def save(self, commit=True):
         temp = super(SaleModelForm, self).save(commit=True)
         date = temp.validity_date.strftime("%d-%m-%Y")
-        temp.name = f"Order#{temp.id} - {temp.partner_id.name} {temp.partner_id.lastname} - {date} - {temp.so_total}CHF"
+        temp.name = f"Order#{temp.id} - {temp.partner_id.name} {temp.partner_id.lastname} - {date} - {temp.total}CHF"
         if commit:
             temp.save()
         return temp

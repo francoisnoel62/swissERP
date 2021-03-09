@@ -11,7 +11,13 @@ class SaleOrder(models.Model):
     name = models.CharField(max_length=100)
     partner_id = models.ForeignKey(Contact, on_delete=models.CASCADE, null=False, verbose_name='Customer')
     validity_date = models.DateField(verbose_name="Validity date", blank=True, null=True)
-    so_total = models.CharField(verbose_name="Total", max_length=100, blank=True)
+
+    @property
+    def total(self):
+        res = False
+        for sol in self.saleorderline_set.all():
+            res += sol.sol_total
+        return res
 
     def get_absolute_url(self):
         return reverse('sale_detail', kwargs={'pk': self.pk})
@@ -30,4 +36,3 @@ class SaleOrderLine(models.Model):
 
     def __str__(self):
         return f" {self.product_id.name} - {self.quantity} - {self.sol_total}"
-

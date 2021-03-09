@@ -38,21 +38,33 @@
                     </div>
                 </div>
                 <h6 class="card-subtitle mb-2 text-muted ">{{ saleorder.validity_date }}</h6>
-                <h6 class="card-subtitle mb-2 text-muted">{{ saleorder.so_total }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ saleorder.total }}</h6>
             </div>
         </div>
     </div>
     <div class="row mx-auto mt-5 justify-content-center">
-        <div>
-            {% if not saleorder.saleorderline_set.all %}
-                <a class="btn btn-light" href="{% url 'edit_sale' saleorder.pk %}" role="button">Add products</a>
-            {% endif %}
+        <table class="table table-hover w-50" style="text-align: center">
+            <thead>
+            <tr>
+                <th scope="col">Products</th>
+                <th scope="col">Unit Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+            </tr>
+            </thead>
+            <tbody>
             {% for sol in saleorder.saleorderline_set.all %}
-               {{ sol.product_id.name }}
-               {{ sol.quantity }}
-               {{ sol.sol_total }}
+                <tr>
+                    <td>{{ sol.product_id.name }}</td>
+                    <td>{{ sol.product_id.price }}</td>
+                    <td>{{ sol.quantity }}</td>
+                    <td>{{ sol.sol_total }}</td>
+                </tr>
             {% endfor %}
-        </div>
+            </tbody>
+        </table>
     </div>
+    <a class="btn btn-light" href="{% url 'edit_sale' saleorder.pk %}" role="button">Add products</a>
+
 
 {% endblock %}
