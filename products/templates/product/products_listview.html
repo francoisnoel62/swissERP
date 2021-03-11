@@ -9,7 +9,7 @@
         {#        </form>#}
         <div class="row mx-auto mt-5 justify-content-center">
             <form class="form-inline">
-                <a class="btn btn-info" href="#" role="button">Create products</a>
+                <a class="btn btn-info" href="{% url 'create-product' %}" role="button">Create products</a>
             </form>
         </div>
     </div>
@@ -25,7 +25,7 @@
                         </a>
                         <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="badge badge-success">CHF {{ product.price }}</p>
+                            <p class="badge badge-success">CHF {{ product.price|floatformat:2 }}</p>
                             <p class="card-text">{{ product.description }}</p>
 {#                            <p class="card-text">{{ product.categ_id.name }}</p>#}
 {#                            {% for tax in product.tax_ids.all %}#}

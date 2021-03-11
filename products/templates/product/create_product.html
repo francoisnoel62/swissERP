@@ -1,0 +1,19 @@
+{% extends 'viewlist/viewlist.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block viewlist %}
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="w-50 mx-auto mt-5">
+                {{ form.as_p }}
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-info">Submit</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

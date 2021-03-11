@@ -91,3 +91,7 @@ M
 sale/templatetags/__init__.py,9/d/9d60e3cb06b1a31929deaeedccbd2b6bbc80db89
 R
 "sale/templatetags/verbose_names.py,7/0/7048a82bc0612d87271361ebe929afa46a25bfab
+^
+.products/migrations/0010_auto_20210309_1322.py,6/8/68cac7d5dbdf9f4934e5d4df9c005b5207e11e67
+@
+products/urls.py,c/3/c3cf7c6b7cba09d947e60eed5c7b4eb3b2f3ccdf
