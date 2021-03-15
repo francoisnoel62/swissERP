@@ -33,8 +33,6 @@ A
 sale/urls.py,6/4/643dddf57adc7caca537a454e9e02aba1da73753
 A
 products/views.py,e/7/e7c0df80dbe407ceab2293cb3ce846b3cc0b1733
-=
-tax/models.py,0/2/027694312f9fff97a415b1c5e9abb938cd393151
 D
 swissERP/settings.py,a/a/aab293619ac61908383614915c17e005cc6a33cb
 =
@@ -71,16 +69,6 @@ _
 /sale/templates/sale/create_sale_order_line.html,6/3/630ca2b7f216c32ac96052feb7da54fb8cce50ba
 V
 &sale/templates/sale/sale_formview.html,f/5/f5ed1e66e15cc4087cb1a378a597f819894acfe7
-Z
-*sale/migrations/0002_auto_20210308_1433.py,d/f/df369cef1efbb0a99fe84ef57dce70d952464b56
-Z
-*sale/migrations/0003_auto_20210309_1212.py,4/a/4a1bfdb586cd0f04950e09110c68de957d31ffc7
-Z
-*sale/migrations/0004_auto_20210309_1214.py,e/5/e5f4bc3a8517095dafbe3a0f15693a006186f926
-Z
-*sale/migrations/0005_auto_20210309_1216.py,3/e/3eae566eab5019056facedd62d6133800c875eb8
-a
-1sale/migrations/0006_remove_saleorder_so_total.py,e/6/e6657fe91fb1f536aa1342681f3d88efe568cbc3
 P
  static/formset/jquery.formset.js,6/0/60ee8543c98e042c3a3827598ba1445b119862bd
 P
@@ -91,7 +79,13 @@ M
 sale/templatetags/__init__.py,9/d/9d60e3cb06b1a31929deaeedccbd2b6bbc80db89
 R
 "sale/templatetags/verbose_names.py,7/0/7048a82bc0612d87271361ebe929afa46a25bfab
-^
-.products/migrations/0010_auto_20210309_1322.py,6/8/68cac7d5dbdf9f4934e5d4df9c005b5207e11e67
 @
 products/urls.py,c/3/c3cf7c6b7cba09d947e60eed5c7b4eb3b2f3ccdf
+A
+products/forms.py,1/8/18290037a6c6f23e022d2baa2e1e1ce35b23ac91
+^
+.products/templates/product/create_product.html,a/3/a36db716d1254cd7a214015c60d3b32c54d8293e
+O
+products/migrations/__init__.py,6/f/6f389171a3bb25446a30aeea5632a065dc15ecc1
+<
+home/urls.py,f/9/f9782bad13aa4d6aa4b8882f98cae6053daa8556

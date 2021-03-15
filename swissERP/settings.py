@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'viewlist.apps.ViewlistConfig',
     'contacts.apps.ContactsConfig',
     'products.apps.ProductConfig',
-    'tax.apps.TaxConfig',
     'sale.apps.SaleConfig',
     'phonenumber_field',
     'crispy_forms',
@@ -134,3 +133,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+# Base url to serve media files
+MEDIA_URL = '/media/'
+
+# Path where media is stored
+MEDIA_ROOT = BASE_DIR / 'media'

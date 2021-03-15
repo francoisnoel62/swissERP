@@ -13,3 +13,9 @@ class ProductListView(generic.ListView):
 class ProductCreateView(generic.CreateView):
     template_name = 'product/create_product.html'
     form_class = ProductModelForm
+
+
+class ProductUpdateView(generic.UpdateView):
+    template_name = 'product/create_product.html'
+    form_class = ProductModelForm
+    model = Product

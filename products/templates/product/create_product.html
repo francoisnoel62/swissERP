@@ -5,7 +5,7 @@
 
 {% block viewlist %}
     <div>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="w-50 mx-auto mt-5">
                 {{ form.as_p }}
@@ -14,6 +14,5 @@
                 <button type="submit" class="btn btn-info">Submit</button>
             </div>
         </form>
-    </div>
 
 {% endblock %}
