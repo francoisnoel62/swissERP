@@ -14,6 +14,18 @@
         </div>
     </div>
     <div class="row mx-auto mt-5 justify-content-center">
+        {% if messages %}
+            {% for message in messages %}
+                <p class="alert alert-dismissable {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        &times;
+                    </button>
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="row mx-auto mt-5 justify-content-center">
         {% if products_list %}
             <div class="card-deck" style="width: 60%">
                 {% for product in products_list %}
@@ -27,13 +39,22 @@
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="badge badge-success">CHF {{ product.price|floatformat:2 }}</p>
                             <p class="card-text">{{ product.description }}</p>
-{#                            <p class="card-text">{{ product.categ_id.name }}</p>#}
-{#                            {% for tax in product.tax_ids.all %}#}
-{#                                <p class="card-text">{{ tax.name }}</p>#}
-{#                            {% endfor %}#}
+                            {#                            <p class="card-text">{{ product.categ_id.name }}</p>#}
+                            {#                            {% for tax in product.tax_ids.all %}#}
+                            {#                                <p class="card-text">{{ tax.name }}</p>#}
+                            {#                            {% endfor %}#}
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">Last updated : {{ product.updated_at }}</small>
+                        </div>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example"
+                             style="margin: auto">
+                            <form action="{% url 'delete-product' product.id %}" method="post"
+                                  onsubmit="return confirm('Do you really want to delete *{{ product.name }}* from DB ?');">
+                                {% csrf_token %}
+                                <button class="btn btn-light mr-2" style="padding: unset; font-size: 1.4vh;">delete
+                                </button>
+                            </form>
                         </div>
                     </div>
                 {% endfor %}
