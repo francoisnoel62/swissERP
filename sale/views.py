@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.db import transaction
+from django.urls import reverse_lazy
 from django.views import generic
 
 from .forms import SaleModelForm, SaleOrderLineFormSet
@@ -6,7 +8,6 @@ from .models import SaleOrder
 
 
 # SALE ORDER
-
 class SaleOrderCreateView(generic.CreateView):
     template_name = 'sale/create_sale.html'
     form_class = SaleModelForm
@@ -76,3 +77,13 @@ class SaleOrderIndexView(generic.ListView):
 class SaleOrderDetailView(generic.DetailView):
     template_name = 'sale/sale_formview.html'
     model = SaleOrder
+
+
+class SaleOrderDeleteView(generic.DeleteView):
+    model = SaleOrder
+    success_url = reverse_lazy('sales')
+
+    def delete(self, request, *args, **kwargs):
+        deleted_sale = super(SaleOrderDeleteView, self).get_object()
+        messages.success(self.request, f"{deleted_sale.name} was removed from DB ")
+        return super(SaleOrderDeleteView, self).delete(request, *args, **kwargs)

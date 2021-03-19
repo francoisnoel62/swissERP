@@ -33,7 +33,8 @@
                     <div class="col-md-2" style="display: inherit">
                         <a class="btn btn-light mr-2" href="{% url 'edit_sale' saleorder.pk %}"
                            role="button">Edit</a>
-                        <form action="#" method="post">
+                        <form action="{% url 'delete_sale' saleorder.id %}" method="post"
+                              onsubmit="return confirm('Do you really want to delete *{{ saleorder.name }}* from DB ?');">
                             {% csrf_token %}
                             <button class="btn btn-light mr-2">Delete</button>
                         </form>
@@ -44,6 +45,9 @@
                 <h6 class="card-subtitle mb-2 text-muted">Total: {{ saleorder.total|floatformat:2 }} CHF</h6>
             </div>
         </div>
+    </div>
+    <div class="row mx-auto mt-5 justify-content-center">
+        <a class="btn btn-light" href="{% url 'edit_sale' saleorder.pk %}" role="button">Add products</a>
     </div>
     <div class="row mx-auto mt-5 justify-content-center">
         <table class="table table-hover w-50" style="text-align: center">
@@ -67,6 +71,5 @@
             </tbody>
         </table>
     </div>
-    <a class="btn btn-light" href="{% url 'edit_sale' saleorder.pk %}" role="button">Add products</a>
 
 {% endblock %}
