@@ -1,0 +1,55 @@
+{% extends 'index/index.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    {% if form.errors %}
+        <div class="row">
+            <div class="offset-md-4 col-md-4 alert alert-danger" role="alert">
+                {{ form.errors }}
+                <a class="btn btn-danger" href="{% url 'register' %}" role="button">Clear data</a>
+            </div>
+        </div>
+    {% endif %}
+    <div class="row" style="margin-top: 15vh;">
+        <div class="offset-md-4 col-md-4">
+            <form method="post" class="text-center border border-light p-5">
+                {% csrf_token %}
+
+                <p class="h4 mb-4">Sign in</p>
+
+                <!-- Email -->
+                <input type="text" name="username" class="form-control mb-4" placeholder="Username">
+
+                <!-- Password -->
+                <input type="password" name="password" class="form-control mb-4" placeholder="Password">
+
+                <div class="d-flex justify-content-around">
+                    <div>
+                        <!-- Remember me -->
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                            <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                        </div>
+                    </div>
+                    <div>
+                        <!-- Forgot password -->
+                        <a href="">Forgot password?</a>
+                    </div>
+                </div>
+
+                <!-- Sign in button -->
+                <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+
+                <!-- Register -->
+                <p>Not a member yet ?
+                    <a href="{% url 'register' %}">Register</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
+

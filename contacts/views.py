@@ -1,15 +1,16 @@
 from django.contrib import messages
-from django.shortcuts import redirect, render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from next_prev import next_in_order, prev_in_order
-
 
 from .forms import ContactsModelForm
 from .models import Contact
 
 
-class IndexView(generic.ListView):
+class IndexView(LoginRequiredMixin, generic.ListView):
+    login_url = reverse_lazy('login')
     template_name = 'contacts/contacts_listview.html'
     context_object_name = 'contacts_list'
     queryset = Contact.objects.all()

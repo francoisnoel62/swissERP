@@ -1,0 +1,56 @@
+{% extends 'index/index.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    {% if form.errors %}
+        <div class="row">
+            <div class="offset-md-4 col-md-4 alert alert-danger" role="alert">
+                {{ form.errors }}
+                <a class="btn btn-danger" href="{% url 'register' %}" role="button">Clear data</a>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="offset-md-4 col-md-4">
+            <form method="POST" class="text-center border border-light p-5 " style="width: 30vw;">
+                {% csrf_token %}
+
+                <p class="h4 mb-4">Sign up</p>
+
+                <div class="form-row mb-4">
+                    <div class="col">
+                        <!-- First name -->
+                        {{ form.first_name|as_crispy_field }}
+                    </div>
+                    <div class="col">
+                        <!-- Last name -->
+                        {{ form.last_name|as_crispy_field }}
+                    </div>
+                </div>
+
+                <!-- E-mail -->
+                {{ form.username|as_crispy_field }}
+
+                {{ form.email|as_crispy_field }}
+
+                <!-- Password -->
+                {{ form.password1|as_crispy_field }}
+                {{ form.password2|as_crispy_field }}
+
+                <!-- Sign up button -->
+                <button class="btn btn-info my-4 btn-block" type="submit">Sign in</button>
+
+                <hr>
+
+                <p>Already have an account ? <a href="{% url 'login' %}"> Sign in</a>
+
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
+

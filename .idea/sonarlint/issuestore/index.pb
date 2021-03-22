@@ -94,3 +94,15 @@ S
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+B
+accounts/models.py,6/1/61552fe05711cbaa3244c18deedf1d76e08d2649
+@
+accounts/urls.py,6/0/605dfdd3d50bf83b921d6fff90cbd98052a71d27
+A
+accounts/forms.py,4/2/423d51d4f9a16166c3e1046d2a92cb79899b60d0
+Y
+)accounts/templates/accounts/register.html,6/3/6321c42c63a1eeddbc8ad22628b36962c1bd004b
+V
+&accounts/templates/accounts/login.html,2/e/2efb935804e73168608511b9e54627f2f98d0b0f
+A
+accounts/views.py,b/a/ba7590f6f358542018b74d55cb2e357917bab56c
