@@ -4,9 +4,6 @@ from django.shortcuts import render, redirect
 from .forms import CreateUserForm
 
 
-def landingPage(request):
-    return render(request, 'accounts/landing.html', {})
-
 
 def registerPage(request):
     if request.user.is_authenticated:
