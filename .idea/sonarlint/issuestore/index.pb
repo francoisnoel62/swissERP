@@ -106,3 +106,13 @@ V
 &accounts/templates/accounts/login.html,2/e/2efb935804e73168608511b9e54627f2f98d0b0f
 A
 accounts/views.py,b/a/ba7590f6f358542018b74d55cb2e357917bab56c
+D
+accounts/__init__.py,6/6/66f55cad95e855b835d1f61bb875e90339c35887
+A
+accounts/admin.py,a/3/a3360866a37a1817d2b7bff9b4bc78c975e3b58e
+@
+accounts/apps.py,1/0/105856a1a16213228e6bf93c0ff567a0b51380c4
+A
+accounts/tests.py,d/d/dd34e9e1474cddb9e5d2f2e680bd1cb27ebbab6e
+=
+home/views.py,8/a/8a8ef48d8177b42e17ba0f631c729a443109261d
