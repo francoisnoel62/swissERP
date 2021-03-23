@@ -13,6 +13,7 @@
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <a class="btn btn-light" href="{% url 'sale_detail' sale.id %}"
                            role="button">{{ sale.name }}</a>
+                        <span class="badge {{ sale.state_color }} badge-pill">{{ sale.get_order_state_display }}</span>
                     </li>
                 {% endfor %}
             </ul>

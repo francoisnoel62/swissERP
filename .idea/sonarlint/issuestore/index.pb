@@ -65,8 +65,6 @@ Y
 )viewlist/templates/viewlist/viewlist.html,a/6/a6c71dd7fdb4d17db66a16639f24e681978cf167
 T
 $sale/templates/sale/create_sale.html,3/e/3e4df6ff3641816083d8ffcd8dcdab52c1f6a4b7
-_
-/sale/templates/sale/create_sale_order_line.html,6/3/630ca2b7f216c32ac96052feb7da54fb8cce50ba
 V
 &sale/templates/sale/sale_formview.html,f/5/f5ed1e66e15cc4087cb1a378a597f819894acfe7
 P
@@ -116,3 +114,5 @@ A
 accounts/tests.py,d/d/dd34e9e1474cddb9e5d2f2e680bd1cb27ebbab6e
 =
 home/views.py,8/a/8a8ef48d8177b42e17ba0f631c729a443109261d
+H
+static/contacts/test.css,a/3/a3df88303055f68e4a7e12f18ea91a5ec83c6321

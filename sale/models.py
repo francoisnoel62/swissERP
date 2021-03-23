@@ -6,18 +6,37 @@ from products.models import Product
 
 
 class SaleOrder(models.Model):
+    ORDER_STATE = (
+        ('DR', 'Draft'),
+        ('PG', 'Pending'),
+        ('CF', 'Confirmed'),
+        ('CC', 'Canceled')
+    )
+
     create_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100)
     partner_id = models.ForeignKey(Contact, on_delete=models.CASCADE, null=False, verbose_name='Customer')
     validity_date = models.DateField(verbose_name="Validity date", blank=True, null=True)
+    order_state = models.CharField(verbose_name="Etat de la commande", max_length=10, choices=ORDER_STATE, default='DR')
+
+    @property
+    def state_color(self):
+        if self.order_state == 'DR':
+            return "badge-info"
+        elif self.order_state == 'PG':
+            return "badge-secondary"
+        elif self.order_state == 'CF':
+            return "badge-warning"
+        elif self.order_state == 'CC':
+            return "badge-danger"
 
     @property
     def total(self):
         res = False
         for sol in self.saleorderline_set.all():
             res += sol.sol_total
-        return res
+        return round(res, 2)
 
     def get_absolute_url(self):
         return reverse('sale_detail', kwargs={'pk': self.pk})

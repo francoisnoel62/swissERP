@@ -1,6 +1,10 @@
 {% extends 'viewlist/viewlist.html' %}
 
+{% load static %}
+
 {% block viewlist %}
+    <link rel="stylesheet" type="text/css" href="{% static 'contacts/test.css' %}">
+
     {#    <div class="row mx-auto mt-5 justify-content-center">#}
     {#        <form class="form-inline">#}
     {#            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
@@ -10,6 +14,7 @@
         <form class="form-inline">
             <a class="btn btn-info" href="{% url 'create_contact' %}" role="button">Create contact</a>
         </form>
+{#        <p id="test">TEST</p>#}
     </div>
     <div class="row mx-auto mt-5 justify-content-center">
         {% if messages %}

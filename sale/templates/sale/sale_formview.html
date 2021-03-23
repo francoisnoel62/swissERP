@@ -30,25 +30,31 @@
                     <div class="col-md-10">
                         <h5 class="card-title">{{ saleorder.partner_id.name }} {{ saleorder.partner_id.lastname }} </h5>
                     </div>
-                    <div class="col-md-2" style="display: inherit">
-                        <a class="btn btn-light mr-2" href="{% url 'edit_sale' saleorder.pk %}"
-                           role="button">Edit</a>
-                        <form action="{% url 'delete_sale' saleorder.id %}" method="post"
-                              onsubmit="return confirm('Do you really want to delete *{{ saleorder.name }}* from DB ?');">
-                            {% csrf_token %}
-                            <button class="btn btn-light mr-2">Delete</button>
-                        </form>
-                    </div>
+                    {% if saleorder.order_state != 'CF' %}
+                        <div class="col-md-2" style="display: inherit">
+                            <a class="btn btn-light mr-2" href="{% url 'edit_sale' saleorder.pk %}"
+                               role="button">Edit</a>
+                            <form action="{% url 'delete_sale' saleorder.id %}" method="post"
+                                  onsubmit="return confirm('Do you really want to delete *{{ saleorder.name }}* from DB ?');">
+                                {% csrf_token %}
+                                <button class="btn btn-light mr-2">Delete</button>
+                            </form>
+                        </div>
+                    {% endif %}
                 </div>
                 <h6 class="card-subtitle mb-2 text-muted " data-toggle="tooltip" data-placement="left"
                     title="{% get_verbose_field_name saleorder "validity_date" %}">{{ saleorder.validity_date }}</h6>
                 <h6 class="card-subtitle mb-2 text-muted">Total: {{ saleorder.total|floatformat:2 }} CHF</h6>
+                <span class="badge {{ saleorder.state_color }} badge-pill">{{ saleorder.get_order_state_display }}</span>
             </div>
         </div>
     </div>
-    <div class="row mx-auto mt-5 justify-content-center">
-        <a class="btn btn-info" href="{% url 'edit_sale' saleorder.pk %}" role="button">Add products</a>
-    </div>
+    {% if saleorder.order_state != 'CF' %}
+        <div class="row mx-auto mt-5 justify-content-center">
+            <a class="btn btn-info" href="{% url 'edit_sale' saleorder.pk %}" role="button">Add products</a>
+            <a class="btn btn-warning ml-5" href="{% url 'confirm_sale' saleorder.pk %}" role="button">Confirm</a>
+        </div>
+    {% endif %}
     <div class="row mx-auto mt-5 justify-content-center">
         <table class="table table-hover w-50" style="text-align: center">
             <thead>

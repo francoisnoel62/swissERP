@@ -52,7 +52,7 @@
                             <form action="{% url 'delete-product' product.id %}" method="post"
                                   onsubmit="return confirm('Do you really want to delete *{{ product.name }}* from DB ?');">
                                 {% csrf_token %}
-                                <button class="btn btn-light mr-2" style="padding: unset; font-size: 1.4vh;">delete
+                                <button class="btn btn-danger mr-2" style="padding: unset; font-size: 1.4vh;">delete
                                 </button>
                             </form>
                         </div>

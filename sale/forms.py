@@ -9,7 +9,7 @@ class SaleModelForm(forms.ModelForm):
 
     class Meta:
         model = SaleOrder
-        exclude = ['name', 'so_total']
+        exclude = ['name', 'order_state']
 
     def save(self, commit=True):
         temp = super(SaleModelForm, self).save(commit=True)
