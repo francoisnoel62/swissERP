@@ -1,11 +1,15 @@
 from django import forms
-from django.forms import SelectDateWidget, inlineformset_factory
+from django.forms import inlineformset_factory
 
 from .models import SaleOrder, SaleOrderLine
 
 
 class SaleModelForm(forms.ModelForm):
-    validity_date = forms.DateField()
+    validity_date = forms.DateField(
+        widget=forms.TextInput(
+            attrs={'type': 'date'}
+        )
+    )
 
     class Meta:
         model = SaleOrder
