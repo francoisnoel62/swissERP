@@ -62,7 +62,7 @@
                 <th scope="col">Products</th>
                 <th scope="col">Unit Price</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
+                <th scope="col">Sub-total</th>
             </tr>
             </thead>
             <tbody>
@@ -74,6 +74,12 @@
                     <td>{{ sol.sol_total|floatformat:2 }}</td>
                 </tr>
             {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td>TOTAL</td>
+                <td>{{ saleorder.total|floatformat:2 }}</td>
+            </tr>
             </tbody>
         </table>
     </div>
