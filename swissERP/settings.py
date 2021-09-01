@@ -15,7 +15,6 @@ import os
 import sys
 import dj_database_url
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -84,7 +83,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'swissERP.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
@@ -102,7 +100,6 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
     DATABASES = {
         "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -122,7 +119,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -135,7 +131,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
