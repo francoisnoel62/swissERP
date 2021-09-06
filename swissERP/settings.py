@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+from django.contrib import messages
 from django.core.management.utils import get_random_secret_key
 from pathlib import Path
 import os
@@ -39,7 +40,6 @@ INSTALLED_APPS = [
     'contacts.apps.ContactsConfig',
     'products.apps.ProductConfig',
     'sale.apps.SaleConfig',
-    'tools.apps.ToolsConfig',
     'phonenumber_field',
     'crispy_forms',
     'index.apps.IndexConfig',
@@ -53,6 +53,10 @@ INSTALLED_APPS = [
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

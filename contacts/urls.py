@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:pk>/edit/', views.EditView.as_view(), name='edit_contact'),
     path('<int:pk>/', views.DetailView.as_view(), name='contact_detail'),
     path('<int:pk>/delete', views.DeleteView.as_view(), name='delete_contact'),
+    path('import/', views.upload_file, name='import_contacts'),
 ]

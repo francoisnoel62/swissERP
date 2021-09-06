@@ -1,6 +1,12 @@
+import os
+
 from django.db import models
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
+
+
+class ContactsImport(models.Model):
+    file = models.FileField(upload_to="contacts")
 
 
 class Contact(models.Model):
