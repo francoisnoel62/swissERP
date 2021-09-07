@@ -2,20 +2,36 @@
 
 {% block other_infos %}
     <div class="row mx-auto mt-5 justify-content-around" style="width: 58rem;">
-        <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#sales" aria-expanded="false" aria-controls="collapseExample">
-        Sales
+        <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#sales" aria-expanded="false"
+                aria-controls="collapseExample">
+            Sales
         </button>
-        <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#invoices" aria-expanded="false" aria-controls="collapseExample">
-        Invoices
+        <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#invoices" aria-expanded="false"
+                aria-controls="collapseExample">
+            Invoices
         </button>
-        <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#delivers" aria-expanded="false" aria-controls="collapseExample">
-        Delivers
+        <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#delivers" aria-expanded="false"
+                aria-controls="collapseExample">
+            Delivers
         </button>
     </div>
-    <div class="row mx-auto mt-5 justify-content-center" style="width: 55%">
+    <div class="row mx-auto mt-5 justify-content-center" style="width: 55%; margin-bottom: 20px;">
         <div class="collapse" id="sales">
-            <div class="card card-body">
-                Some sales
+            <div class="card card-body p-0">
+                {% if contact.saleorder_set.all %}
+                    <ul class="list-group list-group-flush">
+                        {% for so in contact.saleorder_set.all %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <a class="btn btn-light" href="{% url 'sale_detail' so.id %}"
+                                   role="button">{{ so.name }}</a>
+                                <span class="badge {{ so.state_color }} badge-pill">{{ so.get_order_state_display }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>There are no confirmed order yet</p>
+                {% endif %}
+
             </div>
         </div>
         <div class="collapse" id="invoices">
