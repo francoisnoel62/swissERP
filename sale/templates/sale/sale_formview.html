@@ -40,6 +40,11 @@
                                 <button class="btn btn-light mr-2">Delete</button>
                             </form>
                         </div>
+                    {% elif saleorder.order_state == 'CF' %}
+                        <div class="col-md-2" style="display: inherit">
+                            <a class="btn btn-light mr-2" href="#"
+                               role="button">Export as PDF</a>
+                        </div>
                     {% endif %}
                 </div>
                 <h6 class="card-subtitle mb-2 text-muted " data-toggle="tooltip" data-placement="left"
