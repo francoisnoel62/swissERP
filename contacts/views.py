@@ -14,10 +14,12 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     login_url = reverse_lazy('login')
     template_name = 'contacts/contacts_listview.html'
     context_object_name = 'contacts_list'
-    queryset = Contact.objects.all()
+
+    def get_queryset(self):
+        return Contact.objects.filter(user_id=self.request.user)
 
 
-class DetailView(generic.DetailView):
+class DetailView(LoginRequiredMixin, generic.DetailView):
     template_name = 'contacts/contacts_other_infos.html'
     model = Contact
 
@@ -28,18 +30,22 @@ class DetailView(generic.DetailView):
         return context
 
 
-class CreateView(generic.CreateView):
+class CreateView(LoginRequiredMixin, generic.CreateView):
     template_name = 'contacts/contacts_createview.html'
     form_class = ContactsModelForm
 
+    def form_valid(self, form):
+        form.instance.user_id = self.request.user
+        return super().form_valid(form)
 
-class EditView(generic.UpdateView):
+
+class EditView(LoginRequiredMixin, generic.UpdateView):
     template_name = 'contacts/contacts_createview.html'
     model = Contact
     form_class = ContactsModelForm
 
 
-class DeleteView(generic.DeleteView):
+class DeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Contact
     success_url = reverse_lazy("contacts")
 

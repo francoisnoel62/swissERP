@@ -1,5 +1,4 @@
-import os
-
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
@@ -47,6 +46,7 @@ class Contact(models.Model):
     mobile = PhoneNumberField(null=True)
     email = models.EmailField(verbose_name="E-mail", max_length=254, null=True)
     state = models.CharField(verbose_name="Etat", max_length=20, null=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('contact_detail', kwargs={'pk': self.pk})
