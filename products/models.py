@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
@@ -9,6 +10,7 @@ class Product(models.Model):
     price = models.FloatField(verbose_name="Prix du produit")
     description = models.TextField(verbose_name="Description du produit", null=True)
     picture = models.ImageField(verbose_name="Illustrations", upload_to='images')
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

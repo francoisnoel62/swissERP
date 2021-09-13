@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -9,12 +10,12 @@ from .models import SaleOrder
 
 
 # SALE ORDER
-class SaleOrderCreateView(generic.CreateView):
+class SaleOrderCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = 'sale/create_sale.html'
     form_class = SaleModelForm
 
 
-class SaleOrderCreateViewWithSOL(generic.CreateView):
+class SaleOrderCreateViewWithSOL(LoginRequiredMixin, generic.CreateView):
     template_name = 'sale/create_sale.html'
     form_class = SaleModelForm
 
@@ -38,7 +39,7 @@ class SaleOrderCreateViewWithSOL(generic.CreateView):
         return super(SaleOrderCreateViewWithSOL, self).form_valid(form)
 
 
-class SaleOrderUpdateViewWithSOL(generic.UpdateView):
+class SaleOrderUpdateViewWithSOL(LoginRequiredMixin, generic.UpdateView):
     template_name = 'sale/create_sale.html'
     model = SaleOrder
     form_class = SaleModelForm
@@ -63,24 +64,27 @@ class SaleOrderUpdateViewWithSOL(generic.UpdateView):
         return super(SaleOrderUpdateViewWithSOL, self).form_valid(form)
 
 
-class SaleOrderUpdateView(generic.UpdateView):
+class SaleOrderUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = 'sale/create_sale.html'
     model = SaleOrder
     form_class = SaleModelForm
 
 
-class SaleOrderIndexView(generic.ListView):
+class SaleOrderIndexView(LoginRequiredMixin, generic.ListView):
     template_name = 'sale/sale_listview.html'
     context_object_name = 'sales_list'
     queryset = SaleOrder.objects.all()
 
+    def get_queryset(self):
+        return SaleOrder.objects.filter(create_by=self.request.user)
 
-class SaleOrderDetailView(generic.DetailView):
+
+class SaleOrderDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = 'sale/sale_formview.html'
     model = SaleOrder
 
 
-class SaleOrderDeleteView(generic.DeleteView):
+class SaleOrderDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = SaleOrder
     success_url = reverse_lazy('sales')
 
