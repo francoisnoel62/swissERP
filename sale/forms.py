@@ -1,6 +1,7 @@
 from django import forms
-from django.forms import inlineformset_factory
+from django.forms import inlineformset_factory, BaseInlineFormSet
 
+from products.models import Product
 from .models import SaleOrder, SaleOrderLine
 
 
@@ -13,7 +14,7 @@ class SaleModelForm(forms.ModelForm):
 
     class Meta:
         model = SaleOrder
-        exclude = ['name', 'order_state', 'create_by']
+        exclude = ['name', 'order_state', 'created_by']
 
     def save(self, commit=True):
         temp = super(SaleModelForm, self).save(commit=True)

@@ -9,5 +9,6 @@ urlpatterns = [
     path('<int:pk>/', views.SaleOrderDetailView.as_view(), name='sale_detail'),
     path('<int:pk>/delete', views.SaleOrderDeleteView.as_view(), name='delete_sale'),
     path('<int:order_id>/confirm', views.confirm_order, name='confirm_sale'),
+    path('<int:order_id>/generate_pdf/', views.generate_pdf, name='generate_pdf'),
 
 ]

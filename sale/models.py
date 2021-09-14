@@ -15,7 +15,7 @@ class SaleOrder(models.Model):
     )
 
     create_at = models.DateTimeField(auto_now_add=True)
-    create_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100)
     partner_id = models.ForeignKey(Contact, on_delete=models.CASCADE, null=False, verbose_name='Customer')

@@ -42,7 +42,7 @@
                         </div>
                     {% elif saleorder.order_state == 'CF' %}
                         <div class="col-md-2" style="display: inherit">
-                            <a class="btn btn-light mr-2" href="#"
+                            <a class="btn btn-light mr-2" href="{% url 'generate_pdf' saleorder.pk %}"
                                role="button">Export as PDF</a>
                         </div>
                     {% endif %}
