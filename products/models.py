@@ -11,9 +11,17 @@ class Product(models.Model):
     description = models.TextField(verbose_name="Description du produit", null=True)
     picture = models.ImageField(verbose_name="Illustrations", upload_to='images')
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    finished = models.BooleanField("Etat", default=True, null=False)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('products')
+
+    @property
+    def state_color(self):
+        if not self.finished:
+            return "badge-info"
+        else:
+            return "badge-danger"

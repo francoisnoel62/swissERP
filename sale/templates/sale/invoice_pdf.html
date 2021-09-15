@@ -2,12 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>invoice in PDF</title>
+    <title>{{ order.name }}</title>
 </head>
 <body>
-<h1>Hello PDF!!!!!!</h1>
-<p>{{ order.name }}</p>
-<p>{{ user }}</p>
+<div class="container">
+    <div class="row">
+        {{ order.partner_id.name }} {{ order.partner_id.lastname }}
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            One of three columns
+        </div>
+        <div class="col-sm">
+            One of three columns
+        </div>
+        <div class="col-sm">
+            One of three columns
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            One of three columns
+        </div>
+        <div class="col-sm">
+            One of three columns
+        </div>
+        <div class="col-sm">
+            One of three columns
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

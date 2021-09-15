@@ -11,7 +11,9 @@ class SaleOrder(models.Model):
         ('DR', 'Draft'),
         ('PG', 'Pending'),
         ('CF', 'Confirmed'),
-        ('CC', 'Canceled')
+        ('CC', 'Canceled'),
+        ('SD', 'Send'),
+        ('PD', 'Paid'),
     )
 
     create_at = models.DateTimeField(auto_now_add=True)
