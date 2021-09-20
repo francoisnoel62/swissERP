@@ -1,7 +1,6 @@
 from django import forms
-from django.forms import inlineformset_factory, BaseInlineFormSet
+from django.forms import inlineformset_factory
 
-from products.models import Product
 from .models import SaleOrder, SaleOrderLine
 
 

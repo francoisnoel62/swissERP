@@ -138,3 +138,7 @@ def generate_pdf(request, order_id):
         response['Content-Disposition'] = content
         return response
     return HttpResponse("Not found")
+
+
+def create_payment(request, order_id):
+    print(f"create payment of saleorder : {order_id} ")

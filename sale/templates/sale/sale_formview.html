@@ -1,6 +1,8 @@
 {% extends 'viewlist/viewlist.html' %}
 
 {% load verbose_names %}
+{% load crispy_forms_tags %}
+
 
 {% block viewlist %}
     {#    <div class="row mx-auto mt-5 justify-content-around" style="width: 80%">#}
@@ -62,10 +64,8 @@
         </div>
     {% else %}
         <div class="row mx-auto mt-5 justify-content-center">
-            <a class="btn btn-primary ml-5" href="#" role="button">Send as e-mail</a>
-            <button type="button" class="btn btn-info ml-1" data-toggle="modal" data-target=".bd-example-modal-lg">
-                Payment
-            </button>
+            <a class="btn btn-primary mr-1" href="#" role="button">Send as e-mail</a>
+            <a class="btn btn-info" href="{% url 'create_payment' saleorder.pk %}" role="button">Payment</a>
         </div>
     {% endif %}
     <div class="row mx-auto mt-5 justify-content-center">
@@ -95,27 +95,6 @@
             </tr>
             </tbody>
         </table>
-    </div>
-
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Register a payment</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    body
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-info">Save payment</button>
-                </div>
-            </div>
-        </div>
     </div>
 
 {% endblock %}
