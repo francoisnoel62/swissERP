@@ -65,7 +65,9 @@
     {% else %}
         <div class="row mx-auto mt-5 justify-content-center">
             <a class="btn btn-primary mr-1" href="#" role="button">Send as e-mail</a>
-            <a class="btn btn-info" href="{% url 'create_payment' saleorder.pk %}" role="button">Payment</a>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                Payment
+            </button>
         </div>
     {% endif %}
     <div class="row mx-auto mt-5 justify-content-center">
@@ -96,5 +98,49 @@
             </tbody>
         </table>
     </div>
+    <div class="row justify-content-center mt-1">
+        {% if saleorder.payment %}
+            <div class="w-50 mt-5">
+                <div class="text-center">
+                    <a class="btn btn-light" href="#" role="button">
+                        {{ saleorder.payment.currency }}
+                        {{ saleorder.payment.total }} -
+                        {{ saleorder.payment.date }}
+                        <span class="badge badge-success">paid</span>
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <p class="font-italic">There are no payment yet</p>
+        {% endif %}
+    </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Register a payment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        {{ form.currency|as_crispy_field }}
+                        {{ form.total|as_crispy_field }}
+                        {{ form.payment_method|as_crispy_field }}
+                        {{ form.date|as_crispy_field }}
+                        {{ form.sale_id|as_crispy_field }}
+                        {{ form.created_by|as_crispy_field }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-info">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

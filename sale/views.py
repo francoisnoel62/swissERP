@@ -1,13 +1,18 @@
+from datetime import datetime
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template.loader import get_template
-from django.urls import reverse_lazy
-from django.views import generic
+from django.urls import reverse_lazy, reverse
+from django.views import generic, View
+from django.views.generic import FormView
+from django.views.generic.detail import SingleObjectMixin
 
 from contacts.models import Contact
+from payment.forms import PaymentForm
 from products.models import Product
 from .forms import SaleModelForm, SaleOrderLineFormSet
 from .models import SaleOrder
@@ -96,9 +101,49 @@ class SaleOrderIndexView(LoginRequiredMixin, generic.ListView):
         return SaleOrder.objects.filter(created_by=self.request.user)
 
 
-class SaleOrderDetailView(LoginRequiredMixin, generic.DetailView):
+class SaleOrderDetailView(generic.DetailView):
     template_name = 'sale/sale_formview.html'
     model = SaleOrder
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = PaymentForm()
+        context['form'].fields['total'].initial = context['object'].total
+        context['form'].fields['date'].initial = datetime.now()
+        context['form'].fields['sale_id'].initial = context['object']
+        context['form'].fields['created_by'].initial = self.request.user
+        return context
+
+
+class SaleOrderPaymentFormView(SingleObjectMixin, FormView):
+    template_name = 'sale/sale_formview.html'
+    form_class = PaymentForm
+    model = SaleOrder
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('sale_detail', kwargs={'pk': self.object.pk})
+
+
+class SaleOrderView(View):
+    def get(self, request, *args, **kwarg):
+        view = SaleOrderDetailView.as_view()
+        return view(request, *args, **kwarg)
+
+    def post(self, request, *args, **kwargs):
+        view = SaleOrderPaymentFormView.as_view()
+        return view(request, *args, **kwargs)
 
 
 class SaleOrderDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -138,7 +183,3 @@ def generate_pdf(request, order_id):
         response['Content-Disposition'] = content
         return response
     return HttpResponse("Not found")
-
-
-def create_payment(request, order_id):
-    print(f"create payment of saleorder : {order_id} ")
