@@ -34,6 +34,8 @@ class SaleOrder(models.Model):
             return "badge-warning"
         elif self.order_state == 'CC':
             return "badge-danger"
+        elif self.order_state == 'PD':
+            return "badge-success"
 
     @property
     def total(self):

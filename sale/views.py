@@ -124,6 +124,8 @@ class SaleOrderPaymentFormView(SingleObjectMixin, FormView):
         self.object = self.get_object()
         form = self.get_form()
         if form.is_valid():
+            self.object.order_state = 'PD'
+            self.object.save()
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -160,7 +162,7 @@ def confirm_order(request, order_id):
     order = SaleOrder.objects.get(pk=order_id)
     order.order_state = 'CF'
     order.save()
-    return redirect('sales')
+    return redirect(order)
 
 
 def generate_pdf(request, order_id):

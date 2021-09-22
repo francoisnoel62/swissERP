@@ -32,7 +32,7 @@
                     <div class="col-md-10">
                         <h5 class="card-title">{{ saleorder.partner_id.name }} {{ saleorder.partner_id.lastname }} </h5>
                     </div>
-                    {% if saleorder.order_state != 'CF' %}
+                    {% if saleorder.order_state != 'CF' and saleorder.order_state != 'PD'%}
                         <div class="col-md-2" style="display: inherit">
                             <a class="btn btn-light mr-2" href="{% url 'edit_sale' saleorder.pk %}"
                                role="button">Edit</a>
@@ -57,17 +57,18 @@
             </div>
         </div>
     </div>
-    {% if saleorder.order_state != 'CF' %}
+    {% if saleorder.order_state != 'CF' and saleorder.order_state != 'PD' %}
         <div class="row mx-auto mt-5 justify-content-center">
             <a class="btn btn-info" href="{% url 'edit_sale' saleorder.pk %}" role="button">Add products</a>
             <a class="btn btn-warning ml-5" href="{% url 'confirm_sale' saleorder.pk %}" role="button">Confirm</a>
         </div>
-    {% else %}
+    {% endif %}
+    {% if saleorder.order_state == 'CF' and saleorder.order_state != 'PD' %}
         <div class="row mx-auto mt-5 justify-content-center">
-            <a class="btn btn-primary mr-1" href="#" role="button">Send as e-mail</a>
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
                 Payment
             </button>
+            <a class="btn btn-primary ml-2" href="#" role="button">Send as e-mail</a>
         </div>
     {% endif %}
     <div class="row mx-auto mt-5 justify-content-center">
@@ -106,7 +107,7 @@
                         {{ saleorder.payment.currency }}
                         {{ saleorder.payment.total }} -
                         {{ saleorder.payment.date }}
-                        <span class="badge badge-success">paid</span>
+                        <span class="badge {{ saleorder.state_color }}">paid</span>
                     </a>
                 </div>
             </div>
@@ -132,8 +133,8 @@
                         {{ form.total|as_crispy_field }}
                         {{ form.payment_method|as_crispy_field }}
                         {{ form.date|as_crispy_field }}
-                        {{ form.sale_id|as_crispy_field }}
-                        {{ form.created_by|as_crispy_field }}
+                        {{ form.sale_id.as_hidden }}
+                        {{ form.created_by.as_hidden }}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>

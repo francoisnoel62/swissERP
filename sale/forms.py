@@ -1,3 +1,5 @@
+import datetime
+
 from django import forms
 from django.forms import inlineformset_factory
 
@@ -7,8 +9,8 @@ from .models import SaleOrder, SaleOrderLine
 class SaleModelForm(forms.ModelForm):
     validity_date = forms.DateField(
         widget=forms.TextInput(
-            attrs={'type': 'date'}
-        )
+            attrs={'type': 'date'},
+        ),
     )
 
     class Meta:
