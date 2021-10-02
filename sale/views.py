@@ -175,6 +175,8 @@ def clean_sol(request, order_id):
         old_sol = SaleOrderLine.objects.filter(sale_order_id=order_id, quantity__lt=qty)
         for element in old_sol:
             element.delete()
+    order.order_state = 'CL'
+    order.save()
     return redirect(order)
 
 

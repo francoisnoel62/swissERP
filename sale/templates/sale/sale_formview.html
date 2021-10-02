@@ -57,14 +57,19 @@
             </div>
         </div>
     </div>
-    {% if saleorder.order_state != 'CF' and saleorder.order_state != 'PD' %}
+    {% if saleorder.order_state == 'DR' %}
         <div class="row mx-auto mt-5 justify-content-center">
             <a class="btn btn-info" href="{% url 'edit_sale' saleorder.pk %}" role="button">Add products</a>
             <a class="btn btn-warning ml-5" href="{% url 'confirm_sale' saleorder.pk %}" role="button">Confirm</a>
             <a class="btn btn-outline-success ml-5" href="{% url 'clean_sol' saleorder.pk %}" role="button">Clean SOL</a>
         </div>
     {% endif %}
-    {% if saleorder.order_state == 'CF' and saleorder.order_state != 'PD' %}
+    {% if saleorder.order_state == 'CL' %}
+        <div class="row mx-auto mt-5 justify-content-center">
+            <a class="btn btn-warning ml-5" href="{% url 'confirm_sale' saleorder.pk %}" role="button">Confirm</a>
+        </div>
+    {% endif %}
+    {% if saleorder.order_state == 'CF' %}
         <div class="row mx-auto mt-5 justify-content-center">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
                 Payment

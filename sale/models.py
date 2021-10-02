@@ -9,9 +9,8 @@ from products.models import Product
 class SaleOrder(models.Model):
     ORDER_STATE = (
         ('DR', 'Draft'),
-        ('PG', 'Pending'),
+        ('CL', 'Cleaned'),
         ('CF', 'Confirmed'),
-        ('CC', 'Canceled'),
         ('SD', 'Send'),
         ('PD', 'Paid'),
     )
