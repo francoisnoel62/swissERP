@@ -39,4 +39,4 @@ class SaleOrderLineModelForm(forms.ModelForm):
         return temp
 
 
-SaleOrderLineFormSet = inlineformset_factory(SaleOrder, SaleOrderLine, form=SaleOrderLineModelForm, extra=1)
+SaleOrderLineFormSet = inlineformset_factory(SaleOrder, SaleOrderLine, form=SaleOrderLineModelForm, extra=2)

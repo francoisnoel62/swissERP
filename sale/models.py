@@ -54,7 +54,7 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     create_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
-    product_id = models.OneToOneField(Product, on_delete=models.CASCADE, null=False, verbose_name="Products")
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, null=False, verbose_name="Products")
     quantity = models.FloatField(default=1, verbose_name="Quantity")
     sol_total = models.FloatField(verbose_name="Total", max_length=100)
     sale_order_id = models.ForeignKey(SaleOrder, on_delete=models.CASCADE)

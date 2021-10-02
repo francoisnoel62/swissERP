@@ -61,6 +61,7 @@
         <div class="row mx-auto mt-5 justify-content-center">
             <a class="btn btn-info" href="{% url 'edit_sale' saleorder.pk %}" role="button">Add products</a>
             <a class="btn btn-warning ml-5" href="{% url 'confirm_sale' saleorder.pk %}" role="button">Confirm</a>
+            <a class="btn btn-outline-success ml-5" href="{% url 'clean_sol' saleorder.pk %}" role="button">Clean SOL</a>
         </div>
     {% endif %}
     {% if saleorder.order_state == 'CF' and saleorder.order_state != 'PD' %}
