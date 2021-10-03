@@ -1,7 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views import generic
 
-from .forms import CreateUserForm
+from .forms import CreateUserForm, UpdateUserForm
 
 
 def landingPage(request):
@@ -22,6 +26,13 @@ def registerPage(request):
 
         context = {'form': form}
         return render(request, 'accounts/register.html', context)
+
+
+class EditUser(LoginRequiredMixin, generic.UpdateView):
+    template_name = 'accounts/edit.html'
+    model = User
+    form_class = UpdateUserForm
+    success_url = reverse_lazy('home')
 
 
 def loginPage(request):
