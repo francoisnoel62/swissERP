@@ -12,13 +12,25 @@
                     {{ request.user }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Parameters</a>
                     <a class="dropdown-item" href="{% url 'edit_user' user.pk %}">Profil</a>
+                    <a class="dropdown-item" href="{% url 'change_pass' %}">Change password</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row mx-auto mt-5 justify-content-center">
+        {% if messages %}
+            {% for message in messages %}
+                <p class="alert alert-dismissable {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        &times;
+                    </button>
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
     </div>
     <div class="row col-md-8 offset-md-2 mt-8 mb-5">
         <a class="btn btn-outline-secondary ml-5" href="{% url 'contacts' %}" role="button">Contacts</a>

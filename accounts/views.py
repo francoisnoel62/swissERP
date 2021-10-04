@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -34,6 +36,10 @@ class EditUser(LoginRequiredMixin, generic.UpdateView):
     form_class = UpdateUserForm
     success_url = reverse_lazy('home')
 
+    def form_valid(self, form):
+        messages.success(self.request, f"User has been updated successfully !")
+        return super(EditUser, self).form_valid(form)
+
 
 def loginPage(request):
     if request.user.is_authenticated:
@@ -51,6 +57,23 @@ def loginPage(request):
 
         context = {}
         return render(request, 'accounts/login.html', context)
+
+
+def change_pass(request):
+    if request.user.is_authenticated:
+        form = PasswordChangeForm(user=request.user)
+
+        if request.method == 'POST':
+            form = PasswordChangeForm(data=request.POST, user=request.user)
+            if form.is_valid():
+                form.save()
+                messages.success(request, f"Password has been changed successfully !")
+                return redirect('login')
+
+        context = {'form': form}
+        return render(request, 'accounts/change_passw.html', context)
+    else:
+        return redirect('login')
 
 
 def logoutPage(request):
