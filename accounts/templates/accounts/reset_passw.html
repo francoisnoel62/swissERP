@@ -15,20 +15,11 @@
             <form method="POST" class="text-center border border-light p-5">
                 {% csrf_token %}
 
-                <p class="h4 mb-4">Edit User Password</p>
+                <p class="h4 mb-4">Reset Password</p>
 
                 <div class="form-row mb-4">
                     <div class="col">
-                        {{ form.old_password|as_crispy_field }}
-                    </div>
-                </div>
-
-                <div class="form-row mb-4">
-                    <div class="col">
-                        {{ form.new_password1|as_crispy_field }}
-                    </div>
-                    <div class="col">
-                        {{ form.new_password2|as_crispy_field }}
+                        {{ form.email|as_crispy_field }}
                     </div>
                 </div>
 
@@ -44,4 +35,3 @@
         </div>
     </div>
 {% endblock %}
-

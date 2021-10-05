@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -74,6 +74,20 @@ def change_pass(request):
         return render(request, 'accounts/change_passw.html', context)
     else:
         return redirect('login')
+
+
+def reset_password(request):
+    form = PasswordResetForm()
+
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"We sent you an e-mail to reset your password. Please check your inbox !")
+            return redirect('login')
+
+    context = {'form': form}
+    return render(request, 'accounts/reset_passw.html', context)
 
 
 def logoutPage(request):
