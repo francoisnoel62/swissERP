@@ -3,15 +3,13 @@
 {% load static %}
 
 {% block viewlist %}
+    {#        <form class="form-inline">#}
+    {#            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+    {#        </form>#}
     <div class="row mx-auto mt-5 justify-content-center">
-        {#        <form class="form-inline">#}
-        {#            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
-        {#        </form>#}
-        <div class="row mx-auto mt-5 justify-content-center">
-            <form class="form-inline">
-                <a class="btn btn-info" href="{% url 'create-product' %}" role="button">Create products</a>
-            </form>
-        </div>
+        <form class="form-inline">
+            <a class="btn btn-info" href="{% url 'create-product' %}" role="button">Create products</a>
+        </form>
     </div>
     <div class="row mx-auto mt-5 justify-content-center">
         {% if messages %}

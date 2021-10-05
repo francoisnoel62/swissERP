@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'products.apps.ProductConfig',
     'sale.apps.SaleConfig',
     'payment.apps.PaymentConfig',
+    'bankAccount.apps.BankAccountConfig',
+    'company.apps.CompanyConfig',
     'phonenumber_field',
     'crispy_forms',
     'index.apps.IndexConfig',
@@ -136,7 +138,7 @@ AUTH_PASSWORD_VALIDATORS = [
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'francoisnoel62@gmail.com'
-EMAIL_HOST_PASSWORD = 'oolfhhsxcvpnqrqs'
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'default from email'
