@@ -128,9 +128,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-if DEVELOPMENT_MODE is True:
-    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-    EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
+# if DEVELOPMENT_MODE is True:
+#     EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+#     EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
+
+# gmail_send/settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'francoisnoel62@gmail.com'
+EMAIL_HOST_PASSWORD = 'oolfhhsxcvpnqrqs'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'default from email'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

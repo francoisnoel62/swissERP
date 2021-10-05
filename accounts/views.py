@@ -3,7 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.contrib.auth.views import PasswordResetCompleteView
+from django.shortcuts import render, redirect, resolve_url
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -76,13 +77,20 @@ def change_pass(request):
         return redirect('login')
 
 
+class PasswordResetCompleteViewInherit(PasswordResetCompleteView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['login_url'] = resolve_url('login')
+        return context
+
+
 def reset_password(request):
     form = PasswordResetForm()
 
     if request.method == 'POST':
         form = PasswordResetForm(request.POST)
         if form.is_valid():
-            form.save()
+            form.save(domain_override='localhost:8000')
             messages.success(request, f"We sent you an e-mail to reset your password. Please check your inbox !")
             return redirect('login')
 
