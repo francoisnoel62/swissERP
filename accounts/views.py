@@ -55,6 +55,9 @@ def loginPage(request):
             if user is not None:
                 login(request, user)
                 return redirect('home')
+            else:
+                messages.error(request, f"Please register if you want to log in.")
+                return redirect('register')
 
         context = {}
         return render(request, 'accounts/login.html', context)
