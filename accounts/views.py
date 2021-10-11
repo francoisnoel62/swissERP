@@ -93,7 +93,7 @@ def reset_password(request):
     if request.method == 'POST':
         form = PasswordResetForm(request.POST)
         if form.is_valid():
-            form.save(domain_override='localhost:8000')
+            form.save(domain_override=request.get_host())
             messages.success(request, f"We sent you an e-mail to reset your password. Please check your inbox !")
             return redirect('login')
 
