@@ -1,5 +1,6 @@
 # Project exclude paths
 /venv/
+/sent_emails/
 db.sqlite3
 *.pyc
 */migrations

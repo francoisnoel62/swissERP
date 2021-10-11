@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'products.apps.ProductConfig',
     'sale.apps.SaleConfig',
     'payment.apps.PaymentConfig',
-    'bankAccount.apps.BankAccountConfig',
-    'company.apps.CompanyConfig',
     'phonenumber_field',
     'crispy_forms',
     'index.apps.IndexConfig',
@@ -95,8 +93,7 @@ WSGI_APPLICATION = 'swissERP.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-# DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
-DEVELOPMENT_MODE = True
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
 if DEVELOPMENT_MODE is True:
     DATABASES = {
@@ -130,14 +127,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# if DEVELOPMENT_MODE is True:
-#     EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-#     EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
 
 # gmail_send/settings.py
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'francoisnoel62@gmail.com'
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
