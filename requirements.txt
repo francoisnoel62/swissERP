@@ -26,11 +26,8 @@ lazy-object-proxy==1.6.0
 mccabe==0.6.1
 ordered-set==4.0.2
 phonenumbers==8.12.17
-Pillow==8.1.0
 pipenv==2018.11.26
 platformdirs==2.3.0
-psycopg2==2.9.1
-psycopg2-binary==2.8.6
 pycparser==2.20
 pylint==2.11.1
 PyPDF2==1.26.0
@@ -52,3 +49,5 @@ webencodings==0.5.1
 wrapt==1.12.1
 xhtml2pdf==0.2.5
 zipp==3.5.0
+Pillow==9.2.0
+WeasyPrint==52.5

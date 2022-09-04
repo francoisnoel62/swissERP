@@ -60,3 +60,11 @@ class SaleOrderLine(models.Model):
 
     def __str__(self):
         return f" {self.product_id.name} - {self.quantity} - {self.sol_total}"
+
+    def save(self, *args, **kwargs):
+        existing_sol = self.__class__.objects.filter(product_id=self.product_id, sale_order_id=self.sale_order_id).first()
+        if existing_sol:
+            self.quantity += existing_sol.quantity
+            existing_sol.delete()
+        super(SaleOrderLine, self).save(*args, **kwargs)
+

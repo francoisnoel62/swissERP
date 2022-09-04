@@ -17,8 +17,10 @@
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/env" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
+      <excludeFolder url="file://$MODULE_DIR$/payment/migrations" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.7 (swissERP)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (swissERP)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="bootstrap-theme" level="application" />

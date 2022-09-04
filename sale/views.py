@@ -162,24 +162,6 @@ def confirm_order(request, order_id):
     order.save()
     return redirect(order)
 
-
-def clean_sol(request, order_id):
-    order = SaleOrder.objects.get(pk=order_id)
-    sol = SaleOrderLine.objects.filter(sale_order_id=order_id).values('product_id').annotate(quantity=Sum('quantity'))
-    for item in sol:
-        prod = Product.objects.filter(created_by=request.user).get(pk=item['product_id'])
-        qty = item['quantity']
-        total = prod.price * qty
-        new_sol = SaleOrderLine(product_id=prod, quantity=qty, sol_total=total, sale_order_id=order)
-        new_sol.save()
-        old_sol = SaleOrderLine.objects.filter(sale_order_id=order_id, quantity__lt=qty)
-        for element in old_sol:
-            element.delete()
-    order.order_state = 'CL'
-    order.save()
-    return redirect(order)
-
-
 def generate_pdf(request, order_id):
     order = SaleOrder.objects.get(pk=order_id)
     template = get_template('sale/invoice_pdf.html')
