@@ -3,6 +3,15 @@
 /sent_emails/
 */migrations
 .idea
+db.sqlite3
+staticfiles/
+.env/
+.venv/
+env/
+venv/
+*.env
+
+*.pyc
 
 ### OSX ###
 .DS_Store
@@ -38,7 +47,6 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-env/
 build/
 develop-eggs/
 dist/
@@ -84,8 +92,5 @@ target/
 
 ### Django ###
 *.log
-*.pyc
 local_settings.py
-
 .env
-db.sqlite3
