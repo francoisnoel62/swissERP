@@ -51,3 +51,6 @@ xhtml2pdf==0.2.5
 zipp==3.5.0
 Pillow==9.2.0
 WeasyPrint==52.5
+django-factory-boy==1.0.0
+factory-boy==3.2.1
+python-dotenv==0.21.0
