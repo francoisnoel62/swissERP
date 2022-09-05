@@ -31,7 +31,7 @@ phonenumbers==8.12.17
 Pillow==9.2.0
 pipenv==2018.11.26
 platformdirs==2.3.0
-psycopg2==2.9.3
+# psycopg2==2.9.3
 psycopg2-binary==2.9.3
 pycparser==2.20
 pylint==2.11.1
