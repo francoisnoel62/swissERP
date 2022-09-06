@@ -1,7 +1,6 @@
 # Project exclude paths
 /venv/
 /sent_emails/
-*/migrations
 .idea
 db.sqlite3
 staticfiles/
