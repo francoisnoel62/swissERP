@@ -173,11 +173,11 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# Base url to serve media files
-MEDIA_URL = '/media/'
-
-# Path where media is stored
-MEDIA_ROOT = BASE_DIR / 'media'
+# # Base url to serve media files
+# MEDIA_URL = '/media/'
+#
+# # Path where media is stored
+# MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Test Runner Config
