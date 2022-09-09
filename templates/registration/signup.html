@@ -38,12 +38,12 @@
                 {{ form.password2|as_crispy_field }}
 
                 <!-- Sign up button -->
-                <button class="btn btn-info my-4 btn-block" type="submit">Sign in</button>
-
+                <div style="display: flex">
+                    <button class="btn btn-info my-4 btn-block" type="submit" style="margin-right: 1%;">Register</button>
+                    <button href="{% url 'home' %}" class="btn btn-danger my-4 btn-block" type="submit">Cancel</button>
+                </div>
                 <hr>
-
                 <p>Already have an account ? <a href="{% url 'login' %}"> Sign in</a>
-
             </form>
         </div>
     </div>
