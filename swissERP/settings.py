@@ -44,16 +44,12 @@ if not IS_HEROKU:
 # Application definition
 
 INSTALLED_APPS = [
-    # 'viewlist.apps.ViewlistConfig',
-    # 'accounts.apps.AccountsConfig',
     'contacts.apps.ContactsConfig',
     'products.apps.ProductConfig',
     'sale.apps.SaleConfig',
     'payment.apps.PaymentConfig',
     'phonenumber_field',
     'crispy_forms',
-    # 'index.apps.IndexConfig',
-    'home.apps.HomeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
