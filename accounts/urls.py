@@ -1,14 +1,9 @@
 from django.urls import path
-from django.contrib.auth import views as auth_view
 
-
-from . import views
+from .views import SignUpView
 
 urlpatterns = [
-    # path('', views.landingPage, name='landing'),
-    # path('register/', views.registerPage, name='register'),
-    # path('login/', views.loginPage, name='login'),
-    # path('logout/', views.logoutPage, name='logout'),
+    path('register/', SignUpView.as_view(), name='register'),
     # path('<int:pk>/edit/', views.EditUser.as_view(), name='edit_user'),
     # path('change_password/', views.change_pass, name='change_pass'),
     # path('reset_password/', views.reset_password, name='reset_password'),

@@ -1,6 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm, UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordResetCompleteView
@@ -11,24 +10,10 @@ from django.views import generic
 from .forms import CreateUserForm, UpdateUserForm
 
 
-def landingPage(request):
-    return render(request, 'home/landing.html', {})
-
-
-def registerPage(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-    else:
-        form = CreateUserForm()
-
-        if request.method == 'POST':
-            form = CreateUserForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('login')
-
-        context = {'form': form}
-        return render(request, 'accounts/register.html', context)
+class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy("login")
+    template_name = "registration/signup.html"
 
 
 class EditUser(LoginRequiredMixin, generic.UpdateView):
@@ -40,27 +25,6 @@ class EditUser(LoginRequiredMixin, generic.UpdateView):
     def form_valid(self, form):
         messages.success(self.request, f"User has been updated successfully !")
         return super(EditUser, self).form_valid(form)
-
-
-def loginPage(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-    else:
-        if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-
-            user = authenticate(request, username=username, password=password)
-
-            if user is not None:
-                login(request, user)
-                return redirect('home')
-            else:
-                messages.error(request, f"Please register if you want to log in.")
-                return redirect('register')
-
-        context = {}
-        return render(request, 'accounts/login.html', context)
 
 
 def change_pass(request):
@@ -99,8 +63,3 @@ def reset_password(request):
 
     context = {'form': form}
     return render(request, 'accounts/reset_passw.html', context)
-
-
-def logoutPage(request):
-    logout(request)
-    return redirect('login')
