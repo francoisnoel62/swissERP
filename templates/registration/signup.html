@@ -30,21 +30,8 @@
 
                 <p class="h4 mb-4">Sign up</p>
 
-{#                <div class="form-row mb-4">#}
-{#                    <div class="col">#}
-{#                        <!-- First name -->#}
-{#                        {{ form.first_name|as_crispy_field }}#}
-{#                    </div>#}
-{#                    <div class="col">#}
-{#                        <!-- Last name -->#}
-{#                        {{ form.last_name|as_crispy_field }}#}
-{#                    </div>#}
-{#                </div>#}
-
                 <!-- E-mail -->
                 {{ form.username|as_crispy_field }}
-
-{#                {{ form.email|as_crispy_field }}#}
 
                 <!-- Password -->
                 {{ form.password1|as_crispy_field }}
@@ -60,7 +47,5 @@
             </form>
         </div>
     </div>
-
-
 {% endblock %}
 
