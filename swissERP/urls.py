@@ -17,10 +17,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('', include('accounts.urls')),
-    path('home/', include('home.urls')),
+    path('', TemplateView.as_view(template_name='home/landing.html'), name='landing'),  # new
+    path('accounts/', include("django.contrib.auth.urls")),
+    path('home/', TemplateView.as_view(template_name='home/home.html'), name='home'),
     path('contacts/', include('contacts.urls')),
     path('products/', include('products.urls')),
     path('sales/', include('sale.urls')),

@@ -12,7 +12,7 @@ from .forms import CreateUserForm, UpdateUserForm
 
 
 def landingPage(request):
-    return render(request, 'accounts/landing.html', {})
+    return render(request, 'home/landing.html', {})
 
 
 def registerPage(request):

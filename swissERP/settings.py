@@ -44,21 +44,21 @@ if not IS_HEROKU:
 # Application definition
 
 INSTALLED_APPS = [
-    'viewlist.apps.ViewlistConfig',
-    'accounts.apps.AccountsConfig',
+    # 'viewlist.apps.ViewlistConfig',
+    # 'accounts.apps.AccountsConfig',
     'contacts.apps.ContactsConfig',
     'products.apps.ProductConfig',
     'sale.apps.SaleConfig',
     'payment.apps.PaymentConfig',
     'phonenumber_field',
     'crispy_forms',
-    'index.apps.IndexConfig',
+    # 'index.apps.IndexConfig',
     'home.apps.HomeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
@@ -187,3 +187,6 @@ if "CI" in os.environ:
     TEST_RUNNER = "gettingstarted.settings.HerokuDiscoverRunner"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "/"

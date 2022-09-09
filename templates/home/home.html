@@ -1,4 +1,4 @@
-{% extends 'index/index.html' %}
+{% extends 'index.html' %}
 
 {% block content %}
     <div class="row mt-4 mb-5">
@@ -13,8 +13,8 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <h6 class="dropdown-header" style="font-size: inherit">Profil</h6>
-                    <a class="dropdown-item" href="{% url 'edit_user' user.pk %}">Edit user</a>
-                    <a class="dropdown-item" href="{% url 'change_pass' %}">Change password</a>
+{#                    <a class="dropdown-item" href="{% url 'edit_user' user.pk %}">Edit user</a>#}
+{#                    <a class="dropdown-item" href="{% url 'change_pass' %}">Change password</a>#}
                     <h6 class="dropdown-header" style="font-size: inherit">Company</h6>
                     <a class="dropdown-item" href="#">Edit company</a>
                     <div class="dropdown-divider"></div>
