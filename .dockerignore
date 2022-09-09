@@ -1,0 +1,9 @@
+.venv
+.git
+.github
+.gitignore
+sent_emails
+db.sqlite3
+identifier.sqlite
+Procfile
+runtime.txt
