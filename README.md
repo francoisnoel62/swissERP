@@ -1,4 +1,6 @@
 # swissERP
+![Heroku](https://pyheroku-badge.herokuapp.com/?app=https://swiss-erp.herokuapp.com&style=<STYLE>)
+
 
 SWISS BUSINESS SOFTWARE FOR SME AND STARTUPS
 
