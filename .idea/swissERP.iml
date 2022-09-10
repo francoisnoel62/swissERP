@@ -18,8 +18,9 @@
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/env" />
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
-      <excludeFolder url="file://$MODULE_DIR$/payment/migrations" />
       <excludeFolder url="file://$MODULE_DIR$/staticfiles" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/payment/migrations" />
+      <excludeFolder url="file://$MODULE_DIR$/sent_emails" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (swissERP)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

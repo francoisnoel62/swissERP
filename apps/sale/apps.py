@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class SaleConfig(AppConfig):
-    name = 'sale'
+    name = 'apps.sale'

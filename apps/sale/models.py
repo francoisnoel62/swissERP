@@ -2,8 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
-from contacts.models import Contact
-from products.models import Product
+from apps.contacts.models import Contact
+from apps.products.models import Product
 
 
 class SaleOrder(models.Model):

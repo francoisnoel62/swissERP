@@ -52,10 +52,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'contacts.apps.ContactsConfig',
-    'products.apps.ProductConfig',
-    'sale.apps.SaleConfig',
-    'payment.apps.PaymentConfig',
+    'apps.contacts.apps.ContactsConfig',
+    'apps.products.apps.ProductConfig',
+    'apps.sale.apps.SaleConfig',
+    'apps.payment.apps.PaymentConfig',
     'phonenumber_field',
     'crispy_forms',
     'accounts.apps.AccountsConfig'

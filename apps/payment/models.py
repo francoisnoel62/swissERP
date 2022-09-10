@@ -1,5 +1,3 @@
-import datetime
-
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -7,7 +5,7 @@ from django.db import models
 # Create your models here.
 from django.utils import timezone
 
-from sale.models import SaleOrder
+from apps.sale.models import SaleOrder
 
 
 class Payment(models.Model):

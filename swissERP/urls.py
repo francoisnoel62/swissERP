@@ -24,10 +24,10 @@ urlpatterns = [
     path('accounts/', include("accounts.urls")),
     path('accounts/', include("django.contrib.auth.urls")),
     path('home/', TemplateView.as_view(template_name='home/home.html'), name='home'),
-    path('contacts/', include('contacts.urls')),
-    path('products/', include('products.urls')),
-    path('sales/', include('sale.urls')),
-    path('payment/', include('payment.urls')),
+    path('contacts/', include('apps.contacts.urls')),
+    path('products/', include('apps.products.urls')),
+    path('sales/', include('apps.sale.urls')),
+    path('payment/', include('apps.payment.urls')),
     path('admin/', admin.site.urls),
 ]
 

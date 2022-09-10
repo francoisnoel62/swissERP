@@ -10,13 +10,12 @@ from django.urls import reverse_lazy, reverse
 from django.views import generic, View
 from django.views.generic import FormView
 from django.views.generic.detail import SingleObjectMixin
-from django.db.models import Sum
 
-from contacts.models import Contact
-from payment.forms import PaymentForm
-from products.models import Product
+from apps.contacts.models import Contact
+from apps.products.models import Product
+from apps.payment.forms import PaymentForm
 from .forms import SaleModelForm, SaleOrderLineFormSet
-from .models import SaleOrder, SaleOrderLine
+from .models import SaleOrder
 from .utils import render_to_pdf
 
 
@@ -161,6 +160,7 @@ def confirm_order(request, order_id):
     order.order_state = 'CF'
     order.save()
     return redirect(order)
+
 
 def generate_pdf(request, order_id):
     order = SaleOrder.objects.get(pk=order_id)
