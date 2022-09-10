@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from django.views.generic import TemplateView
 
@@ -23,7 +24,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home/landing.html'), name='landing'),
     path('accounts/', include("accounts.urls")),
     path('accounts/', include("django.contrib.auth.urls")),
-    path('home/', TemplateView.as_view(template_name='home/home.html'), name='home'),
+    path('home/', login_required(TemplateView.as_view(template_name='home/home.html')), name='home'),
     path('contacts/', include('apps.contacts.urls')),
     path('products/', include('apps.products.urls')),
     path('sales/', include('apps.sale.urls')),
