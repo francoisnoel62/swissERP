@@ -1,9 +1,7 @@
-name: Django CI
+name: Django CI for swissERP
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
     branches: [ master ]
 
 jobs:
