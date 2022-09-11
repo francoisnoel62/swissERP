@@ -1,15 +1,20 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
+from faker import Faker
+
+import swissERP.settings
+
+faker = Faker()
 
 
 class HomePageTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = User.objects.create_user(
-            username="fanfan",
-            email="test@test.ch",
-            password="change me!!"
+            username=faker.name(),
+            email=faker.email(),
+            password=faker.password()
         )
 
     def setUp(self):
@@ -50,8 +55,13 @@ class HomePageTest(TestCase):
         response = self.client.get(reverse("home"))
         self.assertContains(response, "<h1>Welcome to swissERP</h1>")
 
+    def test_redirection_if_anonymous_user(self):
         # user logged out
         self.client.logout()
         response = self.client.get(reverse("home"))
         self.assertEqual(response.status_code, 302)
-        self.assertURLEqual(response.url, "/accounts/login/?next=/home/")
+        self.assertRedirects(response,
+                             f"{swissERP.settings.LOGIN_URL}?next={swissERP.settings.LOGIN_REDIRECT_URL}",
+                             status_code=302,
+                             target_status_code=200)
+
