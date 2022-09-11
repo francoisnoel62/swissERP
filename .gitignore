@@ -9,6 +9,7 @@ staticfiles/
 env/
 venv/
 *.env
+coverage_html
 
 *.pyc
 
