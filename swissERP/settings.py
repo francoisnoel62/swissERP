@@ -194,7 +194,7 @@ class HerokuDiscoverRunner(DiscoverRunner):
 
 # Use HerokuDiscoverRunner on Heroku CI
 if "CI" in os.environ:
-    TEST_RUNNER = "gettingstarted.settings.HerokuDiscoverRunner"
+    TEST_RUNNER = "swissERP.settings.HerokuDiscoverRunner"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
