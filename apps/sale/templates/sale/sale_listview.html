@@ -2,6 +2,12 @@
 
 {% block viewlist %}
     <div class="row mx-auto mt-5 justify-content-center">
+        <form class="form-inline" action="{% url 'filter_sales' %}" method="get">
+            <input name="filter" class="form-control" type="search" placeholder="Search sales..." aria-label="Search">
+            <a href="{% url 'sales' %}" class="btn btn-light">clear</a>
+        </form>
+    </div>
+    <div class="row mx-auto mt-5 justify-content-end w-50">
         <form class="form-inline">
             <a class="btn btn-info" href="{% url 'create_sale' %}" role="button">Create order</a>
         </form>

@@ -3,6 +3,7 @@ from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template.loader import get_template
@@ -95,6 +96,10 @@ class SaleOrderIndexView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'sales_list'
 
     def get_queryset(self):
+        query = self.request.GET.get("filter")
+        if query:
+            object_list = SaleOrder.objects.filter(Q(name__icontains=query))
+            return object_list
         return SaleOrder.objects.filter(created_by=self.request.user)
 
 
