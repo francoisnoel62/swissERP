@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -13,6 +14,12 @@ class ProductListView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'products_list'
 
     def get_queryset(self):
+        query = self.request.GET.get("filter")
+        if query:
+            object_list = Product.objects.filter(
+                Q(name__icontains=query) | Q(description__icontains=query)
+            )
+            return object_list
         return Product.objects.filter(created_by=self.request.user)
 
 

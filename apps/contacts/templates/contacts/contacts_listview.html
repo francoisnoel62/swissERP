@@ -3,14 +3,12 @@
 {% load static %}
 
 {% block viewlist %}
-        <div class="row mx-auto mt-5 justify-content-center">
-            <form class="form-inline" action="{% url 'filter_contacts' %}" method="get">
-                <input name="filter" class="form-control" type="search" placeholder="Search by name..." aria-label="Search">
-            </form>
-            <form class="form-inline" action="{% url 'contacts' %}" method="get">
-                <a href="{% url 'contacts' %}" class="btn btn-light">clear</a>
-            </form>
-        </div>
+    <div class="row mx-auto mt-5 justify-content-center">
+        <form class="form-inline" action="{% url 'filter_contacts' %}" method="get">
+            <input name="filter" class="form-control" type="search" placeholder="Search by name..." aria-label="Search">
+            <a href="{% url 'contacts' %}" class="btn btn-light">clear</a>
+        </form>
+    </div>
     <div class="row mx-auto mt-5 justify-content-center">
         <form class="form-inline">
             <a class="btn btn-info" href="{% url 'create_contact' %}" role="button">Create contact</a>

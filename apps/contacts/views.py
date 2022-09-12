@@ -18,7 +18,6 @@ class IndexView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         query = self.request.GET.get("filter")
-        print(f"The query is {query}!")
         if query:
             object_list = Contact.objects.filter(
                 Q(name__icontains=query) | Q(lastname__icontains=query)
