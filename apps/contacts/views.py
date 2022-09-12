@@ -1,6 +1,7 @@
 import csv
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -16,6 +17,13 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'contacts_list'
 
     def get_queryset(self):
+        query = self.request.GET.get("filter")
+        print(f"The query is {query}!")
+        if query:
+            object_list = Contact.objects.filter(
+                Q(name__icontains=query) | Q(lastname__icontains=query)
+            )
+            return object_list
         return Contact.objects.filter(user_id=self.request.user)
 
 
