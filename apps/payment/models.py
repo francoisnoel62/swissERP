@@ -29,3 +29,6 @@ class Payment(models.Model):
     payment_method = models.CharField(verbose_name="Payment method", max_length=50, choices=PAYMENT_METHOD, default='IBAN')
     date = models.DateField(verbose_name="Date du paiement", default=timezone.now)
     sale_id = models.OneToOneField(SaleOrder, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"facture:{self.sale_id.name} // Date de paiement:{self.date}"
