@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
+from django.db.models import Q, ProtectedError
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -45,3 +46,12 @@ class ProductDeleteView(LoginRequiredMixin, generic.DeleteView):
     def form_valid(self, form):
         messages.success(self.request, f"{self.object} was deleted ✅ ")
         return super(ProductDeleteView, self).form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            return self.delete(request, *args, **kwargs)
+        except ProtectedError as e:
+            messages.error(self.request, f"⛔️ Enable to delete this product as it is used in other relations !")
+            for x in e.args[1]:
+                messages.info(self.request, f"{x}")
+            return redirect(self.success_url)

@@ -19,7 +19,7 @@ class SaleOrder(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100)
-    partner_id = models.ForeignKey(Contact, on_delete=models.CASCADE, null=False, verbose_name='Customer')
+    partner_id = models.ForeignKey(Contact, on_delete=models.PROTECT, null=False, verbose_name='Customer')
     validity_date = models.DateField(verbose_name="Validity date", blank=True, null=True)
     order_state = models.CharField(verbose_name="Etat de la commande", max_length=10, choices=ORDER_STATE, default='DR')
 
@@ -53,7 +53,7 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     create_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, null=False, verbose_name="Products")
+    product_id = models.ForeignKey(Product, on_delete=models.PROTECT, null=False, verbose_name="Products")
     quantity = models.FloatField(default=1, verbose_name="Quantity")
     sol_total = models.FloatField(verbose_name="Total", max_length=100)
     sale_order_id = models.ForeignKey(SaleOrder, on_delete=models.CASCADE)
