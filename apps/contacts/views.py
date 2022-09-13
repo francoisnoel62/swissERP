@@ -16,12 +16,21 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'contacts_list'
 
     def get_queryset(self):
-        query = self.request.GET.get("filter")
-        if query:
-            object_list = Contact.objects.filter(
-                Q(name__icontains=query) | Q(lastname__icontains=query)
-            )
-            return object_list
+        if not list(self.request.GET):
+            return Contact.objects.filter(user_id=self.request.user)
+        else:
+            contacts_filter = list(self.request.GET)[0]
+            if contacts_filter == "filter":
+                query = self.request.GET.get("filter")
+                if query:
+                    object_list = Contact.objects.filter(
+                        Q(name__icontains=query) | Q(lastname__icontains=query)
+                    )
+                    return object_list
+            if contacts_filter == 'active':
+                return Contact.objects.filter(is_active=True)
+            if contacts_filter == 'archived':
+                return Contact.objects.filter(is_active=False)
         return Contact.objects.filter(user_id=self.request.user)
 
 
