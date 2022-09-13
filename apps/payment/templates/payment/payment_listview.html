@@ -1,6 +1,8 @@
 {% extends 'home/viewlist.html' %}
 
 {% load static %}
+{% load crispy_forms_tags %}
+
 
 {% block viewlist %}
     {#    <div class="row mx-auto mt-5 justify-content-center">#}
@@ -14,7 +16,8 @@
             Create payment
         </button>
         <!-- Modal -->
-        <div class="modal fade" id="payment_modal" tabindex="-1" aria-labelledby="payment_modal_label" aria-hidden="true">
+        <div class="modal fade" id="payment_modal" tabindex="-1" aria-labelledby="payment_modal_label"
+             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -24,11 +27,19 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <form method="get" action="#">
+                            {% for sale in sales %}
+                                <div class="mb-3">
+                                    <a class="btn btn-outline-secondary" href="{% url 'sale_detail' sale.id %}"
+                                       role="button">{{ sale.name }}</a>
+                                </div>
+                            {% endfor %}
+                        </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close
+                        </button>
+                        <button type="submit" class="btn btn-outline-info">Register</button>
                     </div>
                 </div>
             </div>

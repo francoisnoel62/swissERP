@@ -1,8 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views import generic
 from apps.payment.forms import PaymentForm
 from apps.payment.models import Payment
+from apps.sale.models import SaleOrder
 
 
 class PaymentListView(LoginRequiredMixin, generic.ListView):
@@ -13,6 +15,13 @@ class PaymentListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return Payment.objects.filter(created_by=self.request.user)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sales'] = SaleOrder.objects.filter(
+            Q(order_state='CF')
+        )
+        return context
+
 
 class PaymentCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = 'sale/sale_formview.html'
@@ -22,6 +31,3 @@ class PaymentCreateView(LoginRequiredMixin, generic.CreateView):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
 
-
-class PaymentDetailView(LoginRequiredMixin, generic.DetailView):
-    pass
