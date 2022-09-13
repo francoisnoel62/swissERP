@@ -1,4 +1,3 @@
-import csv
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -69,40 +68,17 @@ def toggle_active(request, contact_id):
     return redirect('contacts')
 
 
-def process_data(path_to_csv=False):
-    if path_to_csv:
-        with open(path_to_csv) as f:
-            reader = csv.reader(f, delimiter=";")
-            next(reader, None)
-            for row in reader:
-                _, created = Contact.objects.get_or_create(
-                    is_active=row[0],
-                    title=row[1],
-                    lang=row[2],
-                    lastname=row[3],
-                    name=row[4],
-                    age=row[5],
-                    street=row[6],
-                    region_zip=row[7],
-                    city=row[8],
-                    country=row[9],
-                    phone=row[10],
-                    mobile=row[11],
-                    email=row[12],
-                    state=row[13],
-                )
-
-
 def upload_file(request):
     if request.method == 'POST':
         form = ImportContactsModelForm(request.POST, request.FILES)
         if form.is_valid():
             file_id = form.save()
-            doc = ContactsImport.objects.get(pk=file_id.id)
-            process_data(path_to_csv=doc.file.path)
+            Contact.process_data(file=file_id, current_user=request.user)
+            messages.success(request, "Contacts import completed !")
             return redirect("contacts")
         else:
             messages.error(request, "Please use CSV file format !")
     else:
+        messages.info(request, "Please enter your CSV file below 👇")
         form = ImportContactsModelForm()
     return render(request, 'contacts/contacts_import.html', {'form': form})

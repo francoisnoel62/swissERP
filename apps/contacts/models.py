@@ -1,3 +1,5 @@
+import csv
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
@@ -53,3 +55,29 @@ class Contact(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.lastname}"
+
+    @staticmethod
+    def process_data(file, current_user):
+        if file and current_user:
+            doc = ContactsImport.objects.get(pk=file.id)
+            with open(doc.file.path) as f:
+                reader = csv.reader(f, delimiter=";")
+                next(reader, None)
+                for row in reader:
+                    _, created = Contact.objects.get_or_create(
+                        is_active=row[0],
+                        title=row[1],
+                        lang=row[2],
+                        lastname=row[3],
+                        name=row[4],
+                        age=row[5],
+                        street=row[6],
+                        region_zip=row[7],
+                        city=row[8],
+                        country=row[9],
+                        phone=row[10],
+                        mobile=row[11],
+                        email=row[12],
+                        state=row[13],
+                        user_id=current_user
+                    )
