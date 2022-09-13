@@ -54,11 +54,10 @@ class EditView(LoginRequiredMixin, generic.UpdateView):
 class DeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Contact
     success_url = reverse_lazy("contacts")
-
-    def delete(self, request, *args, **kwargs):
-        deleted_person = super(DeleteView, self).get_object()
-        messages.success(self.request, f"{deleted_person.name} was removed from DB  ")
-        return super(DeleteView, self).delete(request, *args, **kwargs)
+    
+    def form_valid(self, form):
+        messages.success(self.request, f"{self.object} was deleted ✅")
+        return super(DeleteView, self).form_valid(form)
 
 
 def toggle_active(request, contact_id):
@@ -74,10 +73,10 @@ def upload_file(request):
         if form.is_valid():
             file_id = form.save()
             Contact.process_data(file=file_id, current_user=request.user)
-            messages.success(request, "Contacts import completed !")
+            messages.success(request, "Contacts import completed ✅")
             return redirect("contacts")
         else:
-            messages.error(request, "Please use CSV file format !")
+            messages.error(request, "⚠️Please use CSV file format")
     else:
         messages.info(request, "Please enter your CSV file below 👇")
         form = ImportContactsModelForm()

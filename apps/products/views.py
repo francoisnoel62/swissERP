@@ -42,7 +42,6 @@ class ProductDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Product
     success_url = reverse_lazy("products")
 
-    def delete(self, request, *args, **kwargs):
-        deleted_product = super(ProductDeleteView, self).get_object()
-        messages.success(self.request, f"{deleted_product.name} was removed from DB  ")
-        return super(ProductDeleteView, self).delete(request, *args, **kwargs)
+    def form_valid(self, form):
+        messages.success(self.request, f"{self.object} was deleted ✅ ")
+        return super(ProductDeleteView, self).form_valid(form)
