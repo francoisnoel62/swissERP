@@ -19,7 +19,7 @@ class PaymentListView(LoginRequiredMixin, generic.ListView):
         context = super().get_context_data(**kwargs)
         context['sales'] = SaleOrder.objects.filter(
             Q(order_state='CF')
-        )
+        ).filter(created_by=self.request.user)
         return context
 
 
