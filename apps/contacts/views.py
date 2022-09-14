@@ -28,9 +28,9 @@ class IndexView(LoginRequiredMixin, generic.ListView):
                     )
                     return object_list
             if contacts_filter == 'active':
-                return Contact.objects.filter(is_active=True)
+                return Contact.objects.filter(user_id=self.request.user, is_active=True)
             if contacts_filter == 'archived':
-                return Contact.objects.filter(is_active=False)
+                return Contact.objects.filter(user_id=self.request.user, is_active=False)
         return Contact.objects.filter(user_id=self.request.user)
 
 
