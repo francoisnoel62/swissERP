@@ -98,7 +98,7 @@ class SaleOrderIndexView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         query = self.request.GET.get("filter")
         if query:
-            object_list = SaleOrder.objects.filter(Q(name__icontains=query))
+            object_list = SaleOrder.objects.filter(Q(name__icontains=query)).filter(created_by=self.request.user)
             return object_list
         return SaleOrder.objects.filter(created_by=self.request.user)
 

@@ -78,7 +78,6 @@ class DeleteView(LoginRequiredMixin, generic.DeleteView):
             return redirect(self.success_url)
 
 
-
 def toggle_active(request, contact_id):
     contact = Contact.objects.get(pk=contact_id)
     contact.is_active = not contact.is_active

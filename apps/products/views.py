@@ -19,7 +19,7 @@ class ProductListView(LoginRequiredMixin, generic.ListView):
         if query:
             object_list = Product.objects.filter(
                 Q(name__icontains=query) | Q(description__icontains=query)
-            )
+            ).filter(created_by=self.request.user)
             return object_list
         return Product.objects.filter(created_by=self.request.user)
 
