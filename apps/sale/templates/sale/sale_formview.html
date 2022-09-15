@@ -32,7 +32,7 @@
                     <div class="col-md-10">
                         <h5 class="card-title">{{ saleorder.partner_id.name }} {{ saleorder.partner_id.lastname }} </h5>
                     </div>
-                    {% if saleorder.order_state != 'CF' and saleorder.order_state != 'PD'%}
+                    {% if saleorder.order_state != 'CF' and saleorder.order_state != 'PD' %}
                         <div class="col-md-2" style="display: inherit">
                             <a class="btn btn-light mr-2" href="{% url 'edit_sale' saleorder.pk %}"
                                role="button">Edit</a>
@@ -101,23 +101,45 @@
                 <td>TOTAL</td>
                 <td>{{ saleorder.total|floatformat:2 }}</td>
             </tr>
+            {% if saleorder.solde != 0 %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Solde</td>
+                    <td>{{ saleorder.solde }}</td>
+                </tr>
+            {% endif %}
             </tbody>
         </table>
     </div>
-    <div class="row justify-content-center mt-1">
-        {% if saleorder.payment %}
-            <div class="w-50 mt-5">
-                <div class="text-center">
-                    <a class="btn btn-light" href="#" role="button">
-                        {{ saleorder.payment.currency }}
-                        {{ saleorder.payment.total }} -
-                        {{ saleorder.payment.date }}
-                        <span class="badge {{ saleorder.state_color }}">paid</span>
-                    </a>
+    <div class="row mx-auto mt-5 justify-content-center">
+        {% if messages %}
+            {% for message in messages %}
+                <p class="alert alert-dismissable {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        &times;
+                    </button>
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="row justify-content-center mt-1" style="flex-direction: column">
+        {% if saleorder.payment_set.all %}
+            {% for payment in saleorder.payment_set.all %}
+                <div class="mt-2">
+                    <div class="text-center">
+                        <a class="btn btn-light" href="#" role="button">
+                            {{ payment.currency }}
+                            {{ payment.total }} -
+                            {{ payment.date }} -
+                            {{ payment.payment_method }}
+                        </a>
+                    </div>
                 </div>
-            </div>
+            {% endfor %}
         {% else %}
-            <p class="font-italic">There are no payment yet</p>
+            <p class="font-italic text-center">There are no payment yet</p>
         {% endif %}
     </div>
 

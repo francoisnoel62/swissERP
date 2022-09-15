@@ -43,6 +43,13 @@ class SaleOrder(models.Model):
             res += sol.sol_total
         return round(res, 2)
 
+    @property
+    def solde(self):
+        total_payment = False
+        for payment in self.payment_set.all():
+            total_payment += payment.total
+        return round(self.total - total_payment)
+
     def get_absolute_url(self):
         return reverse('sale_detail', kwargs={'pk': self.pk})
 

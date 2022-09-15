@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.db.models import Q
 from django.http import HttpResponse
@@ -110,8 +111,8 @@ class SaleOrderDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = PaymentForm()
-        context['form'].fields['total'].initial = context['object'].total
-        context['form'].fields['date'].initial = datetime.now()
+        context['form'].fields['total'].initial = context['object'].solde
+        context['form'].fields['date'].initial = datetime.today()
         context['form'].fields['sale_id'].initial = context['object']
         context['form'].fields['created_by'].initial = self.request.user
         return context
@@ -125,16 +126,15 @@ class SaleOrderPaymentFormView(SingleObjectMixin, FormView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
-        if form.is_valid():
-            self.object.order_state = 'PD'
-            self.object.save()
-            return self.form_valid(form)
+        if form.is_valid() and self.object.solde > 0:
+            try:
+                form.save()
+                return self.form_valid(form)
+            except Exception as e:
+                messages.error(self.request, f"{e}")
+                return redirect('sale_detail', pk=self.object.id)
         else:
             return self.form_invalid(form)
-
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('sale_detail', kwargs={'pk': self.object.pk})
