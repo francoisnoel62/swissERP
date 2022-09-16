@@ -1,7 +1,6 @@
-from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.dispatch import receiver
 
-from .models import SaleOrder
 from ..payment.models import Payment
 
 
@@ -16,5 +15,4 @@ def check_sale_solde(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Payment)
 def save_sale_after_paid(sender, instance, **kwargs):
     if instance.sale_id.order_state == 'PD':
-        print("oui")
         instance.sale_id.save()
