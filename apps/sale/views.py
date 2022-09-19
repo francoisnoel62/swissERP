@@ -169,21 +169,18 @@ def confirm_order(request, order_id):
 
 def generate_pdf(request, order_id):
     order = SaleOrder.objects.get(pk=order_id)
-    template = get_template('sale/invoice_pdf.html')
     context = {
         "order": order,
         "user": request.user,
     }
-    html = template.render(context)
-    pdf = render_to_pdf('sale/invoice_pdf.html', context)
-
-    if pdf:
-        response = HttpResponse(pdf, content_type='application/pdf')
-        filename = "Invoice_%s.pdf" % ("12341231")
-        content = "inline; filename='%s'" % (filename)
-        download = request.GET.get("download")
-        if download:
-            content = "attachment; filename='%s'" % (filename)
-        response['Content-Disposition'] = content
-        return response
+    if context:
+        pdf = render_to_pdf('sale/invoice_pdf.html', context)
+        if pdf:
+            filename = f"{order.name}.pdf"
+            content = f"inline; filename={filename}"
+            download = request.GET.get("download")
+            if download:
+                content = f"attachment; filename={filename}"
+            pdf['Content-Disposition'] = content
+            return pdf
     return HttpResponse("Not found")
