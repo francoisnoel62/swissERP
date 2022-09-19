@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.db import models
 from django.urls import reverse
 
+from swissERP.settings import AUTH_USER_MODEL
+
 
 class Product(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
@@ -11,7 +13,7 @@ class Product(models.Model):
     price = models.FloatField(verbose_name="Prix du produit")
     description = models.TextField(verbose_name="Description du produit", null=True)
     picture = models.ImageField(verbose_name="Illustrations", upload_to='images')
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     finished = models.BooleanField("Etat", default=True, null=False)
 
     def __str__(self):

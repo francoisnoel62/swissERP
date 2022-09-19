@@ -7,35 +7,23 @@
 <body>
 <div class="container">
     <div class="row">
-        {{ user.first_name }} {{ user.lastname }}
+        {{ user.first_name }} {{ user.last_name }}
     </div>
-</div>
-<div class="container">
     <div class="row">
-        <div class="col-sm">
-            One of three columns
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
+        {{ user.street }}
     </div>
-</div>
-<div class="container">
+        <div class="row">
+        {{ user.zip }} {{ user.city }}
+    </div>
     <div class="row">
-        <div class="col-sm">
-            One of three columns
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
+        {{ user.email }}
+    </div>
+        <div class="row">
+        {{ user.telephone }}
     </div>
 </div>
+</div>
+
 
 </body>
 </html>

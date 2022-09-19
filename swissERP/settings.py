@@ -214,3 +214,6 @@ if IS_HEROKU:
 else:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     DEFAULT_FROM_EMAIL = "test@test.com"
+
+
+AUTH_USER_MODEL = "accounts.CustomUser"

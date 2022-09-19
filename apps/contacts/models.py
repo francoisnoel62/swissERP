@@ -5,6 +5,8 @@ from django.db import models
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 
+from swissERP.settings import AUTH_USER_MODEL
+
 
 class ContactsImport(models.Model):
     file = models.FileField(upload_to="contacts")
@@ -48,7 +50,7 @@ class Contact(models.Model):
     mobile = PhoneNumberField(null=True)
     email = models.EmailField(verbose_name="E-mail", max_length=254, null=True)
     state = models.CharField(verbose_name="Etat", max_length=20, null=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('contact_detail', kwargs={'pk': self.pk})

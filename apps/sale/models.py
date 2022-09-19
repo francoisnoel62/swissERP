@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from apps.contacts.models import Contact
 from apps.products.models import Product
+from swissERP.settings import AUTH_USER_MODEL
 
 
 class SaleOrder(models.Model):
@@ -16,7 +17,7 @@ class SaleOrder(models.Model):
     )
 
     create_at = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100)
     partner_id = models.ForeignKey(Contact, on_delete=models.PROTECT, null=False, verbose_name='Customer')
