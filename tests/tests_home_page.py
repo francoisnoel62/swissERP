@@ -4,6 +4,7 @@ from django.urls import reverse
 from faker import Faker
 
 import swissERP.settings
+from accounts.models import CustomUser
 
 faker = Faker()
 
@@ -11,10 +12,11 @@ faker = Faker()
 class HomePageTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.user = User.objects.create_user(
+        cls.user = CustomUser.objects.create_user(
             username=faker.name(),
             email=faker.email(),
-            password=faker.password()
+            password=faker.password(),
+            zip=faker.postcode()
         )
 
     def setUp(self):

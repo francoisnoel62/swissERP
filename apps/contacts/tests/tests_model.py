@@ -1,6 +1,7 @@
 from django.urls import reverse
 from faker import Faker
-from django.contrib.auth.models import User
+from accounts.models import CustomUser
+
 from django.test import TestCase
 
 from apps.contacts.models import Contact
@@ -11,10 +12,11 @@ faker = Faker()
 class ModelContactsTests(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.user = User.objects.create_user(
+        cls.user = CustomUser.objects.create_user(
             username=faker.name(),
             email=faker.email(),
-            password=faker.password()
+            password=faker.password(),
+            zip=faker.postcode()
         )
 
     def setUp(self):
