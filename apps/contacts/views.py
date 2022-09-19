@@ -2,12 +2,12 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q, ProtectedError
 from django.shortcuts import redirect, render
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views import generic
 from next_prev import next_in_order, prev_in_order
 
 from .forms import ContactsModelForm, ImportContactsModelForm
-from .models import Contact, ContactsImport
+from .models import Contact
 
 
 class IndexView(LoginRequiredMixin, generic.ListView):

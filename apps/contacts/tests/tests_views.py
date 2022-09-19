@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 from faker import Faker
 
-import swissERP
+from swissERP import settings
 from apps.contacts.models import Contact
 from apps.contacts.views import IndexView, DetailView
 
@@ -86,7 +86,7 @@ class ViewsContactsTests(TestCase):
         response = self.client.get(reverse("contact_detail", kwargs={'pk': untel.id}))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response,
-                             f"{swissERP.settings.LOGIN_URL}?next=/contacts/{untel.id}/",
+                             f"{settings.LOGIN_URL}?next=/contacts/{untel.id}/",
                              status_code=302,
                              target_status_code=200)
 
@@ -105,4 +105,3 @@ class ViewsContactsTests(TestCase):
         self.assertIsInstance(response.context['previous'], Contact)
         self.assertEqual(response.context['next'].id, 3)
         self.assertEqual(response.context['previous'].id, 1)
-
