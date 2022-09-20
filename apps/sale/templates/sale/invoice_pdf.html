@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ order.name }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+        div {
+           font-size: x-large;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -12,13 +21,13 @@
     <div class="row">
         {{ user.street }}
     </div>
-        <div class="row">
+    <div class="row">
         {{ user.zip }} {{ user.city }}
     </div>
     <div class="row">
         {{ user.email }}
     </div>
-        <div class="row">
+    <div class="row">
         {{ user.telephone }}
     </div>
 </div>
