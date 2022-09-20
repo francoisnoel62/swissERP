@@ -2,6 +2,8 @@
 
 {% load crispy_forms_tags %}
 
+{% load static %}
+
 {% block viewlist %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -20,6 +22,9 @@
                 <div class="form-group col-md-4">
                     {{ form.file|as_crispy_field }}
                 </div>
+            </div>
+            <div>
+                <img src="{% static "contacts/contacts_csv_image.png" %}" alt="CSV file example">
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-info">Submit</button>
