@@ -6,33 +6,104 @@
     <style>
         @page {
             size: A4;
-            margin: 1cm;
+            margin: 1cm 3cm 1cm 2cm;
         }
+
         div {
-           font-size: x-large;
+            font-size: x-large;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        {{ user.first_name }} {{ user.last_name }}
+    <div>
+        <div class="row">
+            {{ user.first_name }} {{ user.last_name }}
+        </div>
+        <div class="row">
+            {{ user.street }}
+        </div>
+        <div class="row">
+            {{ user.zip }} {{ user.city }}
+        </div>
+        <div class="row">
+            {{ user.email }}
+        </div>
+        <div class="row">
+            {{ user.telephone }}
+        </div>
     </div>
-    <div class="row">
-        {{ user.street }}
+    <div style="margin-top: 5px; margin-left: 11cm;">
+        <div class="row">
+            {{ order.partner_id.name }} {{ order.partner_id.lastname }}
+        </div>
+        <div class="row">
+            {{ order.partner_id.street }}
+        </div>
+        <div class="row">
+            {{ order.partner_id.region_zip }} {{ order.partner_id.city }} - {{ order.partner_id.country }}
+        </div>
     </div>
-    <div class="row">
-        {{ user.zip }} {{ user.city }}
+    <div style="padding-top: 2cm;">
+        <p>Reference: {{ order.name }}</p>
     </div>
-    <div class="row">
-        {{ user.email }}
+    <div style="padding-top: 15px;">
+        <p>Date: {% now "jS F Y" %}</p>
     </div>
-    <div class="row">
-        {{ user.telephone }}
+    <div style="margin-top: 2cm;">
+        <table style="text-align: center;">
+            <thead>
+            <tr style="padding: 8px;">
+                <th style="text-align: left;">Products</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Sub-total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for sol in order.saleorderline_set.all %}
+                <tr style="padding-top: 5px;">
+                    <td style="text-align: left;">{{ sol.product_id.name }}</td>
+                    <td>CHF {{ sol.product_id.price }}</td>
+                    <td>{{ sol.quantity|floatformat:"0" }}</td>
+                    <td>CHF {{ sol.sol_total }}</td>
+                </tr>
+            {% endfor %}
+            <tr style="padding-top: 10px;">
+                <td></td>
+                <td></td>
+                <td style="text-align: right">TOTAL</td>
+                <td style="text-align: right">CHF {{ order.total }}</td>
+            </tr>
+            {% if order.solde != 0 %}
+                <tr style="padding-top: 10px;">
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: right">Solde</td>
+                    <td style="text-align: right">CHF {{ order.solde }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+        <div style="text-align: center;">
+            Payments (at the current date)
+        </div>
+        <div style="text-align: center; margin-top: 1cm;">
+            {% if order.payment_set.all %}
+                {% for payment in order.payment_set.all %}
+                    <p>
+                        {{ payment.currency }}
+                        {{ payment.total }} -
+                        {{ payment.date }} -
+                        {{ payment.payment_method }}
+                    </p>
+                {% endfor %}
+            {% else %}
+                <p>There are no payment yet</p>
+            {% endif %}
+        </div>
     </div>
 </div>
-</div>
-
 
 </body>
 </html>

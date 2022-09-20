@@ -42,6 +42,15 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-md-6">
+                        {{ form.first_name|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.last_name|as_crispy_field }}
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-md-4">
                         {{ form.zip|as_crispy_field }}
                     </div>
