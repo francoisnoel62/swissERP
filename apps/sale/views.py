@@ -97,11 +97,26 @@ class SaleOrderIndexView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'sales_list'
 
     def get_queryset(self):
-        query = self.request.GET.get("filter")
-        if query:
-            object_list = SaleOrder.objects.filter(Q(name__icontains=query)).filter(created_by=self.request.user)
-            return object_list
-        return SaleOrder.objects.filter(created_by=self.request.user)
+        if not list(self.request.GET):
+            return SaleOrder.objects.filter(created_by=self.request.user)
+        else:
+            sale_filter = list(self.request.GET)[0]
+            if sale_filter == "filter":
+                query = self.request.GET.get("filter")
+                if query:
+                    object_list = SaleOrder.objects.filter(Q(name__icontains=query)).filter(created_by=self.request.user)
+                    return object_list
+            if sale_filter == "draft":
+                return SaleOrder.objects.filter(created_by=self.request.user, order_state="DR")
+            if sale_filter == "confirmed":
+                return SaleOrder.objects.filter(created_by=self.request.user, order_state="CF")
+            if sale_filter == "paid":
+                return SaleOrder.objects.filter(created_by=self.request.user, order_state="PD")
+            if sale_filter == "all":
+                return SaleOrder.objects.filter(created_by=self.request.user)
+
+
+
 
 
 class SaleOrderDetailView(generic.DetailView):

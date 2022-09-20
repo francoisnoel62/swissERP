@@ -12,6 +12,14 @@
             <a class="btn btn-info" href="{% url 'create_sale' %}" role="button">Create order</a>
         </form>
     </div>
+    <div class="row mx-auto mt-5 justify-content-end w-50" style="margin-top: 6rem!important;">
+        <form class="form-inline" action="{% url 'filter_sales' %}" method="get">
+            <button type="submit" class="btn btn-outline-secondary btn-sm" name="all">All</button>
+            <button type="submit" class="btn btn-outline-info btn-sm" name="draft">Draft</button>
+            <button type="submit" class="btn btn-outline-warning btn-sm" name="confirmed">Confirmed</button>
+            <button type="submit" class="btn btn-outline-success btn-sm" name="paid">Paid</button>
+        </form>
+    </div>
     <div class="row mx-auto mt-5 justify-content-center">
         {% if sales_list %}
             <ul class="list-group list-group-flush w-50">
