@@ -8,6 +8,7 @@ from next_prev import next_in_order, prev_in_order
 
 from .forms import ContactsModelForm, ImportContactsModelForm
 from .models import Contact
+from .utils import filter_contacts
 
 
 class IndexView(LoginRequiredMixin, generic.ListView):
@@ -16,22 +17,16 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'contacts_list'
 
     def get_queryset(self):
-        if not list(self.request.GET):
-            return Contact.objects.filter(user_id=self.request.user)
+        if list(self.request.GET):
+            filter_in_request = list(self.request.GET)
+            if not filter_in_request:
+                return Contact.objects.filter(user_id=self.request.user)
+            else:
+                contacts_filter = list(self.request.GET)[0]
+                filtered_contacts = filter_contacts(self.request, contacts_filter)
+                return filtered_contacts
         else:
-            contacts_filter = list(self.request.GET)[0]
-            if contacts_filter == "filter":
-                query = self.request.GET.get("filter")
-                if query:
-                    object_list = Contact.objects.filter(
-                        Q(name__icontains=query) | Q(lastname__icontains=query)
-                    )
-                    return object_list
-            if contacts_filter == 'active':
-                return Contact.objects.filter(user_id=self.request.user, is_active=True)
-            if contacts_filter == 'archived':
-                return Contact.objects.filter(user_id=self.request.user, is_active=False)
-        return Contact.objects.filter(user_id=self.request.user)
+            return Contact.objects.filter(user_id=self.request.user)
 
 
 class DetailView(LoginRequiredMixin, generic.DetailView):
@@ -40,8 +35,10 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['next'] = next_in_order(self.object)
-        context['previous'] = prev_in_order(self.object)
+        context.update(
+            {"next": next_in_order(self.object),
+             "previous": prev_in_order(self.object)
+             })
         return context
 
 
@@ -73,8 +70,9 @@ class DeleteView(LoginRequiredMixin, generic.DeleteView):
             return self.delete(request, *args, **kwargs)
         except ProtectedError as e:
             messages.error(self.request, f"⛔️ Enable to delete this object as it is used in other relations !")
-            for x in e.args[1]:
-                messages.info(self.request, f"{x}")
+            objects_in_relation = e.args[1]
+            for element in objects_in_relation:
+                messages.info(self.request, f"{element}")
             return redirect(self.success_url)
 
 

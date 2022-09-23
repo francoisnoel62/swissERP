@@ -17,4 +17,4 @@ class LandingPageTest(SimpleTestCase):
 
     def test_template_content(self):
         response = self.client.get(reverse("landing"))
-        self.assertContains(response, "<title>swissERP - Free Business Software</title>")
+        self.assertContains(response, "<title>circa+ Free Business Software</title>")
