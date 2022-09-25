@@ -34,7 +34,12 @@ class ViewsContactsTests(TestCase):
             Contact.objects.create(
                 user_id=self.user,
                 name=faker.first_name(),
-                lastname=faker.last_name()
+                lastname=faker.last_name(),
+                email=faker.email(),
+                date_of_birth=faker.date_of_birth(),
+                region_zip=faker.postalcode(),
+                city=faker.city(),
+                country=faker.country()
             )
         response1 = self.client.get(reverse("contacts"))
         self.assertEqual(len(response1.context['contacts_list']), 10)
@@ -64,7 +69,12 @@ class ViewsContactsTests(TestCase):
         y = Contact.objects.create(
             user_id=self.user,
             name='Fanfan',
-            lastname='Noel'
+            lastname='Noel',
+            email=faker.email(),
+            date_of_birth=faker.date_of_birth(),
+            region_zip=faker.postalcode(),
+            city=faker.city(),
+            country=faker.country()
         )
 
         response8 = self.client.get(reverse("contacts") + '?filter=' + f"{y.name}")
@@ -77,7 +87,12 @@ class ViewsContactsTests(TestCase):
         untel = Contact.objects.create(
             user_id=self.user,
             name=faker.first_name(),
-            lastname=faker.last_name()
+            lastname=faker.last_name(),
+            email=faker.email(),
+            date_of_birth=faker.date_of_birth(),
+            region_zip=faker.postalcode(),
+            city=faker.city(),
+            country=faker.country()
         )
         response = self.client.get(reverse("contact_detail", kwargs={'pk': untel.id}))
         self.assertEqual(response.status_code, 200)
@@ -100,7 +115,12 @@ class ViewsContactsTests(TestCase):
             Contact.objects.create(
                 user_id=self.user,
                 name=faker.first_name(),
-                lastname=faker.last_name()
+                lastname=faker.last_name(),
+                email=faker.email(),
+                date_of_birth=faker.date_of_birth(),
+                region_zip=faker.postalcode(),
+                city=faker.city(),
+                country=faker.country()
             )
         response = self.client.get(reverse("contact_detail", kwargs={'pk': 2}))
         self.assertIsInstance(response.context['next'], Contact)

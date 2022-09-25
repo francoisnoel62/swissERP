@@ -25,6 +25,11 @@ class ModelContactsTests(TestCase):
             user_id=self.user,
             name=faker.first_name(),
             lastname=faker.last_name(),
+            email=faker.email(),
+            date_of_birth=faker.date_of_birth(),
+            region_zip=faker.postalcode(),
+            city=faker.city(),
+            country=faker.country()
         )
 
     def test_contact_user_id(self):
@@ -36,17 +41,8 @@ class ModelContactsTests(TestCase):
     def test_contact_title(self):
         self.assertEqual(self.contact1.title, "Mme")
 
-    def test_contact_lang(self):
-        self.assertEqual(self.contact1.lang, "US")
-
-    def test_contact_country(self):
-        self.assertEqual(self.contact1.country, "CH")
-
     def test_contact_absolute_url(self):
         self.assertURLEqual(self.contact1.get_absolute_url(), reverse('contact_detail', kwargs={'pk': self.contact1.id}))
-
-    def test_contact_title(self):
-        self.assertEqual(self.contact1.title, "Mme")
 
     def test_contact_str_method(self):
         self.assertEqual(str(self.contact1), f"{self.contact1.name} {self.contact1.lastname}")
