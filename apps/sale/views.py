@@ -2,20 +2,18 @@ from datetime import datetime
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.template.loader import get_template
 from django.urls import reverse_lazy, reverse
 from django.views import generic, View
 from django.views.generic import FormView
 from django.views.generic.detail import SingleObjectMixin
 
 from apps.contacts.models import Contact
-from apps.products.models import Product
 from apps.payment.forms import PaymentForm
+from apps.products.models import Product
 from .forms import SaleModelForm, SaleOrderLineFormSet
 from .models import SaleOrder
 from .utils import render_to_pdf
