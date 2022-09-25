@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'apps.products.apps.ProductConfig',
     'apps.sale.apps.SaleConfig',
     'apps.payment.apps.PaymentConfig',
+    'apps.sessions.apps.SessionsConfig',
     'phonenumber_field',
     'crispy_forms',
     'accounts.apps.AccountsConfig'

@@ -1,6 +1,5 @@
 import csv
 
-from dateutil.utils import today
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse

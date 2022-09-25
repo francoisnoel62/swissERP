@@ -1,0 +1,38 @@
+{% extends 'home/viewlist.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block viewlist %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="w-50 mx-auto mt-5">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    {{ form.name|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    {{ form.date|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.schedule|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.duration|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    {{ form.attendees|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-info">Submit</button>
+            <button type="cancel" class="btn btn-danger">Cancel</button>
+        </div>
+        </div>
+    </form>
+{% endblock %}
+
