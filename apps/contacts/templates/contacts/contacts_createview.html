@@ -7,22 +7,25 @@
         {% csrf_token %}
         <div class="w-50 mx-auto mt-5">
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-2">
                     {{ form.title|as_crispy_field }}
                 </div>
-                <div class="form-group col-md-4">
-                    {{ form.lang|as_crispy_field }}
+                <div class="form-group col-md-3">
+                    {{ form.name|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-3">
+                    {{ form.lastname|as_crispy_field }}
                 </div>
                 <div class="form-group col-md-4">
-                    {{ form.age|as_crispy_field }}
+                    {{ form.date_of_birth|as_crispy_field }}
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    {{ form.name|as_crispy_field }}
+                    {{ form.email|as_crispy_field }}
                 </div>
                 <div class="form-group col-md-6">
-                    {{ form.lastname|as_crispy_field }}
+                    {{ form.phone|as_crispy_field }}
                 </div>
             </div>
             <div class="form-row">
@@ -30,35 +33,20 @@
                     {{ form.street|as_crispy_field }}
                 </div>
                 <div class="form-group col-md-4">
-                    {{ form.city|as_crispy_field }}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-3">
                     {{ form.region_zip|as_crispy_field }}
                 </div>
-                <div class="form-group col-md-4">
-                    {{ form.state|as_crispy_field }}
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    {{ form.city|as_crispy_field }}
                 </div>
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-6">
                     {{ form.country|as_crispy_field }}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    {{ form.email|as_crispy_field }}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    {{ form.phone|as_crispy_field }}
-                </div>
-                <div class="form-group col-md-6">
-                    {{ form.mobile|as_crispy_field }}
                 </div>
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-info">Submit</button>
+                <button type="cancel" class="btn btn-danger">Cancel</button>
             </div>
         </div>
     </form>

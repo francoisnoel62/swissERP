@@ -26,8 +26,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-10">
-                        <h5 class="card-title">{{ contact.name }} {{ contact.lastname }} <span
-                                class="badge bg-light text-primary">{{ contact.lang }}</span></h5>
+                        <h5 class="card-title">{{ contact.name }} {{ contact.lastname }}
+                            <span class="badge text-secondary">{{ contact.date_of_birth }}</span></h5>
                     </div>
                     <div class="col-md-2" style="display: inherit">
                         <a class="btn btn-light mr-2" href="{% url 'edit_contact' contact.id %}" role="button">Edit</a>

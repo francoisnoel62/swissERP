@@ -61,12 +61,10 @@ class DeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Contact
     success_url = reverse_lazy("contacts")
 
-    def form_valid(self, form):
-        messages.success(self.request, f"{self.object} was deleted ✅")
-        return super(DeleteView, self).form_valid(form)
-
     def post(self, request, *args, **kwargs):
         try:
+            messages.success(self.request, f"contact deleted ✅")
+            print(messages)
             return self.delete(request, *args, **kwargs)
         except ProtectedError as e:
             messages.error(self.request, f"⛔️ Enable to delete this object as it is used in other relations !")
