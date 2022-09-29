@@ -55,7 +55,7 @@ class HomePageTest(TestCase):
     def test_template_content(self):
         # user logged
         response = self.client.get(reverse("home"))
-        self.assertContains(response, "<h1>Welcome to swissERP</h1>")
+        self.assertContains(response, "<h1>Welcome to <i>Circa+</i></h1>")
 
     def test_redirection_if_anonymous_user(self):
         # user logged out

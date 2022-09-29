@@ -1,12 +1,11 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 from faker import Faker
 
 from accounts.models import CustomUser
-from swissERP import settings
 from apps.contacts.models import Contact
 from apps.contacts.views import IndexView, DetailView
+from swissERP import settings
 
 faker = Faker()
 
@@ -27,7 +26,7 @@ class ViewsContactsTests(TestCase):
     def test_context_object_name(self):
         view = IndexView()
         context_object_name = view.context_object_name
-        self.assertTrue(context_object_name, 'contacts_list')
+        self.assertEqual(context_object_name, 'contacts_list')
 
     def test_IndexView_with_filter_request(self):
         for _ in range(10):
