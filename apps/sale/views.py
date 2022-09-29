@@ -41,7 +41,6 @@ class SaleOrderCreateViewWithSOL(LoginRequiredMixin, generic.CreateView):
             for form in data['sale_order_lines']:
                 form.fields['product_id'].queryset = products
 
-        data['form'].fields['partner_id'].queryset = Contact.objects.filter(user_id=self.request.user)
         return data
 
     def form_valid(self, form):

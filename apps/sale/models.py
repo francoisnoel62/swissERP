@@ -20,7 +20,7 @@ class SaleOrder(models.Model):
     created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100)
-    partner_id = models.ForeignKey(Contact, on_delete=models.PROTECT, null=False, verbose_name='Customer')
+    partner_id = models.ForeignKey(Contact, on_delete=models.PROTECT, null=False, verbose_name='Customer', limit_choices_to={'is_active': True})
     validity_date = models.DateField(verbose_name="Validity date", blank=True, null=True)
     order_state = models.CharField(verbose_name="Etat de la commande", max_length=10, choices=ORDER_STATE, default='DR')
 
