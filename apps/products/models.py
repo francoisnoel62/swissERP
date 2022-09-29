@@ -20,9 +20,3 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('products')
 
-    @property
-    def state_color(self):
-        if not self.finished:
-            return "badge-info"
-        else:
-            return "badge-danger"

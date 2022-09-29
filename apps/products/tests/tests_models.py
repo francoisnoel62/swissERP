@@ -40,18 +40,5 @@ class ModelProductsTests(TestCase):
         self.assertEqual(self.product2.created_by, self.user)
         self.assertEqual(self.product3.created_by, self.user)
 
-    def test_product_finished(self):
-        self.assertEqual(self.product1.finished, True)
-        self.assertEqual(self.product2.finished, True)
-        self.assertEqual(self.product3.finished, True)
-
-    def test_product_state_color(self):
-        self.assertTrue(self.product1.finished)
-        self.assertEqual(self.product1.state_color, "badge-danger")
-
-        self.product1.finished = not self.product1.finished
-        self.assertFalse(self.product1.finished)
-        self.assertEqual(self.product1.state_color, "badge-info")
-
     def test_products_absolute_url(self):
         self.assertURLEqual(self.product1.get_absolute_url(), reverse("products"))
