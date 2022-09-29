@@ -13,7 +13,6 @@ class Product(models.Model):
     description = models.TextField(verbose_name="Description du produit", null=True)
     picture = models.ImageField(verbose_name="Illustrations", upload_to='images', null=True)
     created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
-    finished = models.BooleanField("Etat", default=True, null=False)
 
     def __str__(self):
         return self.name
