@@ -26,7 +26,6 @@ IS_HEROKU = "DYNO" in os.environ
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "CHANGE_ME!!!! (P.S. the SECRET_KEY environment variable will be used, if set, instead)."
 
 if 'SECRET_KEY' in os.environ:
@@ -109,17 +108,6 @@ DATABASES = {
         "NAME": os.path.join(BASE_DIR, "db.sqlite3")
     }
 }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "postgres",
-#         "USER": "postgres",
-#         "PASSWORD": "postgres",
-#         "HOST": "db",
-#         "PORT": 5432,
-#     }
-# }
 
 if "DATABASE_URL" in os.environ:
     # Configure Django for DATABASE_URL environment variable.

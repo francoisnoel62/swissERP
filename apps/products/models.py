@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-from django.contrib import messages
 from django.db import models
 from django.urls import reverse
 
@@ -12,7 +11,7 @@ class Product(models.Model):
     name = models.CharField(verbose_name="Nom du produit", max_length=50)
     price = models.FloatField(verbose_name="Prix du produit")
     description = models.TextField(verbose_name="Description du produit", null=True)
-    picture = models.ImageField(verbose_name="Illustrations", upload_to='images')
+    picture = models.ImageField(verbose_name="Illustrations", upload_to='images', null=True)
     created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     finished = models.BooleanField("Etat", default=True, null=False)
 
