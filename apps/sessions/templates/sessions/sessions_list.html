@@ -40,6 +40,12 @@
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <a class="btn btn-light" href="{% url 'detail_session' session.id %}"
                            role="button">{{ session.name }}</a>
+                        {% if not session.terminated %}
+                            <span class="badge badge-success">A venir</span>
+                        {% else %}
+                            <span class="badge badge-danger">Passée</span>
+                        {% endif %}
+
                         <span>{{ session.date }}</span>
                         <span>{{ session.schedule }}</span>
                     </li>

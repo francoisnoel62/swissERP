@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -46,3 +47,10 @@ class UpdateSession(LoginRequiredMixin, generic.UpdateView):
         response = super().form_invalid(form)
         messages.error(self.request, 'Session update failed')
         return response
+
+
+def validate_session(request, pk):
+    session = Session.objects.get(pk=pk)
+    session.terminated = True
+    session.save()
+    return redirect('sessions')

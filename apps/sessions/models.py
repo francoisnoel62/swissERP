@@ -13,6 +13,7 @@ class Session(models.Model):
     schedule = models.TimeField(verbose_name='Schedule')
     duration = models.DurationField(verbose_name="Duration")
     attendees = models.ManyToManyField(Contact, related_name="sessions")
+    terminated = models.BooleanField(verbose_name="Terminated", default=False)
 
     def __str__(self):
         return self.name
