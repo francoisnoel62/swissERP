@@ -23,7 +23,7 @@
       <excludeFolder url="file://$MODULE_DIR$/sent_emails" />
       <excludeFolder url="file://$MODULE_DIR$/coverage_html" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8 (swissERP)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.10 (swissERP)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="bootstrap-theme" level="application" />

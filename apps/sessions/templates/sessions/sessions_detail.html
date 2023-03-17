@@ -1,0 +1,27 @@
+{% extends 'home/viewlist.html' %}
+
+{% block viewlist %}
+    <div class="row mx-auto mt-5 justify-content-center">
+        {% if session %}
+            <div class="card w-50">
+                <div class="card-header">
+                    <h4>{{ session.name }}</h4>
+                    <a href="{% url 'edit_session' session.id %}">Edit</a>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Date: {{ session.date }}</li>
+                    <li class="list-group-item">Schedule: {{ session.schedule }}</li>
+                    <li class="list-group-item">Duration: {{ session.duration }}</li>
+                    <li class="list-group-item">Attendees:</li>
+                    {% for attendee in session.attendees.all %}
+                        <li class="list-group-item">{{ attendee }}</li>
+                    {% empty %}
+                        <li class="list-group-item">No attendees yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <p>No session available.</p>
+        {% endif %}
+    </div>
+{% endblock %}
