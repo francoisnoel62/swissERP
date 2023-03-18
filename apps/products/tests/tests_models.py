@@ -28,7 +28,6 @@ class ModelProductsTests(TestCase):
                 name=faker.text(max_nb_chars=50),
                 price=faker.pyfloat(left_digits=2, right_digits=2, positive=True),
                 description=faker.sentence(),
-                picture=SimpleUploadedFile(name='test_image.jpg', content=b'', content_type='image/jpeg')
             )
 
         self.product1 = Product.objects.get(pk=1)
