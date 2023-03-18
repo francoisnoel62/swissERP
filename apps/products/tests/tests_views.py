@@ -33,10 +33,7 @@ class ViewsProductsTests(TestCase):
             Product.objects.create(created_by=self.user,
                                    name=faker.text(max_nb_chars=50),
                                    price=faker.pyfloat(left_digits=2, right_digits=2, positive=True),
-                                   description=faker.sentence(),
-                                   picture=SimpleUploadedFile(name='test_image.jpg',
-                                                              content=b'',
-                                                              content_type='image/jpeg'))
+                                   description=faker.sentence())
 
         response1 = self.client.get(reverse("products"))
         self.assertEqual(len(response1.context['products_list']), 5)
@@ -62,9 +59,7 @@ class ViewsProductsTests(TestCase):
         product_desc = "une pomme très sucrée"
         Product.objects.create(created_by=self.user, name=product_name,
                                price=faker.pyfloat(left_digits=2, right_digits=2, positive=True),
-                               description=product_desc,
-                               picture=SimpleUploadedFile(name='test_image.jpg', content=b'',
-                                                          content_type='image/jpeg'))
+                               description=product_desc)
 
         response1 = self.client.get(reverse("products") + '?filter=' + product_name)
         self.assertIsInstance(response1.context['products_list'].first(), Product)
@@ -106,10 +101,7 @@ class ViewsProductsTests(TestCase):
         p1 = Product.objects.create(created_by=self.user,
                                     name=faker.text(max_nb_chars=50),
                                     price=faker.pyfloat(left_digits=2, right_digits=2, positive=True),
-                                    description=faker.sentence(),
-                                    picture=SimpleUploadedFile(name='test_image.jpg',
-                                                               content=b'',
-                                                               content_type='image/jpeg'))
+                                    description=faker.sentence())
 
         data = {
             'name': 'test',
@@ -133,10 +125,7 @@ class ViewsProductsTests(TestCase):
         p1 = Product.objects.create(created_by=self.user,
                                     name=faker.text(max_nb_chars=50),
                                     price=faker.pyfloat(left_digits=2, right_digits=2, positive=True),
-                                    description=faker.sentence(),
-                                    picture=SimpleUploadedFile(name='test_image.jpg',
-                                                               content=b'',
-                                                               content_type='image/jpeg'))
+                                    description=faker.sentence())
 
         res = self.client.post(reverse("delete-product", kwargs={'pk': p1.id}))
         self.assertRedirects(res, reverse("products"), status_code=302)
