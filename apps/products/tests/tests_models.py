@@ -1,4 +1,4 @@
-from PIL.Image import Image
+# from PIL.Image import Image
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
@@ -27,7 +27,6 @@ class ModelProductsTests(TestCase):
                 created_by=self.user,
                 name=faker.text(max_nb_chars=50),
                 price=faker.pyfloat(left_digits=2, right_digits=2, positive=True),
-                description=faker.sentence(),
             )
 
         self.product1 = Product.objects.get(pk=1)

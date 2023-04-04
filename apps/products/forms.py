@@ -1,5 +1,7 @@
 from django import forms
-from .models import Product
+from django.forms import widgets
+
+from .models import Product, Subscription, UnitPass
 
 
 class ProductModelForm(forms.ModelForm):
@@ -7,3 +9,21 @@ class ProductModelForm(forms.ModelForm):
         model = Product
         fields = '__all__'
         exclude = ['created_by']
+
+class PassModelForm(forms.ModelForm):
+    class Meta:
+        model = UnitPass
+        fields = '__all__'
+        exclude = ['created_by']
+        widgets = {
+            'date': widgets.DateInput(attrs={'type': 'date'}),
+        }
+
+class SubModelForm(forms.ModelForm):
+    class Meta:
+        model = Subscription
+        fields = '__all__'
+        exclude = ['created_by']
+
+
+        

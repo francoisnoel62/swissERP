@@ -6,14 +6,17 @@
             <div class="card w-50">
                 <div class="card-header">
                     <h4>{{ session.name }}</h4>
+                    <button type="button" class="btn btn-sm btn-primary">
+                        Print presences
+                    </button>
                     <a href="{% url 'edit_session' session.id %}">Edit</a>
+
                     {% if not session.terminated %}
                         <a href="{% url 'validate_session' session.id %}">Validate</a>
                     {% endif %}
                 </div>
                 <div class="card-body">
                     <p class="card-text">Date: {{ session.date }}</p>
-                    <p class="card-text">Schedule: {{ session.schedule }}</p>
                     <p class="card-text">Attendees:</p>
                     {% for attendee in session.attendees.all %}
                         <li>{{ attendee }}</li>

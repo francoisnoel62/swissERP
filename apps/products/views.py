@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import ProductModelForm
+from .forms import PassModelForm, ProductModelForm, SubModelForm
 from .models import Product
 
 
@@ -18,19 +18,39 @@ class ProductListView(LoginRequiredMixin, generic.ListView):
         query = self.request.GET.get("filter")
         if query:
             object_list = Product.objects.filter(
-                Q(name__icontains=query) | Q(description__icontains=query)
-            ).filter(created_by=self.request.user)
+                Q(name__icontains=query)            
+                ).filter(created_by=self.request.user)
             return object_list
         return Product.objects.filter(created_by=self.request.user)
 
 
-class ProductCreateView(LoginRequiredMixin, generic.CreateView):
-    template_name = 'product/create_product.html'
-    form_class = ProductModelForm
+class ProductCreatePassView(LoginRequiredMixin, generic.CreateView):
+    template_name = 'product/create_pass.html'
+    form_class = PassModelForm
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
-        return super().form_valid(form)
+        messages.success(self.request, 'Create pass success')
+        return super(ProductCreatePassView, self).form_valid(form)
+    
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        messages.error(self.request, 'Create pass failed')
+        return response
+    
+class ProductCreateSubView(LoginRequiredMixin, generic.CreateView):
+    template_name = 'product/create_subscription.html'
+    form_class = SubModelForm
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        messages.success(self.request, 'Create subscription success')
+        return super(ProductCreateSubView, self).form_valid(form)
+    
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        messages.error(self.request, 'Create subscription failed')
+        return response
 
 
 class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):

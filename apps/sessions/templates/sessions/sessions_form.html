@@ -7,19 +7,16 @@
         {% csrf_token %}
         <div class="w-50 mx-auto mt-5">
             <div class="form-row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     {{ form.name|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6">
+                    {{ form.date|as_crispy_field }}
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-4">
-                    {{ form.date|as_crispy_field }}
-                </div>
-                <div class="form-group col-md-4">
-                    {{ form.schedule|as_crispy_field }}
-                </div>
-                <div class="form-group col-md-4">
-                    {{ form.duration|as_crispy_field }}
+                <div class="form-group col-md-12">
+                    {{ form.terminated|as_crispy_field }}
                 </div>
             </div>
             <div class="form-row">

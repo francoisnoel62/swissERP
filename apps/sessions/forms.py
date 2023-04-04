@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import Form, ModelForm, DateField, widgets
+from django.forms import widgets
 
 from .models import Session
 
@@ -11,6 +11,5 @@ class SessionsModelForm(forms.ModelForm):
         exclude = ['user_id']
         widgets = {
             'date': widgets.DateInput(attrs={'type': 'date'}),
-            'schedule': widgets.DateTimeInput(attrs={'type': 'time'}),
             'attendees': widgets.CheckboxSelectMultiple()
         }

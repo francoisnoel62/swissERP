@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
@@ -8,18 +9,24 @@ from swissERP.settings import AUTH_USER_MODEL
 class Product(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(verbose_name="Nom du produit", max_length=50)
     price = models.FloatField(verbose_name="Prix du produit")
-    description = models.TextField(verbose_name="Description du produit", null=True)
-    created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
-    is_subscription = models.BooleanField(verbose_name="Abonnement", default=False)
-    classes_remaining = models.IntegerField(verbose_name="Nombre de cours restants", default=10)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('products')
+    
+class Subscription(Product):
+    classes_by_month = models.IntegerField(verbose_name="Nombre de cours par mois")
 
+class UnitPass(Product):
+    remaining_classes = models.IntegerField(verbose_name="Nombre de cours restants", default=10)
+    date = models.DateField(verbose_name="Date d'achat")
+
+    def due_date(self):
+        return self.date + timedelta(months=12)
 
 
