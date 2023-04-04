@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from .forms import PassModelForm, ProductModelForm, SubModelForm
-from .models import Product
+from .models import Product, Subscription, UnitPass
 
 
 class ProductListView(LoginRequiredMixin, generic.ListView):
@@ -53,10 +53,15 @@ class ProductCreateSubView(LoginRequiredMixin, generic.CreateView):
         return response
 
 
-class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):
-    template_name = 'product/create_product.html'
-    form_class = ProductModelForm
-    model = Product
+class PassUpdateView(LoginRequiredMixin, generic.UpdateView):
+    template_name = 'product/create_pass.html'
+    form_class = PassModelForm
+    model = UnitPass
+
+class SubscriptionUpdateView(LoginRequiredMixin, generic.UpdateView):
+    template_name = 'product/create_subscription.html'
+    form_class = SubModelForm
+    model = Subscription
 
 
 class ProductDeleteView(LoginRequiredMixin, generic.DeleteView):

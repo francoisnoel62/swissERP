@@ -33,9 +33,15 @@
                 {% for product in products_list %}
                     <div class="card text-center mt-3" style="min-width: 30%; max-width: 30%">
                         <div class="card-body">
-                            <a href="{% url 'edit-product' product.id %}">
-                                <h5 class="card-title">{{ product.name }}</h5>
-                            </a>
+                            {% if product.unitpass %}
+                                <a href="{% url 'edit-pass' product.id %}">
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                </a>
+                            {% else %}
+                                <a href="{% url 'edit-sub' product.id %}">
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                </a>
+                            {% endif %}
                             <p class="badge badge-success">CHF {{ product.price|floatformat:2 }}</p>
                         </div>
                         <div class="card-footer">

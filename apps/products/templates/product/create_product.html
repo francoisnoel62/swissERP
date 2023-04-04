@@ -15,12 +15,18 @@
                     <div class="form-group col-md-4">
                         {{ form.price|as_crispy_field }}
                     </div>
-                    
+                    <div class="form-group col-md-4">
+                        {{ form.classes_by_month|as_crispy_field }}
+                    </div>
                 </div>
                 <div class="form-row">
-                    
+                    <div class="form-group col-md-6">
+                        {{ form.remaining_classes|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ form.date|as_crispy_field }}
+                    </div>
                 </div>
-               
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-info">Submit</button>
