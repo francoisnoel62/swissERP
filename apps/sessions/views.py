@@ -1,10 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import transaction
+
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import SessionsModelForm
+from apps.products.models import Product
+
+from .forms import SessionsModelForm, PresenceFormSet
 from .models import Session
 
 
@@ -15,15 +19,46 @@ class SessionsList(LoginRequiredMixin, generic.ListView):
     context_object_name = 'sessions_list'
 
     def get_queryset(self):
-        return Session.objects.filter(user_id=self.request.user)
+        return Session.objects.filter(created_by=self.request.user)
 
 
-class CreateSession(LoginRequiredMixin, generic.CreateView):
+# class CreateSession(LoginRequiredMixin, generic.CreateView):
+#     template_name = 'sessions/sessions_form.html'
+#     form_class = SessionsModelForm
+        
+
+#     def form_valid(self, form):
+#         form.instance.user_id = self.request.user
+#         return super().form_valid(form)
+
+class CreateSessionWithPresences(LoginRequiredMixin, generic.CreateView):
     template_name = 'sessions/sessions_form.html'
     form_class = SessionsModelForm
 
+    def get_context_data(self, **kwargs):
+        data = super(CreateSessionWithPresences, self).get_context_data(**kwargs)
+        products = Product.objects.filter(created_by=self.request.user)
+        
+        if self.request.POST:
+            data['presences'] = PresenceFormSet(self.request.POST, instance=self.object)
+            for form in data['presences']:
+                form.fields['product'].queryset = products
+        else:
+            data['presences'] = PresenceFormSet(instance=self.object)
+            for form in data['presences']:
+                form.fields['product'].queryset = products
+        return data
+        
+
     def form_valid(self, form):
-        form.instance.user_id = self.request.user
+        form.instance.created_by = self.request.user
+        context = self.get_context_data()
+        presences = context['presences']
+        with transaction.atomic():
+            self.object = form.save()
+            if presences.is_valid():
+                presences.instance = self.object
+                presences.save()
         return super().form_valid(form)
 
 

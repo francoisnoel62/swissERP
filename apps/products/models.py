@@ -24,9 +24,5 @@ class Subscription(Product):
 
 class UnitPass(Product):
     remaining_classes = models.IntegerField(verbose_name="Nombre de cours restants", default=10)
-    date = models.DateField(verbose_name="Date d'achat")
-
-    def due_date(self):
-        return self.date + timedelta(months=12)
 
 

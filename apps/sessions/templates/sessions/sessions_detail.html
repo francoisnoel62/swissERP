@@ -18,8 +18,8 @@
                 <div class="card-body">
                     <p class="card-text">Date: {{ session.date }}</p>
                     <p class="card-text">Attendees:</p>
-                    {% for attendee in session.attendees.all %}
-                        <li>{{ attendee }}</li>
+                    {% for presence in session.presence_set.all %}
+                        <li>{{ presence.attendee }} - {{ presence.product }} - {{ presence.comment }}</li>
                     {% empty %}
                         <li>No attendees yet.</li>
                     {% endfor %}
