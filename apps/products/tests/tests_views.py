@@ -6,7 +6,7 @@ from faker import Faker
 from accounts.models import CustomUser
 from apps.products.forms import ProductModelForm
 from apps.products.models import Product
-from apps.products.views import ProductListView, ProductCreateView, ProductUpdateView, ProductDeleteView
+from apps.products.views import ProductListView, ProductDeleteView
 from swissERP import settings
 
 faker = Faker()

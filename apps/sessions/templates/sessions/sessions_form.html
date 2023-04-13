@@ -60,6 +60,8 @@
         // Keep track of how many rows have been added
         let rowCount = {{ presences.forms|length }};
 
+        let totalForms = document.getElementById('id_presence_set-TOTAL_FORMS');
+
         // When the button is clicked, add a new row to the table
         addPresenceButton.addEventListener('click', () => {
             // Clone the last row of the table
@@ -67,8 +69,8 @@
             const newRow = lastRow.cloneNode(true);
 
             // Update the form fields in the new row
-            const formRegex = /presences-(\d|__prefix__)-/gm;
-            const newRowHtml = newRow.innerHTML.replace(formRegex, `presences-${rowCount}-`);
+            const formRegex = /presence_set-(\d|__prefix__)-/gm;
+            const newRowHtml = newRow.innerHTML.replace(formRegex, `presence_set-${rowCount}-`);
             newRow.innerHTML = newRowHtml;
 
             // Append the new row to the table
@@ -76,6 +78,9 @@
 
             // Increment the row count
             rowCount++;
+
+            // Update the total form count
+            totalForms.value = rowCount;
         });
 
     </script>
