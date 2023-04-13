@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 from django.views import generic
 from next_prev import next_in_order, prev_in_order
 
+from apps.sale.models import SaleOrderLine
+
 from .forms import ContactsModelForm, ImportContactsModelForm
 from .models import Contact
 from .utils import filter_contacts
@@ -34,10 +36,16 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
     model = Contact
 
     def get_context_data(self, **kwargs):
+        products = []
+        sale_order_lines = SaleOrderLine.objects.filter(sale_order_id__partner_id=self.object.id).order_by('-sale_order_id__validity_date')
+        for line in sale_order_lines:
+            products.append(line.product_id)
+
         context = super().get_context_data(**kwargs)
         context.update(
             {"next": next_in_order(self.object),
-             "previous": prev_in_order(self.object)
+             "previous": prev_in_order(self.object),
+             "products": products,
              })
         return context
 

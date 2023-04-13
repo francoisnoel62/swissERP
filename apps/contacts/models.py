@@ -1,6 +1,5 @@
 import csv
 
-from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
@@ -31,6 +30,7 @@ class Contact(models.Model):
     region_zip = models.CharField(verbose_name="Code postale", max_length=50)
     city = models.CharField(verbose_name="Ville", max_length=60)
     country = models.CharField(verbose_name="Pays", max_length=50)
+
 
     def get_absolute_url(self):
         return reverse('contact_detail', kwargs={'pk': self.pk})

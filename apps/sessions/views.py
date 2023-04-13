@@ -73,10 +73,36 @@ class UpdateSession(LoginRequiredMixin, generic.UpdateView):
     form_class = SessionsModelForm
     success_url = reverse_lazy('sessions')
 
+    def get_context_data(self, **kwargs):
+        data = super(UpdateSession, self).get_context_data(**kwargs)
+        products = Product.objects.filter(created_by=self.request.user)
+        
+        if self.request.POST:
+            data['presences'] = PresenceFormSet(self.request.POST, instance=self.object)
+            for form in data['presences']:
+                form.fields['product'].queryset = products
+        else:
+            data['presences'] = PresenceFormSet(instance=self.object)
+            for form in data['presences']:
+                form.fields['product'].queryset = products
+        return data
+    
     def form_valid(self, form):
-        response = super().form_valid(form)
+        form.instance.created_by = self.request.user
+        context = self.get_context_data()
+        presences = context['presences']
+        with transaction.atomic():
+            self.object = form.save()
+            if presences.is_valid():
+                presences.instance = self.object
+                presences.save()
         messages.success(self.request, 'Session updated successfully')
-        return response
+        return super().form_valid(form)
+
+    # def form_valid(self, form):
+    #     response = super().form_valid(form)
+    #     messages.success(self.request, 'Session updated successfully')
+    #     return response
 
     def form_invalid(self, form):
         response = super().form_invalid(form)

@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block viewlist %}
-    <form method="post">
+    <form id="form-container" method="post">
         {% csrf_token %}
         <div class="w-50 mx-auto mt-5">
             <div class="form-row">
@@ -22,22 +22,26 @@
             <table class="table">
                 {{ presences.management_form }}
 
-                {% for form in presences.forms %}
-                    <tr class="{% cycle 'row1' 'row2' %}">
-                        {% for field in form.visible_fields %}
-                            <td>
-                                {% if forloop.first %}
-                                    {% for hidden in form.hidden_fields %}
-                                        {{ hidden }}
-                                    {% endfor %}
-                                {% endif %}
-                                {{ field.errors.as_ul }}
-                                {{ field|as_crispy_field }}
-                            </td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
+                <tbody id="presences-table">
+                    {% for form in presences.forms %}
+                        <tr class="{% cycle 'row1' 'row2' %}">
+                            {% for field in form.visible_fields %}
+                                <td>
+                                    {% if forloop.first %}
+                                        {% for hidden in form.hidden_fields %}
+                                            {{ hidden }}
+                                        {% endfor %}
+                                    {% endif %}
+                                    {{ field.errors.as_ul }}
+                                    {{ field|as_crispy_field }}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
+            <button id="add-presence" class="btn btn-light" type="button">Add Another Student</button>
+            
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-info">Submit</button>
@@ -45,5 +49,36 @@
         </div>
         </div>
     </form>
+
+    <script>
+        // Get the table body
+        const tableBody = document.getElementById('presences-table');
+
+        // Get the "Add Another Student" button
+        const addPresenceButton = document.getElementById('add-presence');
+
+        // Keep track of how many rows have been added
+        let rowCount = {{ presences.forms|length }};
+
+        // When the button is clicked, add a new row to the table
+        addPresenceButton.addEventListener('click', () => {
+            // Clone the last row of the table
+            const lastRow = tableBody.lastElementChild;
+            const newRow = lastRow.cloneNode(true);
+
+            // Update the form fields in the new row
+            const formRegex = /presences-(\d|__prefix__)-/gm;
+            const newRowHtml = newRow.innerHTML.replace(formRegex, `presences-${rowCount}-`);
+            newRow.innerHTML = newRowHtml;
+
+            // Append the new row to the table
+            tableBody.appendChild(newRow);
+
+            // Increment the row count
+            rowCount++;
+        });
+
+    </script>
+
 {% endblock %}
 

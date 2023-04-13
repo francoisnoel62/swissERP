@@ -19,4 +19,3 @@ def filter_contacts(request, contacts_filter):
         return Contact.objects.filter(user_id=request.user, is_active=False)
     else:
         return Contact.objects.filter(user_id=request.user)
-

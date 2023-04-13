@@ -16,6 +16,9 @@ class PresenceModelForm(forms.ModelForm):
     class Meta:
         model = Presence
         exclude = ['create_at', 'updated_at']
+        widgets = {
+            'comment': widgets.Textarea(attrs={'rows': 1, 'cols': 20})
+        }
 
 
        
