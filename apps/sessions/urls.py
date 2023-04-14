@@ -8,5 +8,6 @@ urlpatterns = [
     path('create/', views.CreateSessionWithPresences.as_view(), name='create_session'),
     path('<int:pk>/', views.DetailSession.as_view(), name='detail_session'),
     path('<int:pk>/edit/', views.UpdateSession.as_view(), name='edit_session'),
-    path('<int:pk>/validate/', validate_session, name='validate_session')
+    path('<int:pk>/validate/', validate_session, name='validate_session'),
+    path('<int:pk>/delete/', views.DeleteSession.as_view(), name='delete_session'),
 ]

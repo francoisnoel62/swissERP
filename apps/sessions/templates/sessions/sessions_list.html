@@ -38,6 +38,7 @@
             <ul class="list-group list-group-flush w-50">
                 {% for session in sessions_list %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
+
                         <span>{{ session.date }}</span>
 
                         <a class="btn btn-light" href="{% url 'detail_session' session.id %}"
@@ -45,9 +46,12 @@
                         {% if not session.terminated %}
                             <span class="badge badge-success">A venir</span>
                         {% else %}
-                            <span class="badge badge-danger">Passée</span>
+                            <span class="badge badge-info">Passée</span>
                         {% endif %}
-
+                        <form action="{% url 'delete_session' session.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
                     </li>
                 {% endfor %}
             </ul>

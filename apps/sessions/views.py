@@ -115,3 +115,12 @@ def validate_session(request, pk):
     session.terminated = True
     session.save()
     return redirect('sessions')
+
+class DeleteSession(LoginRequiredMixin, generic.DeleteView):
+    model = Session
+    success_url = reverse_lazy('sessions')
+
+    def post(self, request, *args, **kwargs):
+        messages.success(self.request, 'Session deleted successfully')
+        return self.delete(request, *args, **kwargs)
+        

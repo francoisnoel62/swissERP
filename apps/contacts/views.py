@@ -72,7 +72,6 @@ class DeleteView(LoginRequiredMixin, generic.DeleteView):
     def post(self, request, *args, **kwargs):
         try:
             messages.success(self.request, f"contact deleted ✅")
-            print(messages)
             return self.delete(request, *args, **kwargs)
         except ProtectedError as e:
             messages.error(self.request, f"⛔️ Enable to delete this object as it is used in other relations !")
