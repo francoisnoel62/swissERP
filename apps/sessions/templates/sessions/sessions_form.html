@@ -83,19 +83,17 @@
             totalForms.value = rowCount;
         });
 
-        
+
         const rows = document.querySelectorAll('table tbody tr');
         {#td:first-child #}
 
         rows.forEach(row => {
             const student = row.querySelector('td:first-child');
             student.addEventListener('change', (event) => {
-                {#const input = row.querySelector('input');#}
-                {#input.value = event.target.value;#}
+                student_id = event.target.value;
 
-                console.log(event.target);
+
                 console.log(event.target.value);
-                console.log(event.target.selectedOptions[0].text);
             });
         });
 

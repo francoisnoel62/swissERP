@@ -10,14 +10,20 @@ class ProductModelForm(forms.ModelForm):
         fields = '__all__'
         exclude = ['created_by']
 
+
 class PassModelForm(forms.ModelForm):
     class Meta:
         model = UnitPass
         fields = '__all__'
         exclude = ['created_by']
-        widgets = {
-            'date': widgets.DateInput(attrs={'type': 'date'}),
-        }
+
+    def save(self, commit=True):
+        temp = super(PassModelForm, self).save(commit=True)
+        temp.name = temp.name + " // " + str(temp.student)
+        if commit:
+            temp.save()
+        return temp
+
 
 class SubModelForm(forms.ModelForm):
     class Meta:
@@ -25,5 +31,9 @@ class SubModelForm(forms.ModelForm):
         fields = '__all__'
         exclude = ['created_by']
 
-
-        
+    def save(self, commit=True):
+        temp = super(SubModelForm, self).save(commit=True)
+        temp.name = temp.name + " // " + str(temp.student)
+        if commit:
+            temp.save()
+        return temp

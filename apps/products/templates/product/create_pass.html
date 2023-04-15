@@ -10,17 +10,19 @@
             <div class="w-50 mx-auto mt-5">
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        {{ form.name|as_crispy_field }}
+                        {{ form.student|as_crispy_field }}
                     </div>
                     <div class="form-group col-md-6">
-                        {{ form.price|as_crispy_field }}
+                        {{ form.name|as_crispy_field }}
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
+                        {{ form.price|as_crispy_field }}
+                    </div>
+                   <div class="form-group col-md-6">
                         {{ form.remaining_classes|as_crispy_field }}
                     </div>
-                   
                 </div>
             </div>
             <div class="text-center">
