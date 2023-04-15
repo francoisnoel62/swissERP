@@ -84,15 +84,18 @@
         });
 
         
-        const rows = document.querySelectorAll('tr td div select');
+        const rows = document.querySelectorAll('table tbody tr');
+        {#td:first-child #}
 
         rows.forEach(row => {
-            const select = row.querySelector('select');
-            select.addEventListener('change', (event) => {
-                const input = row.querySelector('input');
-                input.value = event.target.value;
+            const student = row.querySelector('td:first-child');
+            student.addEventListener('change', (event) => {
+                {#const input = row.querySelector('input');#}
+                {#input.value = event.target.value;#}
 
-                console.log(input.value);
+                console.log(event.target);
+                console.log(event.target.value);
+                console.log(event.target.selectedOptions[0].text);
             });
         });
 

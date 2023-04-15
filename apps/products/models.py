@@ -18,11 +18,11 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('products')
-    
+
+
 class Subscription(Product):
     classes_by_month = models.IntegerField(verbose_name="Nombre de cours par mois")
 
+
 class UnitPass(Product):
     remaining_classes = models.IntegerField(verbose_name="Nombre de cours restants", default=10)
-
-

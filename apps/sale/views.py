@@ -11,7 +11,6 @@ from django.views import generic, View
 from django.views.generic import FormView
 from django.views.generic.detail import SingleObjectMixin
 
-from apps.contacts.models import Contact
 from apps.payment.forms import PaymentForm
 from apps.products.models import Product
 from .forms import SaleModelForm, SaleOrderLineFormSet
@@ -101,7 +100,8 @@ class SaleOrderIndexView(LoginRequiredMixin, generic.ListView):
             if sale_filter == "filter":
                 query = self.request.GET.get("filter")
                 if query:
-                    object_list = SaleOrder.objects.filter(Q(name__icontains=query)).filter(created_by=self.request.user)
+                    object_list = SaleOrder.objects.filter(Q(name__icontains=query)).filter(
+                        created_by=self.request.user)
                     return object_list
             if sale_filter == "draft":
                 return SaleOrder.objects.filter(created_by=self.request.user, order_state="DR")
@@ -111,9 +111,6 @@ class SaleOrderIndexView(LoginRequiredMixin, generic.ListView):
                 return SaleOrder.objects.filter(created_by=self.request.user, order_state="PD")
             if sale_filter == "all":
                 return SaleOrder.objects.filter(created_by=self.request.user)
-
-
-
 
 
 class SaleOrderDetailView(generic.DetailView):

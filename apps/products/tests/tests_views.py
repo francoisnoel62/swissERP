@@ -1,12 +1,12 @@
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
 from faker import Faker
 
 from accounts.models import CustomUser
-from apps.products.forms import ProductModelForm
-from apps.products.models import Product
-from apps.products.views import ProductListView, ProductDeleteView
+from apps.products.forms import PassModelForm, SubModelForm
+from apps.products.models import Product, UnitPass, Subscription
+from apps.products.views import ProductListView, ProductDeleteView, ProductCreatePassView, ProductCreateSubView, \
+    PassUpdateView, SubscriptionUpdateView
 from swissERP import settings
 
 faker = Faker()
@@ -32,8 +32,7 @@ class ViewsProductsTests(TestCase):
         for _ in range(5):
             Product.objects.create(created_by=self.user,
                                    name=faker.text(max_nb_chars=50),
-                                   price=faker.pyfloat(left_digits=2, right_digits=2, positive=True),
-                                   description=faker.sentence())
+                                   price=faker.pyfloat(left_digits=2, right_digits=2, positive=True))
 
         response1 = self.client.get(reverse("products"))
         self.assertEqual(len(response1.context['products_list']), 5)
@@ -54,30 +53,15 @@ class ViewsProductsTests(TestCase):
                              status_code=302,
                              target_status_code=200)
 
-    def test_ProductListView_with_filterBy_name_or_desc(self):
+    def test_ProductListView_with_filterBy_name(self):
         product_name = "pomme"
-        product_desc = "une pomme très sucrée"
         Product.objects.create(created_by=self.user, name=product_name,
-                               price=faker.pyfloat(left_digits=2, right_digits=2, positive=True),
-                               description=product_desc)
+                               price=faker.pyfloat(left_digits=2, right_digits=2, positive=True))
 
         response1 = self.client.get(reverse("products") + '?filter=' + product_name)
         self.assertIsInstance(response1.context['products_list'].first(), Product)
         self.assertTrue(len(response1.context['products_list']) >= 1)
         self.assertEqual(response1.context['products_list'].first().name, product_name)
-        self.assertEqual(response1.context['products_list'].first().description, product_desc)
-
-        response2 = self.client.get(reverse("products") + '?filter=' + product_desc)
-        self.assertIsInstance(response2.context['products_list'].first(), Product)
-        self.assertTrue(len(response2.context['products_list']) >= 1)
-        self.assertEqual(response2.context['products_list'].first().name, product_name)
-        self.assertEqual(response2.context['products_list'].first().description, product_desc)
-
-        response3 = self.client.get(reverse("products") + '?filter=' + "sucrée")
-        self.assertIsInstance(response3.context['products_list'].first(), Product)
-        self.assertTrue(len(response3.context['products_list']) >= 1)
-        self.assertEqual(response3.context['products_list'].first().name, product_name)
-        self.assertEqual(response3.context['products_list'].first().description, product_desc)
 
         # logout
         self.client.logout()
@@ -89,34 +73,61 @@ class ViewsProductsTests(TestCase):
                              target_status_code=200)
 
     # ProductCreateView
-    def test_ProductCreateView(self):
-        self.assertEqual(ProductCreateView().template_name, 'product/create_product.html')
-        self.assertIs(ProductCreateView().form_class, ProductModelForm)
+    def test_ProductCreatePassView(self):
+        self.assertEqual(ProductCreatePassView().template_name, 'product/create_pass.html')
+        self.assertIs(ProductCreatePassView().form_class, PassModelForm)
 
-    def test_ProductUpdateView(self):
-        self.assertEqual(ProductUpdateView().template_name, 'product/create_product.html')
-        self.assertIs(ProductUpdateView().form_class, ProductModelForm)
-        self.assertIs(ProductUpdateView().model, Product)
+    def test_ProductCreateSubView(self):
+        self.assertEqual(ProductCreateSubView().template_name, 'product/create_subscription.html')
+        self.assertIs(ProductCreateSubView().form_class, SubModelForm)
 
-        p1 = Product.objects.create(created_by=self.user,
+    def test_PassUpdateView(self):
+        self.assertEqual(PassUpdateView().template_name, 'product/create_pass.html')
+        self.assertIs(PassUpdateView().form_class, PassModelForm)
+        self.assertIs(PassUpdateView().model, UnitPass)
+
+        p1 = UnitPass.objects.create(created_by=self.user,
                                     name=faker.text(max_nb_chars=50),
                                     price=faker.pyfloat(left_digits=2, right_digits=2, positive=True),
-                                    description=faker.sentence())
+                                    remaining_classes=faker.pyint(min_value=1, max_value=10))
 
         data = {
             'name': 'test',
             'price': 555.9,
-            'description': 'desc',
+            'remaining_classes': 4,
         }
 
         res1 = self.client.post(
-            reverse("edit-product", kwargs={'pk': p1.id}), data=data)
-        # self.assertEqual(res1.status_code, 302)
-        # self.assertRedirects(res1, reverse("products"))
+            reverse("edit-pass", kwargs={'pk': p1.id}), data=data)
+        self.assertEqual(res1.status_code, 302)
+        self.assertRedirects(res1, reverse("products"))
         p1.refresh_from_db()
-        # self.assertEqual(p1.price, data['price'])
-        # self.assertEqual(p1.name, data['name'])
-        # self.assertEqual(p1.description, data['description'])
+        self.assertEqual(p1.price, data['price'])
+        self.assertEqual(p1.name, data['name'])
+
+    def test_SubscriptionUpdateView(self):
+        self.assertEqual(SubscriptionUpdateView().template_name, 'product/create_subscription.html')
+        self.assertIs(SubscriptionUpdateView().form_class, SubModelForm)
+        self.assertIs(SubscriptionUpdateView().model, Subscription)
+
+        p1 = Subscription.objects.create(created_by=self.user,
+                                    name=faker.text(max_nb_chars=50),
+                                    price=faker.pyfloat(left_digits=2, right_digits=2, positive=True),
+                                    classes_by_month=faker.pyint(min_value=1, max_value=12))
+
+        data = {
+            'name': 'test',
+            'price': 555.9,
+            'classes_by_month': 4,
+        }
+
+        res1 = self.client.post(
+            reverse("edit-sub", kwargs={'pk': p1.id}), data=data)
+        self.assertEqual(res1.status_code, 302)
+        self.assertRedirects(res1, reverse("products"))
+        p1.refresh_from_db()
+        self.assertEqual(p1.price, data['price'])
+        self.assertEqual(p1.name, data['name'])
 
     def test_ProductDeleteView(self):
         self.assertIs(ProductDeleteView().model, Product)
@@ -124,11 +135,13 @@ class ViewsProductsTests(TestCase):
 
         p1 = Product.objects.create(created_by=self.user,
                                     name=faker.text(max_nb_chars=50),
-                                    price=faker.pyfloat(left_digits=2, right_digits=2, positive=True),
-                                    description=faker.sentence())
+                                    price=faker.pyfloat(left_digits=2, right_digits=2, positive=True))
 
         res = self.client.post(reverse("delete-product", kwargs={'pk': p1.id}))
         self.assertRedirects(res, reverse("products"), status_code=302)
 
-        res2 = self.client.get(reverse("edit-product", kwargs={'pk': p1.id}))
+        res2 = self.client.get(reverse("edit-sub", kwargs={'pk': p1.id}))
+        self.assertTrue(res2.status_code, 404)
+
+        res3 = self.client.get(reverse("edit-pass", kwargs={'pk': p1.id}))
         self.assertTrue(res2.status_code, 404)
