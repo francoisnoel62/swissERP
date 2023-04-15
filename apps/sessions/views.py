@@ -19,17 +19,8 @@ class SessionsList(LoginRequiredMixin, generic.ListView):
     context_object_name = 'sessions_list'
 
     def get_queryset(self):
-        return Session.objects.filter(created_by=self.request.user)
+        return Session.objects.filter(created_by=self.request.user).order_by('date')
 
-
-# class CreateSession(LoginRequiredMixin, generic.CreateView):
-#     template_name = 'sessions/sessions_form.html'
-#     form_class = SessionsModelForm
-        
-
-#     def form_valid(self, form):
-#         form.instance.user_id = self.request.user
-#         return super().form_valid(form)
 
 class CreateSessionWithPresences(LoginRequiredMixin, generic.CreateView):
     template_name = 'sessions/sessions_form.html'

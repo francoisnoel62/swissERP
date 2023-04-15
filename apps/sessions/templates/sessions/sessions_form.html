@@ -83,7 +83,19 @@
             totalForms.value = rowCount;
         });
 
-    </script>
+        
+        const rows = document.querySelectorAll('tr td div select');
 
+        rows.forEach(row => {
+            const select = row.querySelector('select');
+            select.addEventListener('change', (event) => {
+                const input = row.querySelector('input');
+                input.value = event.target.value;
+
+                console.log(input.value);
+            });
+        });
+
+    </script>
 {% endblock %}
 
