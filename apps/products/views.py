@@ -15,13 +15,20 @@ class ProductListView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'products_list'
 
     def get_queryset(self):
-        query = self.request.GET.get("filter")
-        if query:
+        if self.request.GET.get("filter") is not None:
+            query = self.request.GET.get("filter")
             object_list = Product.objects.filter(
-                Q(name__icontains=query)
+                Q(student__name__icontains=query) | Q(student__lastname__icontains=query)
             ).filter(created_by=self.request.user)
             return object_list
-        return Product.objects.filter(created_by=self.request.user)
+        elif self.request.GET.get("sub") is not None:
+            object_list = Product.objects.exclude(subscription__isnull=True).filter(created_by=self.request.user)
+            return object_list
+        elif self.request.GET.get("pass") is not None:
+            object_list = Product.objects.exclude(unitpass__isnull=True).filter(created_by=self.request.user)
+            return object_list
+        else:
+            return Product.objects.filter(created_by=self.request.user)
 
 
 class ProductCreatePassView(LoginRequiredMixin, generic.CreateView):

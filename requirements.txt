@@ -58,3 +58,6 @@ whitenoise==6.2.0
 wrapt==1.12.1
 xhtml2pdf==0.2.5
 zipp==3.5.0
+
+django-model-utils~=4.3.1
+dj-config-url~=0.1.1
