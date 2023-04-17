@@ -82,40 +82,42 @@
 
             // Update the total form count
             totalForms.value = rowCount;
+
+            update_product();
         });
 
         //UPDATE PRODUCT WHEN SELECTING STUDENT
+        function update_product() {
+            const url = '{% url 'update-product-when-selecting-student' 0 %}';
+            const rows = document.querySelectorAll('table tbody tr');
 
-        const url = '{% url 'update-product-when-selecting-student' 0 %}';
-        const rows = document.querySelectorAll('table tbody tr');
+            rows.forEach(row => {
+                let student = row.querySelector('td:first-child');
+                let product = row.querySelector('td:nth-child(2)');
 
-        rows.forEach(row => {
-            let student = row.querySelector('td:first-child');
-            let product = row.querySelector('td:nth-child(2)');
-            console.log(product);
-
-
-            student.addEventListener('change', (event) => {
-                student_id = event.target.value;
+                student.addEventListener('change', (event) => {
+                    console.log('changed');
+                    student_id = event.target.value;
 
 
-                fetch(url.replace('0', student_id), {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest',
-                    },
-                }).then(response => response.json())
-                    .then(data => {
-                        if (data['products'][0]) {
-                            product.querySelector('select').value = data['products'][0]['id'];
-                        } else {
-                            alert('No product found for this student');
-                            product.querySelector('select').value = '';
-                        }
-                    });
+                    fetch(url.replace('0', student_id), {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                    }).then(response => response.json())
+                        .then(data => {
+                            if (data['products'][0]) {
+                                product.querySelector('select').value = data['products'][0]['id'];
+                            } else {
+                                alert('No product found for this student');
+                                product.querySelector('select').value = '';
+                            }
+                        });
+                });
             });
-        });
+        }
 
     </script>
 {% endblock %}
