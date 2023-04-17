@@ -60,3 +60,15 @@ class UrlAndTemplatesProductsTests(TestCase):
                              target_status_code=200)
 
 
+    def test_filter_product(self):
+        # user logged
+        response = self.client.get(reverse("filter_products"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "product")
+
+        # user logged out
+        self.client.logout()
+        response = self.client.get(reverse("filter_products"))
+        self.assertEqual(response.status_code, 302)
+
+
