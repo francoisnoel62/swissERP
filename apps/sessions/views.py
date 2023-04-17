@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
+from django.http import JsonResponse
 
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -29,7 +30,7 @@ class CreateSessionWithPresences(LoginRequiredMixin, generic.CreateView):
     def get_context_data(self, **kwargs):
         data = super(CreateSessionWithPresences, self).get_context_data(**kwargs)
         products = Product.objects.filter(created_by=self.request.user)
-        
+
         if self.request.POST:
             data['presences'] = PresenceFormSet(self.request.POST, instance=self.object)
             for form in data['presences']:
@@ -39,7 +40,6 @@ class CreateSessionWithPresences(LoginRequiredMixin, generic.CreateView):
             for form in data['presences']:
                 form.fields['product'].queryset = products
         return data
-        
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
@@ -67,7 +67,7 @@ class UpdateSession(LoginRequiredMixin, generic.UpdateView):
     def get_context_data(self, **kwargs):
         data = super(UpdateSession, self).get_context_data(**kwargs)
         products = Product.objects.filter(created_by=self.request.user)
-        
+
         if self.request.POST:
             data['presences'] = PresenceFormSet(self.request.POST, instance=self.object)
             for form in data['presences']:
@@ -77,7 +77,7 @@ class UpdateSession(LoginRequiredMixin, generic.UpdateView):
             for form in data['presences']:
                 form.fields['product'].queryset = products
         return data
-    
+
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         context = self.get_context_data()
@@ -107,6 +107,7 @@ def validate_session(request, pk):
     session.save()
     return redirect('sessions')
 
+
 class DeleteSession(LoginRequiredMixin, generic.DeleteView):
     model = Session
     success_url = reverse_lazy('sessions')
@@ -114,4 +115,11 @@ class DeleteSession(LoginRequiredMixin, generic.DeleteView):
     def post(self, request, *args, **kwargs):
         messages.success(self.request, 'Session deleted successfully')
         return self.delete(request, *args, **kwargs)
-        
+
+
+def update_product_when_selecting_student(request, student_id):
+    products = Product.objects.filter(created_by=request.user, student=student_id)
+    data = {
+        'products': list(products.values('id', 'name'))
+    }
+    return JsonResponse(data)

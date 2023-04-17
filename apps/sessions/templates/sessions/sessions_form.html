@@ -23,25 +23,25 @@
                 {{ presences.management_form }}
 
                 <tbody id="presences-table">
-                    {% for form in presences.forms %}
-                        <tr class="{% cycle 'row1' 'row2' %}">
-                            {% for field in form.visible_fields %}
-                                <td>
-                                    {% if forloop.first %}
-                                        {% for hidden in form.hidden_fields %}
-                                            {{ hidden }}
-                                        {% endfor %}
-                                    {% endif %}
-                                    {{ field.errors.as_ul }}
-                                    {{ field|as_crispy_field }}
-                                </td>
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
+                {% for form in presences.forms %}
+                    <tr class="{% cycle 'row1' 'row2' %}">
+                        {% for field in form.visible_fields %}
+                            <td>
+                                {% if forloop.first %}
+                                    {% for hidden in form.hidden_fields %}
+                                        {{ hidden }}
+                                    {% endfor %}
+                                {% endif %}
+                                {{ field.errors.as_ul }}
+                                {{ field|as_crispy_field }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
             <button id="add-presence" class="btn btn-light" type="button">Add Another Student</button>
-            
+
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-info">Submit</button>
@@ -51,6 +51,7 @@
     </form>
 
     <script>
+        //ADD NEW PRESENCES FORMSET
         // Get the table body
         const tableBody = document.getElementById('presences-table');
 
@@ -83,17 +84,36 @@
             totalForms.value = rowCount;
         });
 
+        //UPDATE PRODUCT WHEN SELECTING STUDENT
 
+        const url = '{% url 'update-product-when-selecting-student' 0 %}';
         const rows = document.querySelectorAll('table tbody tr');
-        {#td:first-child #}
 
         rows.forEach(row => {
-            const student = row.querySelector('td:first-child');
+            let student = row.querySelector('td:first-child');
+            let product = row.querySelector('td:nth-child(2)');
+            console.log(product);
+
+
             student.addEventListener('change', (event) => {
                 student_id = event.target.value;
 
 
-                console.log(event.target.value);
+                fetch(url.replace('0', student_id), {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                }).then(response => response.json())
+                    .then(data => {
+                        if (data['products'][0]) {
+                            product.querySelector('select').value = data['products'][0]['id'];
+                        } else {
+                            alert('No product found for this student');
+                            product.querySelector('select').value = '';
+                        }
+                    });
             });
         });
 

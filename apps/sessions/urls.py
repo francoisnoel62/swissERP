@@ -10,4 +10,6 @@ urlpatterns = [
     path('<int:pk>/edit/', views.UpdateSession.as_view(), name='edit_session'),
     path('<int:pk>/validate/', validate_session, name='validate_session'),
     path('<int:pk>/delete/', views.DeleteSession.as_view(), name='delete_session'),
+    path('create/<int:student_id>/', views.update_product_when_selecting_student,
+         name='update-product-when-selecting-student'),
 ]
