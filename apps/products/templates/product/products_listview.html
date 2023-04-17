@@ -41,14 +41,18 @@
             <ul class="list-group list-group-flush w-50">
                 {% for product in products_list %}
                     <li class="list-group-item d-flex justify-content-around align-items-center">
-                        <a class="btn btn-light" href="#"
-                           role="button">{{ product.name }}
-                            {% if product.unitpass %}
+                        {% if product.unitpass %}
+                            <a class="btn btn-light" href="{% url 'edit-pass' product.id %}"
+                               role="button">{{ product.name }}
                                 <span class="badge badge-primary badge-pill">{{ product.unitpass.remaining_classes }}</span>
-                            {% else %}
+                            </a>
+                        {% else %}
+                            <a class="btn btn-light" href="{% url 'edit-sub' product.id %}"
+                               role="button">{{ product.name }}
                                 <span class="badge badge-secondary badge-pill">{{ product.subscription.classes_by_month }}</span>
-                            {% endif %}
-                        </a>
+                            </a>
+                        {% endif %}
+
                         <span>{{ product.student }}</span>
                         {% if product.unitpass %}
                             <span>{{ product.unitpass.date_of_buy }}</span>
