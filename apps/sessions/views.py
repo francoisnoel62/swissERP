@@ -120,6 +120,6 @@ class DeleteSession(LoginRequiredMixin, generic.DeleteView):
 def update_product_when_selecting_student(request, student_id):
     products = Product.objects.filter(created_by=request.user, student=student_id)
     data = {
-        'products': list(products.values('id', 'name'))
+        'products': list(products.values('id', 'name', 'student__name'))
     }
     return JsonResponse(data)

@@ -51,6 +51,7 @@
     </form>
 
     <script>
+        update_product();
         //ADD NEW PRESENCES FORMSET
         // Get the table body
         const tableBody = document.getElementById('presences-table');
@@ -92,13 +93,11 @@
             const rows = document.querySelectorAll('table tbody tr');
 
             rows.forEach(row => {
-                let student = row.querySelector('td:first-child');
-                let product = row.querySelector('td:nth-child(2)');
+                let students = row.querySelector('td:first-child');
+                let products = row.querySelector('td:nth-child(2)');
 
-                student.addEventListener('change', (event) => {
-                    console.log('changed');
-                    student_id = event.target.value;
-
+                students.addEventListener('change', (event) => {
+                    const student_id = event.target.value;
 
                     fetch(url.replace('0', student_id), {
                         method: 'GET',
@@ -109,10 +108,20 @@
                     }).then(response => response.json())
                         .then(data => {
                             if (data['products'][0]) {
-                                product.querySelector('select').value = data['products'][0]['id'];
+                                products.querySelectorAll('option').forEach(option => {
+                                    option.remove();
+                                });
+
+                                data['products'].forEach(product => {
+                                    let option = document.createElement('option');
+                                    option.value = product['id'];
+                                    option.innerHTML = product['name'] + ' - ' + product['student__name'];
+                                    products.querySelector('select').appendChild(option);
+                                });
+
                             } else {
                                 alert('No product found for this student');
-                                product.querySelector('select').value = '';
+                                products.querySelector('select').value = '';
                             }
                         });
                 });
