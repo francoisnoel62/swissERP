@@ -7,11 +7,12 @@ from .models import Presence, Session
 class SessionsModelForm(forms.ModelForm):
     class Meta:
         model = Session
-        exclude = ['create_at', 'updated_at',  'created_by']
+        exclude = ['create_at', 'updated_at', 'created_by']
         widgets = {
-            'date': widgets.DateInput(attrs={'type': 'date'})
+            'date': widgets.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
-        
+
+
 class PresenceModelForm(forms.ModelForm):
     class Meta:
         model = Presence
@@ -21,5 +22,4 @@ class PresenceModelForm(forms.ModelForm):
         }
 
 
-       
 PresenceFormSet = inlineformset_factory(Session, Presence, form=PresenceModelForm, extra=1)

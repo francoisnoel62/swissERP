@@ -12,7 +12,7 @@ class Session(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(verbose_name="Classe name", max_length=50)
-    date = models.DateField(verbose_name="Date")
+    date = models.DateTimeField(verbose_name="Date et heure")
     terminated = models.BooleanField(verbose_name="Terminated", default=False)
 
     def __str__(self):
