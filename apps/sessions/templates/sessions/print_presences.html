@@ -15,11 +15,11 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <div style="margin-left: 9cm;">
+<div class="container" style="padding-top: 15px;">
+    <div style="text-align: center">
         <div class="row">
-            <p>Liste de présence : {{ session.name }}</p>
-            <p> {{ session.date }}</p>
+            <h1>Liste de présence du jour</h1>
+            <h2><i>{{ session.date|date:"l m F, Y - H:i" }}</i></h2>
         </div>
     </div>
 </div>
@@ -28,16 +28,23 @@
     <table style="text-align: center;">
         <thead>
         <tr style="padding: 8px;">
-            <th>Nom</th>
-            <th>Type de produit</th>
-            <th>Remarques</th>
+            <th></th>
+            <th>NOM</th>
+            <th>TYPE DE PRODUIT</th>
+            <th>REMARQUES</th>
         </tr>
         </thead>
         <tbody>
         {% for presence in presences %}
             <tr style="padding-top: 5px;">
+                <td><h3>O</h3></td>
                 <td>{{ presence.attendee.lastname }} {{ presence.attendee.name }}</td>
-                <td>{{ presence.product.name }}</td>
+                {% if presence.product.unitpass %}
+                    <td>{{ presence.product.name }} <i>[{{ presence.product.unitpass.remaining_classes }} lefts]</i></td>
+                {% else %}
+                    <td>{{ presence.product.name }}</td>
+                {% endif %}
+
                 <td>{{ presence.comment }}</td>
             </tr>
         {% endfor %}
