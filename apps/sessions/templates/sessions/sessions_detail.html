@@ -6,24 +6,31 @@
             <div class="card w-50">
                 <div class="card-header">
                     <h4>{{ session.name }}</h4>
-                    <button type="button" class="btn btn-sm btn-primary">
-                        Print presences
-                    </button>
-                    <a href="{% url 'edit_session' session.id %}" style="color: cadetblue!important;">Edit</a>
+                    <a href="{% url 'print-presences' session.id %}">
+                        <button type="button" class="btn btn-sm btn-primary">
+                            Print presences
+                        </button>
+                    </a>
+                        <a href="{% url 'edit_session' session.id %}" style="color: cadetblue!important;">Edit</a>
 
-                    {% if not session.terminated %}
-                        <a href="{% url 'validate_session' session.id %}" style="color: darkmagenta!important;">Validate</a>
-                    {% endif %}
-                    <form action="{% url 'delete_session' session.id %}" method="post" style="display: inline;">
-                        {% csrf_token %}
-                        <button class="btn btn-sm btn-danger">Delete</button>
-                    </form>
+                        {% if not session.terminated %}
+                            <a href="{% url 'validate_session' session.id %}"
+                               style="color: darkmagenta!important;">Validate</a>
+                        {% endif %}
+                        <form action="{% url 'delete_session' session.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
                 </div>
                 <div class="card-body">
                     <p class="card-text">Date: {{ session.date }}</p>
                     <p class="card-text">Attendees:</p>
                     {% for presence in session.presence_set.all %}
-                        <li>{{ presence.attendee }} - {{ presence.product }} - {{ presence.comment }}</li>
+                        {% if presence.comment %}
+                            <li>{{ presence.attendee }} // {{ presence.product }} // {{ presence.comment }}</li>
+                        {% else %}
+                            <li>{{ presence.attendee }} // {{ presence.product }}</li>
+                        {% endif %}
                     {% empty %}
                         <li>No attendees yet.</li>
                     {% endfor %}

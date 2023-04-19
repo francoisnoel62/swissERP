@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ session }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1cm 3cm 1cm 2cm;
+        }
+
+        div {
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div style="margin-left: 9cm;">
+        <div class="row">
+            <p>Liste de présence : {{ session.name }}</p>
+            <p> {{ session.date }}</p>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 2cm;">
+    <table style="text-align: center;">
+        <thead>
+        <tr style="padding: 8px;">
+            <th>Nom</th>
+            <th>Type de produit</th>
+            <th>Remarques</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for presence in presences %}
+            <tr style="padding-top: 5px;">
+                <td>{{ presence.attendee.lastname }} {{ presence.attendee.name }}</td>
+                <td>{{ presence.product.name }}</td>
+                <td>{{ presence.comment }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>

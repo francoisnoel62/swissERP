@@ -32,4 +32,4 @@ class Presence(models.Model):
     comment = models.TextField(verbose_name="Comments", blank=True, null=True)
 
     def __str__(self):
-        return self.session_id.name + " - " + self.student_id.name + " - " + self.product_id.name
+        return self.session_id.name + " - " + self.attendee.name + " - " + self.product.name

@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -11,6 +11,7 @@ from apps.products.models import Product
 
 from .forms import SessionsModelForm, PresenceFormSet
 from .models import Session
+from ..sale.utils import render_to_pdf
 
 
 # Create your views here.
@@ -123,3 +124,20 @@ def update_product_when_selecting_student(request, student_id):
         'products': list(products.values('id', 'name', 'student__name'))
     }
     return JsonResponse(data)
+
+
+def print_presences(request, pk):
+    session = Session.objects.get(pk=pk)
+    presences = session.presence_set.all()
+    context = {
+        'presences': presences,
+        'session': session,
+    }
+    if context:
+        pdf = render_to_pdf('sessions/print_presences.html', context)
+        if pdf:
+            filename = "Presences_%s.pdf" % (session.date)
+            content = f"attachment; filename={filename}"
+            pdf['Content-Disposition'] = content
+            return pdf
+    return HttpResponse("Not found")
