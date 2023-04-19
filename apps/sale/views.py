@@ -15,7 +15,7 @@ from apps.payment.forms import PaymentForm
 from apps.products.models import Product
 from .forms import SaleModelForm, SaleOrderLineFormSet
 from .models import SaleOrder
-from .utils import render_to_pdf
+from utils import render_to_pdf
 
 
 class SaleOrderCreateView(LoginRequiredMixin, generic.CreateView):

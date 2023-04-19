@@ -11,7 +11,7 @@ from apps.products.models import Product
 
 from .forms import SessionsModelForm, PresenceFormSet
 from .models import Session
-from ..sale.utils import render_to_pdf
+from utils import render_to_pdf
 
 
 # Create your views here.
