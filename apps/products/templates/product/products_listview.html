@@ -49,7 +49,7 @@
                         {% else %}
                             <a class="btn btn-light" href="{% url 'edit-sub' product.id %}"
                                role="button">{{ product.name }}
-                                <span class="badge badge-secondary badge-pill">{{ product.subscription.classes_by_month }}</span>
+                                <span class="badge badge-secondary badge-pill">{{ product.subscription.classes_by_week }}</span>
                             </a>
                         {% endif %}
 

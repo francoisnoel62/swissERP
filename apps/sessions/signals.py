@@ -20,3 +20,5 @@ def update_credits_handler(request, session, **kwargs):
             if presence.product.subscription and presence.product.subscription.classes_by_week > 0:
                 presence.product.subscription.classes_by_week -= 1
                 presence.product.subscription.save()
+            else:
+                messages.error(request, f"{presence.attendee} has no more weekly classes")
