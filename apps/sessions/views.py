@@ -12,6 +12,7 @@ from apps.products.models import Product
 from .forms import SessionsModelForm, PresenceFormSet
 from .models import Session
 from utils import render_to_pdf
+from .signals import update_credits_signal
 
 
 # Create your views here.
@@ -105,6 +106,7 @@ class UpdateSession(LoginRequiredMixin, generic.UpdateView):
 def validate_session(request, pk):
     session = Session.objects.get(pk=pk)
     session.terminated = True
+    update_credits_signal.send(sender=Session, request=request, session=session)
     session.save()
     return redirect('sessions')
 
