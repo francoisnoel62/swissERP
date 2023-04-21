@@ -12,23 +12,27 @@
         div {
             font-size: x-large;
         }
+
+        table, th, td {
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
 <div class="container" style="padding-top: 15px;">
     <div style="text-align: center">
         <div class="row">
-            <h1>Liste de présence du jour</h1>
+            <h1>Liste de présences du jour</h1>
             <h2><i>{{ session.date|date:"l m F, Y - H:i" }}</i></h2>
         </div>
     </div>
 </div>
 
-<div style="margin-top: 2cm;">
+<div style="margin-top: 2cm; margin-bottom: 1cm;">
     <table style="text-align: center;">
         <thead>
         <tr style="padding: 8px;">
-            <th></th>
+            <th style="width: 1.8cm;">Présent?</th>
             <th>NOM</th>
             <th>TYPE DE PRODUIT</th>
             <th>REMARQUES</th>
@@ -40,7 +44,8 @@
                 <td><h3>O</h3></td>
                 <td>{{ presence.attendee.lastname }} {{ presence.attendee.name }}</td>
                 {% if presence.product.unitpass %}
-                    <td>{{ presence.product.name }} <i>[{{ presence.product.unitpass.remaining_classes }} lefts]</i></td>
+                    <td>{{ presence.product.name }} <i>[{{ presence.product.unitpass.remaining_classes }} lefts]</i>
+                    </td>
                 {% else %}
                     <td>{{ presence.product.name }}</td>
                 {% endif %}
@@ -49,10 +54,12 @@
             </tr>
         {% endfor %}
         </tbody>
-
     </table>
-
+    <div style="margin-left: 2cm;">
+        <p>Moniteur 1 : ...........................</p>
+        <p>Moniteur 2 : ...........................</p>
+        <p>Moniteur 3 : ...........................</p>
+    </div>
 </div>
-
 </body>
 </html>

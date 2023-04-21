@@ -26,13 +26,13 @@
             {% endfor %}
         {% endif %}
     </div>
-    {#    <div class="row mx-auto mt-5 justify-content-end w-50">#}
-    {#        <form class="form-inline" action="{% url 'filter_contacts' %}" method="get">#}
-    {#            <button type="submit" class="btn btn-outline-secondary btn-sm" name="all">All</button>#}
-    {#            <button type="submit" class="btn btn-outline-info btn-sm" name="active">Active</button>#}
-    {#            <button type="submit" class="btn btn-outline-danger btn-sm" name="archived">Archived</button>#}
-    {#        </form>#}
-    {#    </div>#}
+    <div class="row mx-auto mt-5 justify-content-end w-50">
+        <form class="form-inline" action="#" method="get">
+            <button type="submit" class="btn btn-outline-secondary btn-sm" name="all">All</button>
+            <button type="submit" class="btn btn-outline-success btn-sm" name="active">Upcoming</button>
+            <button type="submit" class="btn btn-outline-info btn-sm" name="archived">Past</button>
+        </form>
+    </div>
     <div class="row mx-auto mt-5 justify-content-center">
         {% if sessions_list %}
             <ul class="list-group list-group-flush w-50">
@@ -48,6 +48,12 @@
                         {% else %}
                             <span class="badge badge-info">Passée</span>
                         {% endif %}
+
+                        <form action="{% url 'duplicate_session' session.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-sm btn-warning">Duplicate</button>
+                        </form>
+
                         <form action="{% url 'delete_session' session.id %}" method="post">
                             {% csrf_token %}
                             <button class="btn btn-sm btn-danger">Delete</button>

@@ -12,13 +12,20 @@ def update_credits_handler(request, session, **kwargs):
         try:
             if presence.product.unitpass:
                 if presence.product.unitpass.remaining_classes > 0:
+                    current_credits = presence.product.unitpass.remaining_classes
                     presence.product.unitpass.remaining_classes -= 1
                     presence.product.unitpass.save()
+                    messages.success(request,
+                                     f"{presence.attendee} got {current_credits} credits. Has {presence.product.unitpass.remaining_classes} remaining classes on its card now.")
                 else:
                     messages.error(request, f"{presence.attendee} has no remaining classes")
         except Exception as e:
-            if presence.product.subscription and presence.product.subscription.classes_by_week > 0:
-                presence.product.subscription.classes_by_week -= 1
-                presence.product.subscription.save()
-            else:
-                messages.error(request, f"{presence.attendee} has no more weekly classes")
+            if presence.product.subscription:
+                if presence.product.subscription.classes_by_week > 0:
+                    current_credits = presence.product.subscription.classes_by_week
+                    presence.product.subscription.classes_by_week -= 1
+                    presence.product.subscription.save()
+                    messages.success(request,
+                                     f"{presence.attendee} got {current_credits} credit. Has {presence.product.subscription.classes_by_week} remaining classes this week now.")
+                else:
+                    messages.error(request, f"{presence.attendee} has no more weekly classes")

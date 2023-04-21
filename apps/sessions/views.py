@@ -3,8 +3,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.http import JsonResponse, HttpResponse
 
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
+from django.utils.timezone import now
 from django.views import generic
 
 from apps.products.models import Product
@@ -22,7 +23,7 @@ class SessionsList(LoginRequiredMixin, generic.ListView):
     context_object_name = 'sessions_list'
 
     def get_queryset(self):
-        return Session.objects.filter(created_by=self.request.user).order_by('date')
+        return Session.objects.filter(created_by=self.request.user).order_by('-date')
 
 
 class CreateSessionWithPresences(LoginRequiredMixin, generic.CreateView):
@@ -118,6 +119,35 @@ class DeleteSession(LoginRequiredMixin, generic.DeleteView):
     def post(self, request, *args, **kwargs):
         messages.success(self.request, 'Session deleted successfully')
         return self.delete(request, *args, **kwargs)
+
+
+@transaction.atomic
+def duplicate_session(request, pk):
+    session = get_object_or_404(Session, pk=pk)
+
+    # Create a new Session object and copy over the relevant attributes
+    new_session = Session(
+        create_at= now(),
+        updated_at= now(),
+        created_by=request.user,
+        name=session.name,
+        date=session.date,
+        terminated=False
+    )
+    new_session.save()
+
+    # Copy over the related Presence objects
+    for presence in session.presence_set.all():
+        try:
+            if presence.product.subscription:
+                new_presence = presence
+                new_presence.pk = None
+                new_presence.session_id = new_session
+                new_presence.save()
+        except Exception as e:
+            print(e)
+
+    return redirect('sessions')
 
 
 def update_product_when_selecting_student(request, student_id):
