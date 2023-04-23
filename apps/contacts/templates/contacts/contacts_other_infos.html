@@ -16,13 +16,13 @@
     <div class="row mx-auto mt-5 justify-content-center" style="width: 55%; margin-bottom: 20px;">
         <div class="collapse" id="sales">
             <div class="card card-body p-0">
-                {% if contact.saleorder_set.all %}
+                {% if contact.presence_set %}
                     <ul class="list-group list-group-flush">
-                        {% for so in contact.saleorder_set.all %}
+                        {% for presence in contact.presence_set.all %}
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a class="btn btn-light" href="{% url 'sale_detail' so.id %}"
-                                   role="button">{{ so.name }}</a>
-                                <span class="badge {{ so.state_color }} badge-pill">{{ so.get_order_state_display }}</span>
+                                <a class="btn btn-light" href="{% url 'detail_session' presence.session_id.id %}"
+                                   role="button">{{ presence.session_id.date }}</a>
+                                <span class="badge badge-pill">{{ presence.product.name }}</span>
                             </li>
                         {% endfor %}
                     </ul>
