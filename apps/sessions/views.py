@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
@@ -130,8 +132,8 @@ def duplicate_session(request, pk):
         create_at= now(),
         updated_at= now(),
         created_by=request.user,
-        name=session.name,
-        date=session.date,
+        name=session.name + ' (copy)',
+        date=session.date + timedelta(days=7),
         terminated=False
     )
     new_session.save()
