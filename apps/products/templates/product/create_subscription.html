@@ -20,12 +20,16 @@
                     <div class="form-group col-md-4">
                         {{ form.date_of_subscription|as_crispy_field }}
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
                         {{ form.classes_by_week|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        {{ form.current_credits|as_crispy_field }}
                     </div>
                     <div class="form-group col-md-4">
                         {{ form.recurrence|as_crispy_field }}
                     </div>
+
                 </div>
             </div>
             <div class="text-center">

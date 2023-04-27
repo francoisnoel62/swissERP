@@ -27,7 +27,7 @@ class Product(models.Model):
 
 
 class Subscription(Product):
-    classes_by_week = models.IntegerField(verbose_name="Nombre de cours par semaine", default=1)
+    classes_by_week = models.IntegerField(verbose_name="Cours par semaine", default=1)
     date_of_subscription = models.DateField(verbose_name="Date d'abonnement")
     recurrence = models.CharField(verbose_name="Récurrence", choices=[("M", "Mensuel"), ("A", "Annuel")],
                                   max_length=100)
