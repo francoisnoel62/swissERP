@@ -132,12 +132,14 @@ class ViewsProductsTests(TestCase):
         p1 = Subscription.objects.create(created_by=self.user,
                                          name=faker.text(max_nb_chars=50),
                                          classes_by_week=faker.pyint(min_value=1, max_value=12),
+                                         current_credits=1,
                                          date_of_subscription=faker.date())
 
         data = {
             'name': 'test',
             'student': self.any_contact.id,
             'classes_by_week': 1,
+            'current_credits': 1,
             'date_of_subscription': '2021-01-01',
             'recurrence': 'M'
         }
@@ -155,6 +157,7 @@ class ViewsProductsTests(TestCase):
         p1 = Subscription.objects.create(created_by=self.user,
                                          name=faker.text(max_nb_chars=50),
                                          classes_by_week=faker.pyint(min_value=1, max_value=12),
+                                         current_credits=1,
                                          date_of_subscription=faker.date())
 
         res = self.client.post(reverse("delete-product", kwargs={'pk': p1.id}))

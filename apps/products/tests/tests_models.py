@@ -44,7 +44,8 @@ class ModelProductsTests(TestCase):
                 created_by=self.user,
                 name=faker.text(max_nb_chars=50),
                 student=any_contact,
-                classes_by_week=faker.random_int(min=1, max=3),
+                classes_by_week=1,
+                current_credits=1,
                 date_of_subscription=faker.date(),
                 recurrence=faker.random_element(elements=("M", "A"))
             )
@@ -97,7 +98,8 @@ class ModelProductsTests(TestCase):
             created_by=self.user,
             name=faker.text(max_nb_chars=50),
             student=self.sub1.student,
-            classes_by_week=faker.random_int(min=1, max=3),
+            classes_by_week=1,
+            current_credits=1,
             date_of_subscription="2021-01-01",
             recurrence="A"
         )
