@@ -7,6 +7,7 @@ from django.views import generic
 
 from .forms import PassModelForm, ProductModelForm, SubModelForm
 from .models import Product, Subscription, UnitPass
+from ..sessions.models import Session
 
 
 class ProductListView(LoginRequiredMixin, generic.ListView):
@@ -89,3 +90,11 @@ class ProductDeleteView(LoginRequiredMixin, generic.DeleteView):
             for x in e.args[1]:
                 messages.info(self.request, f"{x}")
             return redirect(self.success_url)
+
+
+def update_subscription(request):
+    subscriptions = Subscription.objects.all().filter(created_by=request.user)
+    for sub in subscriptions:
+        sub.current_credits = sub.classes_by_week
+        sub.save()
+    return redirect('products')

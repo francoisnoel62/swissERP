@@ -40,6 +40,10 @@ class Subscription(Product):
         else:
             return datetime.strptime(self.date_of_subscription, "%Y-%m-%d") + relativedelta(years=1)
 
+    def save(self, *args, **kwargs):
+        self.current_credits = self.classes_by_week
+        super(Subscription, self).save(*args, **kwargs)
+
 
 class UnitPass(Product):
     remaining_classes = models.IntegerField(verbose_name="Nombre de cours restants", default=10)

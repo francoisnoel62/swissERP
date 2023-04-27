@@ -25,7 +25,7 @@ class SubModelForm(forms.ModelForm):
     class Meta:
         model = Subscription
         fields = '__all__'
-        exclude = ['created_by']
+        exclude = ['created_by', 'current_credits']
         widgets = {
             'date_of_subscription': widgets.DateInput(attrs={'type': 'date'}),
         }
