@@ -31,7 +31,7 @@ class Subscription(Product):
     date_of_subscription = models.DateField(verbose_name="Date d'abonnement")
     recurrence = models.CharField(verbose_name="Récurrence", choices=[("M", "Mensuel"), ("A", "Annuel")],
                                   max_length=100)
-    current_credits = models.IntegerField(verbose_name="Crédits restants")
+    current_credits = models.IntegerField(verbose_name="Crédits restants", default=0)
 
     @property
     def date_of_renewal(self):
@@ -39,10 +39,6 @@ class Subscription(Product):
             return datetime.strptime(self.date_of_subscription, "%Y-%m-%d") + timedelta(days=31)
         else:
             return datetime.strptime(self.date_of_subscription, "%Y-%m-%d") + relativedelta(years=1)
-
-    def save(self, *args, **kwargs):
-        self.current_credits = self.classes_by_week
-        super(Subscription, self).save(*args, **kwargs)
 
 
 class UnitPass(Product):
