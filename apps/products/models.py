@@ -31,6 +31,7 @@ class Subscription(Product):
     date_of_subscription = models.DateField(verbose_name="Date d'abonnement")
     recurrence = models.CharField(verbose_name="Récurrence", choices=[("M", "Mensuel"), ("A", "Annuel")],
                                   max_length=100)
+    current_credits = models.IntegerField(verbose_name="Crédits restants")
 
     @property
     def date_of_renewal(self):
