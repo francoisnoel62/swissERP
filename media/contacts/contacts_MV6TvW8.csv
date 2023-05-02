@@ -1,0 +1,3 @@
+is_active;Title;Lastname;Name;Date of birth;Street;Zip;City;Country;Phone;Email
+True;Mr;Monneron;Armand;;;;;Suisse;;chachi@test.ch
+True;Mme;Sahli;Aude;;;;;Suisse;;romain@brosset.fr

@@ -41,7 +41,7 @@ class ModelProductsTests(TestCase):
 
         for _ in range(3):
             Subscription.objects.create(
-                created_by=self.user,
+                user_id=self.user,
                 name=faker.text(max_nb_chars=50),
                 student=any_contact,
                 classes_by_week=1,
@@ -51,7 +51,7 @@ class ModelProductsTests(TestCase):
             )
 
             UnitPass.objects.create(
-                created_by=self.user,
+                user_id=self.user,
                 name=faker.text(max_nb_chars=50),
                 student=any_contact,
                 remaining_classes=faker.random_int(min=1, max=10),
@@ -67,13 +67,13 @@ class ModelProductsTests(TestCase):
         self.pass3 = UnitPass.objects.get(pk=6)
 
     def test_product_user_id(self):
-        self.assertEqual(self.sub1.created_by, self.user)
-        self.assertEqual(self.sub2.created_by, self.user)
-        self.assertEqual(self.sub3.created_by, self.user)
+        self.assertEqual(self.sub1.user_id, self.user)
+        self.assertEqual(self.sub2.user_id, self.user)
+        self.assertEqual(self.sub3.user_id, self.user)
 
-        self.assertEqual(self.pass1.created_by, self.user)
-        self.assertEqual(self.pass2.created_by, self.user)
-        self.assertEqual(self.pass3.created_by, self.user)
+        self.assertEqual(self.pass1.user_id, self.user)
+        self.assertEqual(self.pass2.user_id, self.user)
+        self.assertEqual(self.pass3.user_id, self.user)
 
     def test_products_absolute_url(self):
         self.assertURLEqual(self.sub1.get_absolute_url(), reverse("products"))
@@ -95,7 +95,7 @@ class ModelProductsTests(TestCase):
 
     def test_subscription_date_of_renewal(self):
         self.sub4 = Subscription.objects.create(
-            created_by=self.user,
+            user_id=self.user,
             name=faker.text(max_nb_chars=50),
             student=self.sub1.student,
             classes_by_week=1,
@@ -113,7 +113,7 @@ class ModelProductsTests(TestCase):
 
     def test_unipass_end_of_validity(self):
         self.pass4 = UnitPass.objects.create(
-            created_by=self.user,
+            user_id=self.user,
             name=faker.text(max_nb_chars=50),
             student=self.pass1.student,
             remaining_classes=faker.random_int(min=1, max=10),

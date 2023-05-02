@@ -6,15 +6,12 @@ from django.db import models
 from django.urls import reverse
 from model_utils.managers import InheritanceManager
 
+from apps.base_model import BaseModel
 from apps.contacts.models import Contact
-from swissERP.settings import AUTH_USER_MODEL
 
 
-class Product(models.Model):
+class Product(BaseModel):
     objects = InheritanceManager()
-    create_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(verbose_name="Nom du produit", max_length=50)
     student = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name="products", verbose_name="Élève",
                                 null=True, blank=True, limit_choices_to={'is_active': True})

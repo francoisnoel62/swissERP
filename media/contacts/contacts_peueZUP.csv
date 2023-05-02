@@ -1,0 +1,8 @@
+is_active;Title;Lastname;Name;Date of birth;Country;Phone;Email
+True;Mr;Monneron;Armand;1994-10-11;Suisse;;armand.monneron@hotmail.ch
+True;Mme;Gotz;Camille;1998-07-20;Suisse;;camillegotz@gmail.com
+True;Mme;Leuenberger;Audrey;1992-10-15;Suisse;;leuenberger.audrey@gmail.com
+True;Mme;Real;Carole;1988-12-01;Suisse;;carole.real@hotmail.com
+True;Mr;Lehmann;Cédric;1978-09-29;Suisse;;cedriclehmann@hotmail.com
+True;Mme;Schmutz;Chloé;1995-12-05;Suisse;;chloe.schmutz@unifr.ch
+True;Mme;Pasche;Christelle;1994-03-19;Suisse;;ch.pasche@hotmail.com

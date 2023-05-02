@@ -1,6 +1,7 @@
 # Project exclude paths
 /venv/
 /sent_emails/
+/media/contacts
 .idea
 .coverage
 db.sqlite3

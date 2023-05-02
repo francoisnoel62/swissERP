@@ -4,21 +4,20 @@ from django.db import models
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 
-from swissERP.settings import AUTH_USER_MODEL
+from apps.base_model import BaseModel
 
 
 class ContactsImport(models.Model):
     file = models.FileField(upload_to="contacts")
 
 
-class Contact(models.Model):
+class Contact(BaseModel):
     TITLE_CHOICES = (
         ('Mr', 'Mister'),
         ('Ms', 'Madame'),
         ('Miss', 'Miss'),
     )
 
-    user_id = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     is_active = models.BooleanField(verbose_name="active", default=True)
     title = models.CharField(verbose_name="titre", max_length=50, choices=TITLE_CHOICES, default='Mme')
     name = models.CharField(verbose_name='Prénom', max_length=200)
@@ -30,7 +29,6 @@ class Contact(models.Model):
     region_zip = models.CharField(verbose_name="Code postale", max_length=50, null=True, blank=True)
     city = models.CharField(verbose_name="Ville", max_length=60, null=True, blank=True)
     country = models.CharField(verbose_name="Pays", max_length=50, null=True, blank=True)
-
 
     def get_absolute_url(self):
         return reverse('contact_detail', kwargs={'pk': self.pk})

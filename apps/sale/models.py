@@ -2,12 +2,12 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
+from apps.base_model import BaseModel
 from apps.contacts.models import Contact
 from apps.products.models import Product
-from swissERP.settings import AUTH_USER_MODEL
 
 
-class SaleOrder(models.Model):
+class SaleOrder(BaseModel):
     ORDER_STATE = (
         ('DR', 'Draft'),
         ('CL', 'Cleaned'),
@@ -16,11 +16,9 @@ class SaleOrder(models.Model):
         ('PD', 'Paid'),
     )
 
-    create_at = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
-    updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100)
-    partner_id = models.ForeignKey(Contact, on_delete=models.PROTECT, null=False, verbose_name='Customer', limit_choices_to={'is_active': True})
+    partner_id = models.ForeignKey(Contact, on_delete=models.PROTECT, null=False, verbose_name='Customer',
+                                   limit_choices_to={'is_active': True})
     validity_date = models.DateField(verbose_name="Validity date", blank=True, null=True)
     order_state = models.CharField(verbose_name="Etat de la commande", max_length=10, choices=ORDER_STATE, default='DR')
 
@@ -58,9 +56,7 @@ class SaleOrder(models.Model):
         return f"{self.name}"
 
 
-class SaleOrderLine(models.Model):
-    create_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+class SaleOrderLine(BaseModel):
     product_id = models.ForeignKey(Product, on_delete=models.PROTECT, null=False, verbose_name="Products")
     quantity = models.FloatField(default=1, verbose_name="Quantity")
     sol_total = models.FloatField(verbose_name="Total", max_length=100)
@@ -70,9 +66,13 @@ class SaleOrderLine(models.Model):
         return f" {self.product_id.name} - {self.quantity} - {self.sol_total}"
 
     def save(self, *args, **kwargs):
-        existing_sol = self.__class__.objects.filter(product_id=self.product_id, sale_order_id=self.sale_order_id).first()
+        existing_sol = self.__class__.objects.filter(product_id=self.product_id,
+                                                     sale_order_id=self.sale_order_id).first()
         if existing_sol:
             self.quantity += existing_sol.quantity
             existing_sol.delete()
         super(SaleOrderLine, self).save(*args, **kwargs)
 
+
+class SomeModel(BaseModel):
+    pass

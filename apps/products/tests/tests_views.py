@@ -47,7 +47,7 @@ class ViewsProductsTests(TestCase):
 
     def test_ProductListView_without_filter(self):
         for _ in range(5):
-            Product.objects.create(created_by=self.user,
+            Product.objects.create(user_id=self.user,
                                    name=faker.text(max_nb_chars=50),
                                    student=self.any_contact)
 
@@ -103,12 +103,13 @@ class ViewsProductsTests(TestCase):
         self.assertIs(PassUpdateView().form_class, PassModelForm)
         self.assertIs(PassUpdateView().model, UnitPass)
 
-        p1 = UnitPass.objects.create(created_by=self.user,
+        p1 = UnitPass.objects.create(user_id=self.user,
                                      name=faker.text(max_nb_chars=50),
                                      remaining_classes=faker.pyint(min_value=1, max_value=10),
                                      date_of_buy=faker.date())
 
         data = {
+            'user_id': self.user.id,
             'name': 'test',
             'student': self.any_contact.id,
             'remaining_classes': 4,
@@ -129,13 +130,14 @@ class ViewsProductsTests(TestCase):
         self.assertIs(SubscriptionUpdateView().form_class, SubModelForm)
         self.assertIs(SubscriptionUpdateView().model, Subscription)
 
-        p1 = Subscription.objects.create(created_by=self.user,
+        p1 = Subscription.objects.create(user_id=self.user,
                                          name=faker.text(max_nb_chars=50),
                                          classes_by_week=faker.pyint(min_value=1, max_value=12),
                                          current_credits=1,
                                          date_of_subscription=faker.date())
 
         data = {
+            'user_id': self.user.id,
             'name': 'test',
             'student': self.any_contact.id,
             'classes_by_week': 1,
@@ -154,7 +156,7 @@ class ViewsProductsTests(TestCase):
         self.assertIs(ProductDeleteView().model, Product)
         self.assertEqual(ProductDeleteView().success_url, reverse("products"))
 
-        p1 = Subscription.objects.create(created_by=self.user,
+        p1 = Subscription.objects.create(user_id=self.user,
                                          name=faker.text(max_nb_chars=50),
                                          classes_by_week=faker.pyint(min_value=1, max_value=12),
                                          current_credits=1,
@@ -168,3 +170,17 @@ class ViewsProductsTests(TestCase):
 
         res3 = self.client.get(reverse("edit-pass", kwargs={'pk': p1.id}))
         self.assertTrue(res2.status_code, 404)
+
+    def test_update_subscription(self):
+        p1 = Subscription.objects.create(user_id=self.user,
+                                         name=faker.text(max_nb_chars=50),
+                                         classes_by_week=2,
+                                         current_credits=0,
+                                         date_of_subscription=faker.date())
+
+        self.assertEqual(p1.current_credits, 0)
+        res1 = self.client.get(reverse("update-subscription"))
+        p1.refresh_from_db()
+        self.assertEqual(p1.current_credits, p1.classes_by_week)
+        self.assertEqual(res1.status_code, 302)
+        self.assertRedirects(res1, reverse("products"), status_code=302)

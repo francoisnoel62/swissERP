@@ -59,7 +59,6 @@ class UrlAndTemplatesProductsTests(TestCase):
                              status_code=302,
                              target_status_code=200)
 
-
     def test_filter_product(self):
         # user logged
         response = self.client.get(reverse("filter_products"))
@@ -70,5 +69,3 @@ class UrlAndTemplatesProductsTests(TestCase):
         self.client.logout()
         response = self.client.get(reverse("filter_products"))
         self.assertEqual(response.status_code, 302)
-
-

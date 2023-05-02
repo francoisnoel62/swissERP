@@ -20,16 +20,16 @@ class ProductListView(LoginRequiredMixin, generic.ListView):
             query = self.request.GET.get("filter")
             object_list = Product.objects.filter(
                 Q(student__name__icontains=query) | Q(student__lastname__icontains=query)
-            ).filter(created_by=self.request.user)
+            ).filter(user_id=self.request.user)
             return object_list
         elif self.request.GET.get("sub") is not None:
-            object_list = Product.objects.exclude(subscription__isnull=True).filter(created_by=self.request.user)
+            object_list = Product.objects.exclude(subscription__isnull=True).filter(user_id=self.request.user)
             return object_list
         elif self.request.GET.get("pass") is not None:
-            object_list = Product.objects.exclude(unitpass__isnull=True).filter(created_by=self.request.user)
+            object_list = Product.objects.exclude(unitpass__isnull=True).filter(user_id=self.request.user)
             return object_list
         else:
-            return Product.objects.filter(created_by=self.request.user)
+            return Product.objects.filter(user_id=self.request.user)
 
 
 class ProductCreatePassView(LoginRequiredMixin, generic.CreateView):
@@ -93,7 +93,7 @@ class ProductDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 
 def update_subscription(request):
-    subscriptions = Subscription.objects.all().filter(created_by=request.user)
+    subscriptions = Subscription.objects.all().filter(user_id=request.user)
     for sub in subscriptions:
         sub.current_credits = sub.classes_by_week
         sub.save()

@@ -1,0 +1,3 @@
+is_active;Title;Lastname;Name;Date of birth;Street;Zip;City;Country;Phone;Email
+True;Mr;Monneron;Armand;1994-10-11;;;;Suisse;;armand.monneron@hotmail.ch
+True;Mme;Gotz;Camille;1998-07-20;;;;Suisse;;camillegotz@gmail.com
