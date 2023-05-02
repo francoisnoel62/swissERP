@@ -12,7 +12,7 @@ venv/
 *.env
 coverage_html
 htmlcov
-
+*.csv
 *.pyc
 
 ### OSX ###
