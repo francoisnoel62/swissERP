@@ -70,29 +70,11 @@ class ViewsProductsTests(TestCase):
                              status_code=302,
                              target_status_code=200)
 
-    # def test_ProductListView_with_filterBy_name(self):
-    #     product_name = "pomme"
-    #     Product.objects.create(created_by=self.user, name=product_name,
-    #                            student=self.any_contact)
-    #
-    #     response1 = self.client.get(reverse("products") + '?filter=' + product_name)
-    #     self.assertIsInstance(response1.context['products_list'].first(), Product)
-    #     self.assertTrue(len(response1.context['products_list']) >= 1)
-    #     self.assertEqual(response1.context['products_list'].first().name, product_name)
-    #
-    #     # logout
-    #     self.client.logout()
-    #     response4 = self.client.get(reverse("products") + '?filter=' + product_name)
-    #     self.assertEqual(response4.status_code, 302)
-    #     self.assertRedirects(response4,
-    #                          f"{settings.LOGIN_URL}?next=" + reverse("products") + '?filter=' + product_name,
-    #                          status_code=302,
-    #                          target_status_code=200)
-
     # ProductCreateView
     def test_ProductCreatePassView(self):
         self.assertEqual(ProductCreatePassView().template_name, 'product/create_pass.html')
         self.assertIs(ProductCreatePassView().form_class, PassModelForm)
+
 
     def test_ProductCreateSubView(self):
         self.assertEqual(ProductCreateSubView().template_name, 'product/create_subscription.html')

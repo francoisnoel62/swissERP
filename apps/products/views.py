@@ -37,7 +37,7 @@ class ProductCreatePassView(LoginRequiredMixin, generic.CreateView):
     form_class = PassModelForm
 
     def form_valid(self, form):
-        form.instance.created_by = self.request.user
+        form.instance.user_id = self.request.user
         messages.success(self.request, 'Create pass success')
         return super(ProductCreatePassView, self).form_valid(form)
 
@@ -52,7 +52,7 @@ class ProductCreateSubView(LoginRequiredMixin, generic.CreateView):
     form_class = SubModelForm
 
     def form_valid(self, form):
-        form.instance.created_by = self.request.user
+        form.instance.user_id = self.request.user
         messages.success(self.request, 'Create subscription success')
         return super(ProductCreateSubView, self).form_valid(form)
 
